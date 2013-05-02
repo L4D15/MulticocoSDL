@@ -10,5 +10,24 @@
 #define __MulticocoSDL__sprite__
 
 #include <iostream>
+#include <SDL.h>
+
+class Sprite
+{
+public:
+    Sprite(char* img, int animations, int w, int h);
+    ~Sprite();
+    
+    void render(SDL_Surface* screen);
+    
+private:
+    SDL_Surface* _bitmap;
+    unsigned int _width;
+    unsigned int _height;
+    unsigned int _nAnimations;
+    
+    unsigned int _currentFrame;
+    SDL_Rect*    _frames;
+};
 
 #endif /* defined(__MulticocoSDL__sprite__) */

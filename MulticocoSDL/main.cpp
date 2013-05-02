@@ -12,8 +12,9 @@
 
 int main(int argc, char** argv)
 {
-    Window wnd(800,600,"MulticocoSDL");
+    Window* wnd = new Window(800,600,"MulticocoSDL");
     
+    delete wnd;
     SDL_Quit();
     return 0;
 }

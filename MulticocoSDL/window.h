@@ -21,7 +21,10 @@ public:
     ~Window();
     
 private:
-    SDL_Surface*    screen;
+    void render();
+    
+private:
+    SDL_Surface*    _screen;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

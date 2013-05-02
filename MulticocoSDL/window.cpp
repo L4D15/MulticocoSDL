@@ -19,17 +19,26 @@ Window::Window(int w, int h, string title)
         exit(1);
     }
     
-    this->screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+    this->_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
     
-    if (this->screen == NULL) {
+    if (this->_screen == NULL) {
         std::cout << "Error al establecer el modo de video: " << SDL_GetError() << std::endl;
         exit(1);
     }
     
     SDL_WM_SetCaption(title.c_str(),0);
+    
 }
 
 Window::~Window()
 {
+    SDL_FreeSurface(this->_screen);
+}
+
+void Window::render()
+{
+    // Codigo de renderizado
     
+    // Intercambia los buffers
+    SDL_Flip(this->_screen);
 }
