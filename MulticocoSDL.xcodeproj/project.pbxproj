@@ -16,7 +16,8 @@
 		22CE058D17327BAA006F08C7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22CE058B17327BAA006F08C7 /* main.cpp */; };
 		22CE059217327D03006F08C7 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE059117327D03006F08C7 /* SDL.framework */; };
 		22CE059417327D50006F08C7 /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22CE059317327D50006F08C7 /* SDL.framework */; };
-		22CE059717327DAF006F08C7 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22CE059517327DAF006F08C7 /* window.cpp */; };
+		22CE059D1732834D006F08C7 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22CE059B1732834D006F08C7 /* sprite.cpp */; };
+		22CE05A017328371006F08C7 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22CE059E17328371006F08C7 /* window.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,8 +50,10 @@
 		22CE058B17327BAA006F08C7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		22CE059117327D03006F08C7 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
 		22CE059317327D50006F08C7 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
-		22CE059517327DAF006F08C7 /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window.cpp; path = ../window.cpp; sourceTree = "<group>"; };
-		22CE059617327DAF006F08C7 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window.h; path = ../window.h; sourceTree = "<group>"; };
+		22CE059B1732834D006F08C7 /* sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite.cpp; sourceTree = "<group>"; };
+		22CE059C1732834D006F08C7 /* sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite.h; sourceTree = "<group>"; };
+		22CE059E17328371006F08C7 /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = window.cpp; sourceTree = "<group>"; };
+		22CE059F17328371006F08C7 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,11 +112,13 @@
 		22CE056D17327AFA006F08C7 /* MulticocoSDL */ = {
 			isa = PBXGroup;
 			children = (
-				22CE059517327DAF006F08C7 /* window.cpp */,
-				22CE059617327DAF006F08C7 /* window.h */,
+				22CE059E17328371006F08C7 /* window.cpp */,
+				22CE059F17328371006F08C7 /* window.h */,
 				22CE057C17327AFA006F08C7 /* MainMenu.xib */,
 				22CE058B17327BAA006F08C7 /* main.cpp */,
 				22CE056E17327AFA006F08C7 /* Supporting Files */,
+				22CE059B1732834D006F08C7 /* sprite.cpp */,
+				22CE059C1732834D006F08C7 /* sprite.h */,
 			);
 			path = MulticocoSDL;
 			sourceTree = "<group>";
@@ -198,7 +203,8 @@
 			files = (
 				22CE058A17327B73006F08C7 /* SDLMain.m in Sources */,
 				22CE058D17327BAA006F08C7 /* main.cpp in Sources */,
-				22CE059717327DAF006F08C7 /* window.cpp in Sources */,
+				22CE059D1732834D006F08C7 /* sprite.cpp in Sources */,
+				22CE05A017328371006F08C7 /* window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
