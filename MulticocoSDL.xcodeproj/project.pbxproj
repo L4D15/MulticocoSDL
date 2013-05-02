@@ -1,0 +1,344 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22CE056817327AFA006F08C7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE056717327AFA006F08C7 /* Cocoa.framework */; };
+		22CE057217327AFA006F08C7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22CE057017327AFA006F08C7 /* InfoPlist.strings */; };
+		22CE057817327AFA006F08C7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22CE057617327AFA006F08C7 /* Credits.rtf */; };
+		22CE057E17327AFA006F08C7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CE057C17327AFA006F08C7 /* MainMenu.xib */; };
+		22CE058717327B3C006F08C7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE058617327B3C006F08C7 /* OpenGL.framework */; };
+		22CE058A17327B73006F08C7 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CE058917327B73006F08C7 /* SDLMain.m */; };
+		22CE058D17327BAA006F08C7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22CE058B17327BAA006F08C7 /* main.cpp */; };
+		22CE059217327D03006F08C7 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE059117327D03006F08C7 /* SDL.framework */; };
+		22CE059417327D50006F08C7 /* SDL.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22CE059317327D50006F08C7 /* SDL.framework */; };
+		22CE059717327DAF006F08C7 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22CE059517327DAF006F08C7 /* window.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22CE058E17327C54006F08C7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				22CE059417327D50006F08C7 /* SDL.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		22CE056417327AFA006F08C7 /* MulticocoSDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MulticocoSDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22CE056717327AFA006F08C7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		22CE056A17327AFA006F08C7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		22CE056B17327AFA006F08C7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		22CE056C17327AFA006F08C7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		22CE056F17327AFA006F08C7 /* MulticocoSDL-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MulticocoSDL-Info.plist"; sourceTree = "<group>"; };
+		22CE057117327AFA006F08C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22CE057517327AFA006F08C7 /* MulticocoSDL-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MulticocoSDL-Prefix.pch"; sourceTree = "<group>"; };
+		22CE057717327AFA006F08C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		22CE057D17327AFA006F08C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		22CE058617327B3C006F08C7 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		22CE058817327B73006F08C7 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
+		22CE058917327B73006F08C7 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
+		22CE058B17327BAA006F08C7 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		22CE059117327D03006F08C7 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		22CE059317327D50006F08C7 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		22CE059517327DAF006F08C7 /* window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = window.cpp; path = ../window.cpp; sourceTree = "<group>"; };
+		22CE059617327DAF006F08C7 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window.h; path = ../window.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22CE056117327AFA006F08C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22CE059217327D03006F08C7 /* SDL.framework in Frameworks */,
+				22CE058717327B3C006F08C7 /* OpenGL.framework in Frameworks */,
+				22CE056817327AFA006F08C7 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22CE055B17327AFA006F08C7 = {
+			isa = PBXGroup;
+			children = (
+				22CE056D17327AFA006F08C7 /* MulticocoSDL */,
+				22CE056617327AFA006F08C7 /* Frameworks */,
+				22CE056517327AFA006F08C7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22CE056517327AFA006F08C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22CE056417327AFA006F08C7 /* MulticocoSDL.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22CE056617327AFA006F08C7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22CE059317327D50006F08C7 /* SDL.framework */,
+				22CE059117327D03006F08C7 /* SDL.framework */,
+				22CE058617327B3C006F08C7 /* OpenGL.framework */,
+				22CE056717327AFA006F08C7 /* Cocoa.framework */,
+				22CE056917327AFA006F08C7 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22CE056917327AFA006F08C7 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22CE056A17327AFA006F08C7 /* AppKit.framework */,
+				22CE056B17327AFA006F08C7 /* CoreData.framework */,
+				22CE056C17327AFA006F08C7 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		22CE056D17327AFA006F08C7 /* MulticocoSDL */ = {
+			isa = PBXGroup;
+			children = (
+				22CE059517327DAF006F08C7 /* window.cpp */,
+				22CE059617327DAF006F08C7 /* window.h */,
+				22CE057C17327AFA006F08C7 /* MainMenu.xib */,
+				22CE058B17327BAA006F08C7 /* main.cpp */,
+				22CE056E17327AFA006F08C7 /* Supporting Files */,
+			);
+			path = MulticocoSDL;
+			sourceTree = "<group>";
+		};
+		22CE056E17327AFA006F08C7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22CE058817327B73006F08C7 /* SDLMain.h */,
+				22CE058917327B73006F08C7 /* SDLMain.m */,
+				22CE056F17327AFA006F08C7 /* MulticocoSDL-Info.plist */,
+				22CE057017327AFA006F08C7 /* InfoPlist.strings */,
+				22CE057517327AFA006F08C7 /* MulticocoSDL-Prefix.pch */,
+				22CE057617327AFA006F08C7 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22CE056317327AFA006F08C7 /* MulticocoSDL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22CE058117327AFA006F08C7 /* Build configuration list for PBXNativeTarget "MulticocoSDL" */;
+			buildPhases = (
+				22CE056017327AFA006F08C7 /* Sources */,
+				22CE056117327AFA006F08C7 /* Frameworks */,
+				22CE056217327AFA006F08C7 /* Resources */,
+				22CE058E17327C54006F08C7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MulticocoSDL;
+			productName = MulticocoSDL;
+			productReference = 22CE056417327AFA006F08C7 /* MulticocoSDL.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22CE055C17327AFA006F08C7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "José Ladislao y José Molina";
+			};
+			buildConfigurationList = 22CE055F17327AFA006F08C7 /* Build configuration list for PBXProject "MulticocoSDL" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 22CE055B17327AFA006F08C7;
+			productRefGroup = 22CE056517327AFA006F08C7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22CE056317327AFA006F08C7 /* MulticocoSDL */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22CE056217327AFA006F08C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22CE057217327AFA006F08C7 /* InfoPlist.strings in Resources */,
+				22CE057817327AFA006F08C7 /* Credits.rtf in Resources */,
+				22CE057E17327AFA006F08C7 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22CE056017327AFA006F08C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22CE058A17327B73006F08C7 /* SDLMain.m in Sources */,
+				22CE058D17327BAA006F08C7 /* main.cpp in Sources */,
+				22CE059717327DAF006F08C7 /* window.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		22CE057017327AFA006F08C7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22CE057117327AFA006F08C7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		22CE057617327AFA006F08C7 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22CE057717327AFA006F08C7 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		22CE057C17327AFA006F08C7 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22CE057D17327AFA006F08C7 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22CE057F17327AFA006F08C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		22CE058017327AFA006F08C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		22CE058217327AFA006F08C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MulticocoSDL/MulticocoSDL-Prefix.pch";
+				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL.framework/Headers;
+				INFOPLIST_FILE = "MulticocoSDL/MulticocoSDL-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		22CE058317327AFA006F08C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MulticocoSDL/MulticocoSDL-Prefix.pch";
+				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL.framework/Headers;
+				INFOPLIST_FILE = "MulticocoSDL/MulticocoSDL-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22CE055F17327AFA006F08C7 /* Build configuration list for PBXProject "MulticocoSDL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22CE057F17327AFA006F08C7 /* Debug */,
+				22CE058017327AFA006F08C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22CE058117327AFA006F08C7 /* Build configuration list for PBXNativeTarget "MulticocoSDL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22CE058217327AFA006F08C7 /* Debug */,
+				22CE058317327AFA006F08C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22CE055C17327AFA006F08C7 /* Project object */;
+}
