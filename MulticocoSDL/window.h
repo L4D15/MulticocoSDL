@@ -1,30 +1,36 @@
-//
-//  window.h
-//  MulticocoSDL
-//
-//  Created by Jose Ladislao Lainez Ortega on 5/2/13.
-//  Copyright (c) 2013 José Ladislao y José Molina. All rights reserved.
-//
-
 #ifndef __MulticocoSDL__window__
 #define __MulticocoSDL__window__
 
 #include <SDL.h>
 #include <string>
+#include "sprite.h"
 
 using namespace std;
 
 class Window
 {
 public:
-    Window(int w, int h, string title);
-    ~Window();
+                    Window(int w, int h, string title);
+                    ~Window();
+    
+    void            startMainLoop();
+    void            setFullScreen(bool full);
     
 private:
-    void render();
+    void            render();
+    void            update();
+    void            handleEvents();
+    void            mainLoop();
     
 private:
     SDL_Surface*    _screen;
+    bool            _run;
+    unsigned int    _width;
+    unsigned int    _height;
+    bool            _isFullScreen;
+    
+    // TEST
+    Sprite*         _pacman;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

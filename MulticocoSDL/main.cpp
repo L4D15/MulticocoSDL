@@ -1,20 +1,16 @@
-//
-//  main.cpp
-//  MulticocoSDL
-//
-//  Created by Jose Ladislao Lainez Ortega on 5/2/13.
-//  Copyright (c) 2013 José Ladislao y José Molina. All rights reserved.
-//
-
 #include <iostream>
 #include <SDL.h>
 #include "window.h"
+
+#include <fstream>
 
 int main(int argc, char** argv)
 {
     Window* wnd = new Window(800,600,"MulticocoSDL");
     
+    wnd->startMainLoop();
+    
     delete wnd;
-    SDL_Quit();
+
     return 0;
 }
