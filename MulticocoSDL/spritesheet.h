@@ -7,14 +7,17 @@
 class SpriteSheet
 {
 public:
-                                SpriteSheet(char* img, int w, int h, int* animations, int nAnimations);
+                                SpriteSheet(const char* img, int w, int h, int* animations, int nAnimations);
                                 ~SpriteSheet();
     
-    void                        bindAnimation(unsigned int pos, char* name);
-    void                        changeAnimation(const std::string name);
+    void                        bindAnimation(unsigned int pos, const char* name);
+    void                        setAnimation(const std::string name);
     void                        nextFrame();
     void                        setFrameSkip(const std::string name, unsigned int value);
+    void                        setFrameSkip(const unsigned int value);
     void                        render(SDL_Surface* screen, Vector2D& pos);
+    void                        pause();
+    void                        resume();
     
 private:
     int                         animation(const std::string name);
@@ -23,6 +26,8 @@ private:
     std::vector<Sprite*>        _sprites;
     std::vector<std::string*>   _bindings;
     unsigned int                _currentAnimation;
+    
+    bool                        _isPaused;
     
 };
 

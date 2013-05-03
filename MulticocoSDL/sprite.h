@@ -9,7 +9,6 @@
 class Sprite
 {
 public:
-                    Sprite(char* img, int animations, int w, int h);
                     Sprite(SDL_Surface* img, int animations, int w, int h);
                     ~Sprite();
     

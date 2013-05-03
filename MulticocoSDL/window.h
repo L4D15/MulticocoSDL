@@ -3,7 +3,7 @@
 
 #include <SDL.h>
 #include <string>
-#include "sprite.h"
+#include "spritesheet.h"
 
 using namespace std;
 
@@ -28,6 +28,11 @@ private:
     unsigned int    _width;
     unsigned int    _height;
     bool            _isFullScreen;
+    
+    //------------------------------//
+    SpriteSheet*    _pacman;
+    Vector2D        _pos;
+    Vector2D        _v;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

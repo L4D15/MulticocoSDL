@@ -8,16 +8,22 @@
  @param animations  Vector con el numero de frames de cada animacion (columnas de cada fila).
  @param nAnimations Numero de animaciones distintas que tiene la plantilla (numero de filas).
  **/
-SpriteSheet::SpriteSheet(char* img, int w, int h, int* animations, int nAnimations)
+SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAnimations)
 {
     this->_currentAnimation = 0;
+    this->_isPaused = false;
     
     SDL_Surface* spriteSheet = SDL_LoadBMP(img);
+    SDL_SetColorKey(spriteSheet, SDL_SRCCOLORKEY, SDL_MapRGB(spriteSheet->format,255,0,255));   // Indica el color de transparencia
+    
+    if (spriteSheet == NULL) {
+        std::cout << SDL_GetError() << std::endl;
+    }
     
     SDL_Surface* currentSprite;
     for (int i = 0; i < nAnimations; i++) {
         // Creamos una nueva superficie donde dibujar
-        currentSprite = SDL_CreateRGBSurface(SDL_HWSURFACE, w * animations[i], h, 16, 255, 0, 255, 255);
+        currentSprite = SDL_CreateRGBSurface(SDL_HWSURFACE, w * animations[i], h, 16, 0, 0, 0, 0);
         
         // Seleccionamos el area que queremos coger de la plantilla
         SDL_Rect origin;
@@ -28,8 +34,12 @@ SpriteSheet::SpriteSheet(char* img, int w, int h, int* animations, int nAnimatio
         
         // Dibujamos la parte del SpriteSheet que nos interesa en el sprite de destino
         SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL); // NULL para que pille todo el sprite
+        
         // Creamos un nuevo Sprite con la porcion de la plantilla que hemos dibujado
-        this->_sprites[i] = new Sprite(currentSprite,animations[i],w,h);
+        this->_sprites.push_back(new Sprite(currentSprite,animations[i],w,h));
+        
+        // Insertamos un vinculo vacio
+        this->_bindings.push_back(new std::string(""));
     }
     SDL_FreeSurface(spriteSheet);   // Ya no necesitamos la plantilla
 }
@@ -46,13 +56,17 @@ SpriteSheet::SpriteSheet(char* img, int w, int h, int* animations, int nAnimatio
  @post          Si se vincular una animacion ya vinculada anteriormente, el anterior nombre deja de ser
  valido.
  **/
-void SpriteSheet::bindAnimation(unsigned int pos, char* name)
+void SpriteSheet::bindAnimation(unsigned int pos, const char* name)
 {
-    // Para evitar memory leaks
-    if (this->_bindings[pos] != NULL) {
-        delete this->_bindings[pos];
+    if (pos >= this->_bindings.size()) {
+        std::cout << "Error binding " << name << " animation. Position " << pos << " out of index" << std::endl;
+    } else {
+        // Para evitar memory leaks
+        if (this->_bindings[pos] != NULL) {
+            delete this->_bindings[pos];
+        }
+        this->_bindings[pos] = new std::string(name);
     }
-    this->_bindings[pos] = new std::string(name);
 }
 
 /**
@@ -63,7 +77,7 @@ void SpriteSheet::bindAnimation(unsigned int pos, char* name)
 int SpriteSheet::animation(const std::string name)
 {
     for (int i = 0; i < this->_bindings.size(); i++) {
-        if (this->_bindings[0]->compare(name) == 0) {   // Coincide
+        if (this->_bindings[i]->compare(name) == 0) {   // Coincide
             return i;
         }
     }
@@ -83,12 +97,14 @@ void SpriteSheet::nextFrame()
  @param name    Nombre de la nueva animacion a renderizar.
  @pre           La animacion debe estar vinculada con una fila de la plantilla mediante bindAnimation(...).
  **/
-void SpriteSheet::changeAnimation(const std::string name)
+void SpriteSheet::setAnimation(const std::string name)
 {
     int newAnimationPos = this->animation(name);
     
     if (newAnimationPos != -1) {
         this->_currentAnimation = newAnimationPos;
+    } else {
+        std::cout << "Error changing animation to " << name << std::endl;
     }
 }
 
@@ -108,6 +124,17 @@ void SpriteSheet::setFrameSkip(const std::string name, unsigned int value)
 }
 
 /**
+ @brief Ajusta el frameskip de todas las animaciones.
+ @param value   Cantidad de actualzaciones a ignorar antes de pasar al siguiente frame de la animacion.
+ **/
+void SpriteSheet::setFrameSkip(const unsigned int value)
+{
+    for (unsigned int i = 0; i < this->_sprites.size(); i++) {
+        this->_sprites[i]->setFrameSkip(value);
+    }
+}
+
+/**
  @brief Dibuja la imagen en la posicion indicada.
  @param screen  Ventana en la que dibujar la imagen.
  @param pos     Posicion en la ventana donde dibujar.
@@ -115,5 +142,23 @@ void SpriteSheet::setFrameSkip(const std::string name, unsigned int value)
 void SpriteSheet::render(SDL_Surface *screen, Vector2D &pos)
 {
     this->_sprites[this->_currentAnimation]->render(screen, pos);
-    this->_sprites[this->_currentAnimation]->nextFrame();
+    if (!this->_isPaused) {
+        this->_sprites[this->_currentAnimation]->nextFrame();
+    }
+}
+
+/**
+ @brief Pausa la animacion actual.
+ **/
+void SpriteSheet::pause()
+{
+    this->_isPaused = true;
+}
+
+/**
+ @brief Reanuda la animacion actual.
+ **/
+void SpriteSheet::resume()
+{
+    this->_isPaused = true;
 }

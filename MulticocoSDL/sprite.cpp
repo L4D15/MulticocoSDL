@@ -1,46 +1,24 @@
 #include "sprite.h"
 #include <iostream>
 
-Sprite::Sprite(char* img, int animations, int w, int h)
-{
-    this->_nAnimations = animations;
-    this->_width = reinterpret_cast<int>(w / animations);
-    this->_height = h;
-    this->_currentFrame = 0;
-    this->_frameSkip = 0;
-    
-    this->_bitmap = SDL_LoadBMP(img);
-    
-    if (this->_bitmap == NULL) {
-        std::cout << SDL_GetError() << std::endl;
-    } else {
-        
-        // Definimos cual será el color de transparencia
-        SDL_SetColorKey(this->_bitmap, SDL_SRCCOLORKEY, SDL_MapRGB(this->_bitmap->format,255,0,255));
-        
-        this->_frames = new SDL_Rect[this->_nAnimations];
-        
-        SDL_Rect frame;
-        frame.w = this->_width;
-        frame.h = this->_height;
-        for (int i = 0; i < this->_nAnimations; i++) {
-            frame.x = i * this->_width;
-            frame.y = 0;
-            this->_frames[i] = frame;
-        }
-    }
-}
-
+/**
+ @brief Construye un Sprite animado a partir de una imagen con varios frames.
+ @param img     Sprite previamente cargado. Suele ser la fila de un SpriteSheet.
+ @param animations  Numero de frames de la animacion.
+ @param w           Ancho de cada frame del sprite.
+ @param h           Altura de cada frame del sprite.
+ **/
 Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
 {
     this->_nAnimations = animations;
-    this->_width = reinterpret_cast<int>(w / animations);
+    this->_width = w;
     this->_height = h;
     this->_currentFrame = 0;
     this->_frameSkip = 0;
     this->_bitmap = img;
     
-    SDL_SetColorKey(this->_bitmap, SDL_SRCCOLORKEY, SDL_MapRGB(this->_bitmap->format,255,0,255));
+    // Indicamos cual es el color de transparencia
+    //SDL_SetColorKey(this->_bitmap, SDL_SRCCOLORKEY, SDL_MapRGB(this->_bitmap->format,255,0,255));
     
     this->_frames = new SDL_Rect[this->_nAnimations];
     
@@ -51,6 +29,8 @@ Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
         frame.x = i * this->_width;
         frame.y = 0;
         this->_frames[i] = frame;
+        
+        //std::cout << "  Frame " << i << ": " << frame.x << "," << frame.y << "->" << frame.x + frame.w << "," << frame.y + frame.h << std::endl;
     }
 }
 

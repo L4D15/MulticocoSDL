@@ -8,12 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		229F7F27173307FB00F98AE2 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229F7F25173307FB00F98AE2 /* vector2d.cpp */; };
-		229F7F2E17330F1300F98AE2 /* pacman_down.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 229F7F2917330F1300F98AE2 /* pacman_down.bmp */; };
-		229F7F2F17330F1300F98AE2 /* pacman_left.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 229F7F2A17330F1300F98AE2 /* pacman_left.bmp */; };
-		229F7F3017330F1300F98AE2 /* pacman_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 229F7F2B17330F1300F98AE2 /* pacman_left.png */; };
-		229F7F3117330F1300F98AE2 /* pacman_right.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 229F7F2C17330F1300F98AE2 /* pacman_right.bmp */; };
-		229F7F3217330F1300F98AE2 /* pacman_up.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 229F7F2D17330F1300F98AE2 /* pacman_up.bmp */; };
 		22A6744B17340FA60080FCD4 /* spritesheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A6744917340FA60080FCD4 /* spritesheet.cpp */; };
+		22A6744D173431150080FCD4 /* pacman.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A6744C173431150080FCD4 /* pacman.bmp */; };
 		22CE056817327AFA006F08C7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE056717327AFA006F08C7 /* Cocoa.framework */; };
 		22CE057217327AFA006F08C7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22CE057017327AFA006F08C7 /* InfoPlist.strings */; };
 		22CE057817327AFA006F08C7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22CE057617327AFA006F08C7 /* Credits.rtf */; };
@@ -43,13 +39,9 @@
 /* Begin PBXFileReference section */
 		229F7F25173307FB00F98AE2 /* vector2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2d.cpp; sourceTree = "<group>"; };
 		229F7F26173307FB00F98AE2 /* vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
-		229F7F2917330F1300F98AE2 /* pacman_down.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman_down.bmp; sourceTree = "<group>"; };
-		229F7F2A17330F1300F98AE2 /* pacman_left.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman_left.bmp; sourceTree = "<group>"; };
-		229F7F2B17330F1300F98AE2 /* pacman_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pacman_left.png; sourceTree = "<group>"; };
-		229F7F2C17330F1300F98AE2 /* pacman_right.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman_right.bmp; sourceTree = "<group>"; };
-		229F7F2D17330F1300F98AE2 /* pacman_up.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman_up.bmp; sourceTree = "<group>"; };
 		22A6744917340FA60080FCD4 /* spritesheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spritesheet.cpp; sourceTree = "<group>"; };
 		22A6744A17340FA60080FCD4 /* spritesheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spritesheet.h; sourceTree = "<group>"; };
+		22A6744C173431150080FCD4 /* pacman.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman.bmp; sourceTree = "<group>"; };
 		22CE056417327AFA006F08C7 /* MulticocoSDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MulticocoSDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22CE056717327AFA006F08C7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22CE056A17327AFA006F08C7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -89,11 +81,7 @@
 		229F7F2817330F1300F98AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				229F7F2917330F1300F98AE2 /* pacman_down.bmp */,
-				229F7F2A17330F1300F98AE2 /* pacman_left.bmp */,
-				229F7F2B17330F1300F98AE2 /* pacman_left.png */,
-				229F7F2C17330F1300F98AE2 /* pacman_right.bmp */,
-				229F7F2D17330F1300F98AE2 /* pacman_up.bmp */,
+				22A6744C173431150080FCD4 /* pacman.bmp */,
 			);
 			name = Resources;
 			path = MulticocoSDL/img;
@@ -225,11 +213,7 @@
 				22CE057217327AFA006F08C7 /* InfoPlist.strings in Resources */,
 				22CE057817327AFA006F08C7 /* Credits.rtf in Resources */,
 				22CE057E17327AFA006F08C7 /* MainMenu.xib in Resources */,
-				229F7F2E17330F1300F98AE2 /* pacman_down.bmp in Resources */,
-				229F7F2F17330F1300F98AE2 /* pacman_left.bmp in Resources */,
-				229F7F3017330F1300F98AE2 /* pacman_left.png in Resources */,
-				229F7F3117330F1300F98AE2 /* pacman_right.bmp in Resources */,
-				229F7F3217330F1300F98AE2 /* pacman_up.bmp in Resources */,
+				22A6744D173431150080FCD4 /* pacman.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
