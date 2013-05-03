@@ -4,11 +4,13 @@
 #include <iostream>
 #include <SDL.h>
 #include "vector2d.h"
+#include <vector>
 
 class Sprite
 {
 public:
                     Sprite(char* img, int animations, int w, int h);
+                    Sprite(SDL_Surface* img, int animations, int w, int h);
                     ~Sprite();
     
     void            render(SDL_Surface* screen, Vector2D& pos);

@@ -28,9 +28,6 @@ private:
     unsigned int    _width;
     unsigned int    _height;
     bool            _isFullScreen;
-    
-    // TEST
-    Sprite*         _pacman;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

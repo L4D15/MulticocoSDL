@@ -31,6 +31,29 @@ Sprite::Sprite(char* img, int animations, int w, int h)
     }
 }
 
+Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
+{
+    this->_nAnimations = animations;
+    this->_width = reinterpret_cast<int>(w / animations);
+    this->_height = h;
+    this->_currentFrame = 0;
+    this->_frameSkip = 0;
+    this->_bitmap = img;
+    
+    SDL_SetColorKey(this->_bitmap, SDL_SRCCOLORKEY, SDL_MapRGB(this->_bitmap->format,255,0,255));
+    
+    this->_frames = new SDL_Rect[this->_nAnimations];
+    
+    SDL_Rect frame;
+    frame.w = this->_width;
+    frame.h = this->_height;
+    for (int i = 0; i < this->_nAnimations; i++) {
+        frame.x = i * this->_width;
+        frame.y = 0;
+        this->_frames[i] = frame;
+    }
+}
+
 Sprite::~Sprite()
 {
     SDL_FreeSurface(this->_bitmap);

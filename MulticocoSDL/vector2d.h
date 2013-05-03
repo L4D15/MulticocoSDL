@@ -15,8 +15,8 @@ public:
 	bool						operator!=(const Vector2D& vector);
 	bool						operator==(const Vector2D& vector);
     
-	inline float				x() { return _x; }
-	inline float				y() { return _y; }
+	inline float                x() { return _x; }
+	inline float                y() { return _y; }
     
 	inline void					setX(int x) { _x = x; }
 	inline void					setY(int y) { _y = y; }

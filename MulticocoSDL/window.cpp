@@ -24,11 +24,6 @@ Window::Window(int w, int h, string title)
     SDL_WM_SetCaption(title.c_str(),0);
     
     this->_run = false;
-    
-    // TEST
-    
-    this->_pacman = new Sprite("MulticocoSDL.app/Contents/Resources/pacman_right.bmp",2,40,20);
-    this->_pacman->setFrameSkip(20);
 }
 
 Window::~Window()
@@ -60,12 +55,6 @@ void Window::render()
     // Limpiamos la pantalla
     SDL_FillRect(this->_screen, NULL, SDL_MapRGB(this->_screen->format, 0, 0, 0));
     
-    //----------------------------------------//
-    // TEST
-    Vector2D pos(200,200);
-    // Codigo de renderizado
-    this->_pacman->render(this->_screen, pos);
-    //----------------------------------------//
     
     // Intercambia los buffers
     SDL_Flip(this->_screen);
@@ -73,7 +62,7 @@ void Window::render()
 
 void Window::update()
 {
-    this->_pacman->nextFrame();
+
 }
 
 void Window::mainLoop()
