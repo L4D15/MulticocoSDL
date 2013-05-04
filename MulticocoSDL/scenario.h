@@ -1,45 +1,65 @@
-#ifndef SCENARIO_H
-#define SCENARIO_H
+#ifndef __MulticocoSDL__scenario__
+#define __MulticocoSDL__scenario__
 
-#include <QString>
-#include "vector2D.h"
+#include <iostream>
+#include "vector2d.h"
+#include "spritesheet.h"
+#include <SDL.h>
 
-#define SCENARIO_CORRIDOR               0
-#define SCENARIO_WALL                   1
-#define SCENARIO_ENEMY_RESPAWN_POINT    8
-#define SCENARIO_PLAYER_START_POINT     9
+#define NUM_DIRECTIONS 4
+#define MAX_NEIGHBORS 8
+#define WALL true
+#define CORRIDOR false
 
 class Scenario
 {
 public:
-								Scenario(int w, int h);
-								Scenario(QString str);
-								~Scenario();
-
-	bool						saveBoard(QString fileName);
-	bool**						board(){return _scenario;}
-	unsigned int				width(){return _width;}
-	unsigned int				height(){return _height;}
-	bool						isWall(int x, int y);
-	bool						isCorridor(int x, int y);
-
-	void						setEnemySpawningCell(int x, int y);
-	void						setPlayerSpawningCell(int x, int y);
-
-	Vector2D					enemySpawningCell();
-	Vector2D					playerSpawningCell();
-
-	void						render(int w, int h);
-
+                    Scenario(unsigned int hSize, unsigned int vSize);
+                    Scenario(const char* file);
+                    ~Scenario();
+    
+    unsigned int    horizontalSize();
+    unsigned int    verticalSize();
+    unsigned int    width();
+    unsigned int    height();
+    Vector2D        enemySpawningCell();
+    Vector2D        playerSpawningCell();
+    SpriteSheet&    spriteSheet();
+    
+    void            setEnemySpawningCell(unsigned int x, unsigned int y);
+    void            setPlayerSpawningCell(unsigned int x, unsigned int y);
+    
+    void            setSpriteSheet(const char* file, int w, int h, int* animations, int nAnimations);
+    void            setWallSprite(unsigned int pos);
+    void            setCorridorSprite(unsigned int pos);
+    
+    bool            save(const char* file);
+    
+    bool            isWall(int x, int y);
+    bool            isCorridor(int x, int y);
+    
+    void            render(SDL_Surface* screen, Vector2D position);
+    
 private:
-	void						createScenario();
-
+    void            initializeScenario();
+    void            createScenario();
+    int             createRandomWalls(Vector2D previousCell, Vector2D currentSquare,
+                                      int depth, int maxDepth,
+                                      int minFreeNeighbors);
+    int             freeNeighborSquares(Vector2D cell);
+    int             freeNeighborSquaresExtended(Vector2D cell);
+    Vector2D        randomPerimeterSquare();
+    Vector2D        randomSquare();
+    void            createEnemyHouse();
+    
 private:
-	bool**						_scenario;
-	unsigned int				_width;
-	unsigned int				_height;
-	Vector2D					_enemy_spawning_cell;
-	Vector2D					_player_spawning_cell;
+    bool**          _scenario;
+    unsigned int    _hSize;
+    unsigned int    _vSize;
+    Vector2D        _enemySpawningCell;
+    Vector2D        _playerSpawningCell;
+    
+    SpriteSheet*    _sprite;
 };
 
-#endif // SCENARIO_H
+#endif /* defined(__MulticocoSDL__scenario__) */

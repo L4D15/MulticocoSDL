@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22400C7817353EE7001B05DD /* scenario.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22400C7617353EE7001B05DD /* scenario.cpp */; };
+		22400C7A17355EBB001B05DD /* wall.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22400C7917355EBB001B05DD /* wall.bmp */; };
 		229F7F27173307FB00F98AE2 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229F7F25173307FB00F98AE2 /* vector2d.cpp */; };
 		22A6744B17340FA60080FCD4 /* spritesheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A6744917340FA60080FCD4 /* spritesheet.cpp */; };
 		22A6744D173431150080FCD4 /* pacman.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A6744C173431150080FCD4 /* pacman.bmp */; };
@@ -38,8 +40,9 @@
 
 /* Begin PBXFileReference section */
 		22400C73173523E1001B05DD /* entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = entity.h; sourceTree = "<group>"; };
-		22400C741735307C001B05DD /* scenario.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scenario.cpp; sourceTree = "<group>"; };
-		22400C751735307C001B05DD /* scenario.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scenario.h; sourceTree = "<group>"; };
+		22400C7617353EE7001B05DD /* scenario.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scenario.cpp; sourceTree = "<group>"; };
+		22400C7717353EE7001B05DD /* scenario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scenario.h; sourceTree = "<group>"; };
+		22400C7917355EBB001B05DD /* wall.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = wall.bmp; sourceTree = "<group>"; };
 		229F7F25173307FB00F98AE2 /* vector2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2d.cpp; sourceTree = "<group>"; };
 		229F7F26173307FB00F98AE2 /* vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
 		22A6744917340FA60080FCD4 /* spritesheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spritesheet.cpp; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		229F7F2817330F1300F98AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22400C7917355EBB001B05DD /* wall.bmp */,
 				22A6744C173431150080FCD4 /* pacman.bmp */,
 			);
 			name = Resources;
@@ -133,20 +137,19 @@
 		22CE056D17327AFA006F08C7 /* MulticocoSDL */ = {
 			isa = PBXGroup;
 			children = (
-				22400C741735307C001B05DD /* scenario.cpp */,
-				22400C751735307C001B05DD /* scenario.h */,
 				22400C73173523E1001B05DD /* entity.h */,
+				22CE058B17327BAA006F08C7 /* main.cpp */,
+				22400C7617353EE7001B05DD /* scenario.cpp */,
+				22400C7717353EE7001B05DD /* scenario.h */,
+				22CE059B1732834D006F08C7 /* sprite.cpp */,
+				22CE059C1732834D006F08C7 /* sprite.h */,
+				22A6744917340FA60080FCD4 /* spritesheet.cpp */,
+				22A6744A17340FA60080FCD4 /* spritesheet.h */,
+				22CE056E17327AFA006F08C7 /* Supporting Files */,
 				229F7F25173307FB00F98AE2 /* vector2d.cpp */,
 				229F7F26173307FB00F98AE2 /* vector2d.h */,
 				22CE059E17328371006F08C7 /* window.cpp */,
 				22CE059F17328371006F08C7 /* window.h */,
-				22CE057C17327AFA006F08C7 /* MainMenu.xib */,
-				22CE058B17327BAA006F08C7 /* main.cpp */,
-				22CE059B1732834D006F08C7 /* sprite.cpp */,
-				22CE059C1732834D006F08C7 /* sprite.h */,
-				22CE056E17327AFA006F08C7 /* Supporting Files */,
-				22A6744917340FA60080FCD4 /* spritesheet.cpp */,
-				22A6744A17340FA60080FCD4 /* spritesheet.h */,
 			);
 			path = MulticocoSDL;
 			sourceTree = "<group>";
@@ -154,6 +157,7 @@
 		22CE056E17327AFA006F08C7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				22CE057C17327AFA006F08C7 /* MainMenu.xib */,
 				22CE058817327B73006F08C7 /* SDLMain.h */,
 				22CE058917327B73006F08C7 /* SDLMain.m */,
 				22CE056F17327AFA006F08C7 /* MulticocoSDL-Info.plist */,
@@ -220,6 +224,7 @@
 				22CE057817327AFA006F08C7 /* Credits.rtf in Resources */,
 				22CE057E17327AFA006F08C7 /* MainMenu.xib in Resources */,
 				22A6744D173431150080FCD4 /* pacman.bmp in Resources */,
+				22400C7A17355EBB001B05DD /* wall.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +241,7 @@
 				22CE05A017328371006F08C7 /* window.cpp in Sources */,
 				229F7F27173307FB00F98AE2 /* vector2d.cpp in Sources */,
 				22A6744B17340FA60080FCD4 /* spritesheet.cpp in Sources */,
+				22400C7817353EE7001B05DD /* scenario.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

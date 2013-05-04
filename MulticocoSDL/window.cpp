@@ -49,6 +49,17 @@ void Window::setFullScreen(bool full)
 void Window::initialize()
 {
     //------------------------------------------//
+    //              SCENARIO                    //
+    //                                          //
+    this->_scenario = new Scenario(20,20);
+    int types[2] = {1,1};
+    this->_scenario->setSpriteSheet("MulticocoSDL.app/Contents/Resources/wall.bmp", 20, 20, types, 2);
+    this->_scenario->setWallSprite(0);
+    this->_scenario->setCorridorSprite(1);
+    //                                          //
+    //------------------------------------------//
+    
+    //------------------------------------------//
     //              PACMAN                      //
     //                                          //
     this->_pacman = new Entity();
@@ -62,7 +73,6 @@ void Window::initialize()
     this->_pacman->spriteSheet().setFrameSkip(15);
     //                                          //
     //------------------------------------------//
-    
     
     //------------------------------------------//
     //              TESTING                     //
@@ -84,6 +94,7 @@ void Window::render()
     SDL_FillRect(this->_screen, NULL, SDL_MapRGB(this->_screen->format, 0, 0, 0));
     
     //-----------------------------------------//
+    this->_scenario->render(this->_screen, Vector2D(this->_width/2,this->_height/2));
     this->_pacman->render(this->_screen);
     //-----------------------------------------//
     
@@ -157,7 +168,7 @@ void Window::handleEvents()
                     break;
                     
                 case SDLK_0:
-
+                    this->_pacman->spriteSheet().setAnimation("DIE");
                     break;
                     //                                  //
                     //----------------------------------//

@@ -5,6 +5,7 @@
 #include <string>
 #include "spritesheet.h"
 #include "entity.h"
+#include "scenario.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ private:
     bool            _isFullScreen;
     
     //------------------------------//
+    Scenario*       _scenario;
     Entity*         _pacman;
 };
 

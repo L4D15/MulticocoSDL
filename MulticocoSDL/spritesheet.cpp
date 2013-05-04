@@ -12,6 +12,8 @@ SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAn
 {
     this->_currentAnimation = 0;
     this->_isPaused = false;
+    this->_width = w;
+    this->_height = h;
     
     SDL_Surface* spriteSheet = SDL_LoadBMP(img);
     
@@ -42,11 +44,34 @@ SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAn
             // Creamos un nuevo Sprite con la porcion de la plantilla que hemos dibujado
             this->_sprites.push_back(new Sprite(currentSprite,animations[i],w,h));
             
-            // Insertamos un vinculo vacio
+            // Insertamos un vinculo vacio, de esta forma inicializamos el vector de vinculos
             this->_bindings.push_back(new std::string(""));
         }
         SDL_FreeSurface(spriteSheet);   // Ya no necesitamos la plantilla
     }    
+}
+
+SpriteSheet::~SpriteSheet()
+{
+    for (unsigned int i = 0; i < this->_sprites.size(); i++) {
+        delete this->_sprites[i];
+    }
+}
+
+/**
+ @brief Ancho de cada frame individual del sprite.
+ **/
+unsigned int SpriteSheet::spriteWidth()
+{
+    return this->_width;
+}
+
+/**
+ @brief Alto de cada frame individual del sprite.
+ **/
+unsigned int SpriteSheet::spriteHeight()
+{
+    return this->_height;
 }
 
 /**
