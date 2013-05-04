@@ -24,7 +24,7 @@ Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
     this->_bitmap = img;
     
     // Indicamos cual es el color de transparencia
-    //SDL_SetColorKey(this->_bitmap, SDL_SRCCOLORKEY, SDL_MapRGB(this->_bitmap->format,255,0,255));
+    SDL_SetColorKey(this->_bitmap, SDL_SRCCOLORKEY, SDL_MapRGB(this->_bitmap->format,0,0,0));
     
     this->_frames = new SDL_Rect[this->_nAnimations];
     

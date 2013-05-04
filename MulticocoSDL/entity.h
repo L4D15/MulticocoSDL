@@ -20,6 +20,7 @@ public:
 	void					setSpriteSheet(const char* file, int w, int h, int* animations, int nAnimations)
                                         { _sprite = new SpriteSheet(file,w,h,animations,nAnimations); }
     SpriteSheet&            spriteSheet(){ return *_sprite; }
+    void                    setAnimation(const char* name){ _sprite->setAnimation(name); }
 
 	inline bool				isVisible(){ return _visible; }
 	inline bool				isMoving(){ return _moving; }

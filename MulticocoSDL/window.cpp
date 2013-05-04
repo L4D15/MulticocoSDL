@@ -51,7 +51,7 @@ void Window::initialize()
     //------------------------------------------//
     //              SCENARIO                    //
     //                                          //
-    this->_scenario = new Scenario(20,20);
+    this->_scenario = new Scenario(30,30);
     int types[2] = {1,1};
     this->_scenario->setSpriteSheet("MulticocoSDL.app/Contents/Resources/wall.bmp", 20, 20, types, 2);
     this->_scenario->setWallSprite(0);
@@ -111,6 +111,7 @@ void Window::update()
     // Comprobar colisiones
     
     // Mover aquellos que no colisionen
+    this->_pacman->move();
     
     //------------------------------------------//
 }
@@ -152,18 +153,22 @@ void Window::handleEvents()
                     //              PACMAN              //
                     //                                  //
                 case SDLK_RIGHT:
+                    this->_pacman->setAnimation("RIGHT");
                     this->_pacman->setDirection(2, 0);
                     break;
                     
                 case SDLK_LEFT:
+                    this->_pacman->setAnimation("LEFT");
                     this->_pacman->setDirection(-2, 0);
                     break;
                     
                 case SDLK_UP:
+                    this->_pacman->setAnimation("UP");
                     this->_pacman->setDirection(0, -2);
                     break;
                     
                 case SDLK_DOWN:
+                    this->_pacman->setAnimation("DOWN");
                     this->_pacman->setDirection(0, 2);
                     break;
                     
@@ -183,7 +188,7 @@ void Window::handleEvents()
                     case SDLK_LEFT:
                     case SDLK_UP:
                     case SDLK_DOWN:
-
+                        this->_pacman->setDirection(0, 0);
                         break;
                         
                     default:

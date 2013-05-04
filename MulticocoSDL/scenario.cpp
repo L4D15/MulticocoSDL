@@ -96,7 +96,7 @@ void Scenario::setCorridorSprite(unsigned int pos)
 
 /**
  @brief Dibuja el escenario en la pantalla en la posicion indicada.
- @param screen  Pantalla en la que dibujar el escenario.
+ @param screen      Pantalla en la que dibujar el escenario.
  @param position    Punto central donde dibujar el laberinto.
  @pre   Se debe haber especificado la plantilla mediante setSpriteSheet y vincular las imagenes de
         la pared y el pasillo mediante setWallSprite y setCorridorSprite.
