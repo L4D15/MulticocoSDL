@@ -59,7 +59,7 @@ void Scenario::initializeScenario()
     
     for (unsigned int i = 1; i < this->_vSize; i++) {
         for (unsigned int j = 0; j < this->_hSize; j++) {
-            if (j == 0 || j == this->_hSize - 1) {
+            if (j == 0 || j == (this->_hSize - 1) || i == (this->_vSize - 1)) {
                 this->_scenario[i][j] = WALL;
             } else {
                 this->_scenario[i][j] = CORRIDOR;
