@@ -14,34 +14,39 @@ SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAn
     this->_isPaused = false;
     
     SDL_Surface* spriteSheet = SDL_LoadBMP(img);
-    SDL_SetColorKey(spriteSheet, SDL_SRCCOLORKEY, SDL_MapRGB(spriteSheet->format,255,0,255));   // Indica el color de transparencia
     
     if (spriteSheet == NULL) {
         std::cout << SDL_GetError() << std::endl;
-    }
-    
-    SDL_Surface* currentSprite;
-    for (int i = 0; i < nAnimations; i++) {
-        // Creamos una nueva superficie donde dibujar
-        currentSprite = SDL_CreateRGBSurface(SDL_HWSURFACE, w * animations[i], h, 16, 0, 0, 0, 0);
+    } else {
+        SDL_SetColorKey(spriteSheet, SDL_SRCCOLORKEY, SDL_MapRGB(spriteSheet->format,255,0,255));   // Indica el color de transparencia
         
-        // Seleccionamos el area que queremos coger de la plantilla
-        SDL_Rect origin;
-        origin.x = 0;
-        origin.y = i * h;
-        origin.w = w * animations[i];   // El ancho sera la suma de los anchos de cada animacion
-        origin.h = h;
+        if (spriteSheet == NULL) {
+            std::cout << SDL_GetError() << std::endl;
+        }
         
-        // Dibujamos la parte del SpriteSheet que nos interesa en el sprite de destino
-        SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL); // NULL para que pille todo el sprite
-        
-        // Creamos un nuevo Sprite con la porcion de la plantilla que hemos dibujado
-        this->_sprites.push_back(new Sprite(currentSprite,animations[i],w,h));
-        
-        // Insertamos un vinculo vacio
-        this->_bindings.push_back(new std::string(""));
-    }
-    SDL_FreeSurface(spriteSheet);   // Ya no necesitamos la plantilla
+        SDL_Surface* currentSprite;
+        for (int i = 0; i < nAnimations; i++) {
+            // Creamos una nueva superficie donde dibujar
+            currentSprite = SDL_CreateRGBSurface(SDL_HWSURFACE, w * animations[i], h, 16, 0, 0, 0, 0);
+            
+            // Seleccionamos el area que queremos coger de la plantilla
+            SDL_Rect origin;
+            origin.x = 0;
+            origin.y = i * h;
+            origin.w = w * animations[i];   // El ancho sera la suma de los anchos de cada animacion
+            origin.h = h;
+            
+            // Dibujamos la parte del SpriteSheet que nos interesa en el sprite de destino
+            SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL); // NULL para que pille todo el sprite
+            
+            // Creamos un nuevo Sprite con la porcion de la plantilla que hemos dibujado
+            this->_sprites.push_back(new Sprite(currentSprite,animations[i],w,h));
+            
+            // Insertamos un vinculo vacio
+            this->_bindings.push_back(new std::string(""));
+        }
+        SDL_FreeSurface(spriteSheet);   // Ya no necesitamos la plantilla
+    }    
 }
 
 /**

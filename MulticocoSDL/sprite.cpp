@@ -10,6 +10,12 @@
  **/
 Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
 {
+    if (animations == 0)
+    {
+        std::cout << "Error creating sprite animation." << std::endl
+        << "Length of animation set to 0." << std::endl
+        << "This error takes place when the array with the amount of frames per animation is incorrectly set or empty." << std::endl;
+    }
     this->_nAnimations = animations;
     this->_width = w;
     this->_height = h;

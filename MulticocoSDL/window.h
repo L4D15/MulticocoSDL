@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <string>
 #include "spritesheet.h"
+#include "entity.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ public:
     void            setFullScreen(bool full);
     
 private:
+    void            initialize();
     void            render();
     void            update();
     void            handleEvents();
@@ -30,9 +32,7 @@ private:
     bool            _isFullScreen;
     
     //------------------------------//
-    SpriteSheet*    _pacman;
-    Vector2D        _pos;
-    Vector2D        _v;
+    Entity*         _pacman;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

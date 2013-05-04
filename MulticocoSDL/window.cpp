@@ -25,19 +25,7 @@ Window::Window(int w, int h, string title)
     
     this->_run = false;
     
-    //---------------------------------//
-    int anims[5] = {2,2,2,2,11};
-    this->_pacman = new SpriteSheet("MulticocoSDL.app/Contents/Resources/pacman.bmp",20,20, anims,5);
-    this->_pacman->bindAnimation(0, "UP");
-    this->_pacman->bindAnimation(1, "RIGHT");
-    this->_pacman->bindAnimation(2, "DOWN");
-    this->_pacman->bindAnimation(3, "LEFT");
-    this->_pacman->bindAnimation(4, "DIE");
-    
-    this->_pacman->setFrameSkip(5);
-    this->_pos.setX(w/2);
-    this->_pos.setY(h/2);
-    //---------------------------------//
+    this->initialize();
 }
 
 Window::~Window()
@@ -58,6 +46,32 @@ void Window::setFullScreen(bool full)
     }
 }
 
+void Window::initialize()
+{
+    //------------------------------------------//
+    //              PACMAN                      //
+    //                                          //
+    this->_pacman = new Entity();
+    int animations[5] = {2,2,2,2,11};
+    this->_pacman->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pacman.bmp", 20, 20, animations, 5);
+    this->_pacman->spriteSheet().bindAnimation(0, "UP");
+    this->_pacman->spriteSheet().bindAnimation(1, "RIGHT");
+    this->_pacman->spriteSheet().bindAnimation(2, "DOWN");
+    this->_pacman->spriteSheet().bindAnimation(3, "LEFT");
+    this->_pacman->spriteSheet().bindAnimation(4, "DIE");
+    this->_pacman->spriteSheet().setFrameSkip(15);
+    //                                          //
+    //------------------------------------------//
+    
+    
+    //------------------------------------------//
+    //              TESTING                     //
+    this->_pacman->spriteSheet().setAnimation("RIGHT");
+    this->_pacman->setVisible(true);
+    //                                          //
+    //------------------------------------------//
+}
+
 void Window::startMainLoop()
 {
     this->_run = true;
@@ -70,7 +84,7 @@ void Window::render()
     SDL_FillRect(this->_screen, NULL, SDL_MapRGB(this->_screen->format, 0, 0, 0));
     
     //-----------------------------------------//
-    this->_pacman->render(this->_screen, this->_pos);
+    this->_pacman->render(this->_screen);
     //-----------------------------------------//
     
     // Intercambia los buffers
@@ -80,7 +94,13 @@ void Window::render()
 void Window::update()
 {
     //------------------------------------------//
-    this->_pos = this->_pos + this->_v; // Mueve el pacman
+    
+    // Actualizar elementos
+    
+    // Comprobar colisiones
+    
+    // Mover aquellos que no colisionen
+    
     //------------------------------------------//
 }
 
@@ -117,31 +137,30 @@ void Window::handleEvents()
                         this->setFullScreen(true);
                     }
                     
-                    //--------------------------------//
+                    //----------------------------------//
+                    //              PACMAN              //
+                    //                                  //
                 case SDLK_RIGHT:
-                    this->_pacman->setAnimation("RIGHT");
-                    this->_v.setX(1);
-                    this->_v.setY(0);
+                    this->_pacman->setDirection(2, 0);
                     break;
                     
                 case SDLK_LEFT:
-                    this->_pacman->setAnimation("LEFT");
-                    this->_v.setX(-1);
-                    this->_v.setY(0);
+                    this->_pacman->setDirection(-2, 0);
                     break;
                     
                 case SDLK_UP:
-                    this->_pacman->setAnimation("UP");
-                    this->_v.setX(0);
-                    this->_v.setY(-1);
+                    this->_pacman->setDirection(0, -2);
                     break;
                     
                 case SDLK_DOWN:
-                    this->_pacman->setAnimation("DOWN");
-                    this->_v.setX(0);
-                    this->_v.setY(1);
+                    this->_pacman->setDirection(0, 2);
                     break;
-                    //--------------------------------//
+                    
+                case SDLK_0:
+
+                    break;
+                    //                                  //
+                    //----------------------------------//
                     
                 default:
                     break;
@@ -153,8 +172,7 @@ void Window::handleEvents()
                     case SDLK_LEFT:
                     case SDLK_UP:
                     case SDLK_DOWN:
-                        this->_v.setX(0);
-                        this->_v.setY(0);
+
                         break;
                         
                     default:

@@ -16,18 +16,5 @@
          landmarkName = "SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAnimations)"
          landmarkType = "5">
       </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MulticocoSDL/spritesheet.cpp"
-         timestampString = "389301527.571262"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
-         landmarkName = "SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAnimations)"
-         landmarkType = "5">
-      </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
