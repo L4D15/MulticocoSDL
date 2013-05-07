@@ -9,6 +9,8 @@ Scenario::Scenario(unsigned int hSize, unsigned int vSize)
     this->_vSize = vSize;
     
     this->initializeScenario();
+    this->createScenario();
+    this->createEnemyHouse();
 }
 
 /**
@@ -66,6 +68,150 @@ void Scenario::initializeScenario()
             }
         }
     }
+}
+
+/**
+ @brief Construye el escenario interior (sin contar los muros exteriores).
+ **/
+void Scenario::createScenario()
+{
+    int maxWalls = 0.6f * ((this->_hSize - 2) * (this->_vSize - 2) - ENEMIES_SPACE);
+    int maxNeighbors = MAX_NEIGHBORS - 1;
+    int errors = 0;
+    
+    while (maxWalls > 0 && errors < (this->_hSize * this->_vSize)) {
+        Vector2D origin = this->randomCell();
+        
+        if (this->freeNeighborCellsExtended(origin) >= maxNeighbors) {
+            int result = 1 + this->createRandomWalls(Vector2D(0,0), origin, 0, maxWalls, maxNeighbors - 1);
+            maxWalls -= result;
+            
+            if (result != 0) {
+                errors = 0;
+            }
+        } else {
+            errors++;
+        }
+    }
+}
+
+/**
+ @brief Casilla aleatoria.
+ @return    Una casilla aleatoria del escenario.
+ **/
+Vector2D Scenario::randomCell()
+{
+    return Vector2D(1 + rand() % (this->_hSize - 1), 1 + rand() % (this->_vSize - 1));
+}
+
+/**
+ @brief Indica cuantas casillas vecinas libres hay respecto a la casilla pasada.
+ @param cell    Casilla.
+ @return    Numero de casillas libres alrededor de esta.
+ **/
+int Scenario::freeNeighborCells(Vector2D cell)
+{
+    Vector2D directions[] = {
+        Vector2D(-1,0), Vector2D(1,0), Vector2D(0,-1), Vector2D(0,1)
+    };
+    
+    int freeNeighbors = 0;    
+    for (int i = 0; i < NUM_DIRECTIONS; i++) {
+        Vector2D* currentDirection = &directions[i];
+        Vector2D neighbor = cell + *currentDirection;
+        int x = neighbor.x(), y = neighbor.y();
+        if(this->_scenario[y][x] == CORRIDOR)
+            freeNeighbors++;
+    }
+    return freeNeighbors;
+}
+
+/**
+ 
+ **/
+int Scenario::freeNeighborCellsExtended(Vector2D cell)
+{
+    Vector2D directions[] = {
+        Vector2D(-1,0), Vector2D(1,0), Vector2D(0,-1), Vector2D(0,1),
+        Vector2D(-1,-1),Vector2D(-1,1),Vector2D(1,1),Vector2D(1,-1)
+    };
+    
+    int freeNeighbors = 0;
+    for (int i = 0; i < NUM_DIRECTIONS * 2; i++) {
+        Vector2D* currentDirection = &directions[i];
+        Vector2D neighbor = cell + *currentDirection;
+        int x = neighbor.x(), y = neighbor.y();
+        if(x >= 0 && x < this->_hSize && y >= 0 && y < this->_vSize && this->_scenario[y][x] == CORRIDOR) {
+            freeNeighbors++;
+        }
+    }
+    return freeNeighbors;
+}
+
+/**
+ @brief Crea las paredes del laberinto de forma aleatoria.
+ **/
+int Scenario::createRandomWalls(Vector2D previousCell, Vector2D currentCell, int depth, int maxDepth, int minFreeNeighbors)
+{
+    int x = (int)currentCell.x(), y = (int)currentCell.y();
+    
+    if (this->_scenario[y][x] == WALL || freeNeighborCellsExtended(currentCell) < minFreeNeighbors) {
+        return -1;
+    }
+    
+    // la probabilidad de parar el crecimiento de la rama crece según su profundidad
+    if (depth >= maxDepth || (rand() % maxDepth < depth)) {
+        return depth;
+    }
+    
+    // Como podemos poner un muro aquí lo ponemos
+    this->_scenario[y][x] = WALL;
+    
+    std::vector<Vector2D> directions(NUM_DIRECTIONS);
+    directions.push_back(Vector2D(-1,0));
+    directions.push_back(Vector2D(1,0));
+    directions.push_back(Vector2D(0,-1));
+    directions.push_back(Vector2D(0,1));
+    
+    // Barajamos el vector
+    std::random_shuffle(directions.begin(), directions.end());
+    
+    
+    int result;
+    for(int i = 0; i < NUM_DIRECTIONS; i++){
+        Vector2D* currentDirection = directions.data() + i;
+        if(*currentDirection != previousCell){
+            result = createRandomWalls((*currentDirection)*(-1) /*la inversa, ojo!*/,
+                                         currentCell + *currentDirection, depth + 1, maxDepth, minFreeNeighbors);
+            if(result != -1)
+                return result;
+        }
+    }
+    return depth;
+}
+
+/**
+ @brief Crea la casa de los fantasmas.
+ **/
+void Scenario::createEnemyHouse()
+{
+    int xhalf = this->_hSize/2, yhalf = this->_vSize/2;
+    for(int i = yhalf - 3; i <= yhalf + 2; i++) {
+        for(int j = xhalf - 3; j <= xhalf + 3; j++) {
+            this->_scenario[i][j] = CORRIDOR;
+        }
+    }
+    
+    this->_scenario[yhalf-2][xhalf-2] = this->_scenario[yhalf-2][xhalf-1] =
+    this->_scenario[yhalf-2][xhalf+1] = this->_scenario[yhalf-2][xhalf+2] =
+
+    this->_scenario[yhalf-1][xhalf-2] = this->_scenario[yhalf-1][xhalf+2] =
+
+    this->_scenario[yhalf][xhalf-2] = this->_scenario[yhalf][xhalf+2] =
+
+    this->_scenario[yhalf+1][xhalf-2] = this->_scenario[yhalf+1][xhalf-1] =
+    this->_scenario[yhalf+1][xhalf] = this->_scenario[yhalf+1][xhalf+1] =
+    this->_scenario[yhalf+1][xhalf+2] = WALL;
 }
 
 /**

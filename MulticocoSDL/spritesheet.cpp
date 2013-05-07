@@ -21,11 +21,6 @@ SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAn
         std::cout << SDL_GetError() << std::endl;
     } else {
         SDL_SetColorKey(spriteSheet, SDL_SRCCOLORKEY, SDL_MapRGB(spriteSheet->format,255,0,255));   // Indica el color de transparencia
-        
-        if (spriteSheet == NULL) {
-            std::cout << SDL_GetError() << std::endl;
-        }
-        
         SDL_Surface* currentSprite;
         for (int i = 0; i < nAnimations; i++) {
             // Creamos una nueva superficie donde dibujar

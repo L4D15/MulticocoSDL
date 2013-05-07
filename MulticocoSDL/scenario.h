@@ -10,6 +10,7 @@
 #define MAX_NEIGHBORS 8
 #define WALL true
 #define CORRIDOR false
+#define ENEMIES_SPACE 13
 
 class Scenario
 {
@@ -43,13 +44,13 @@ public:
 private:
     void            initializeScenario();
     void            createScenario();
-    int             createRandomWalls(Vector2D previousCell, Vector2D currentSquare,
+    int             createRandomWalls(Vector2D previousCell, Vector2D currentCell,
                                       int depth, int maxDepth,
                                       int minFreeNeighbors);
-    int             freeNeighborSquares(Vector2D cell);
-    int             freeNeighborSquaresExtended(Vector2D cell);
-    Vector2D        randomPerimeterSquare();
-    Vector2D        randomSquare();
+    int             freeNeighborCells(Vector2D cell);
+    int             freeNeighborCellsExtended(Vector2D cell);
+    Vector2D        randomPerimeterCell();
+    Vector2D        randomCell();
     void            createEnemyHouse();
     
 private:
