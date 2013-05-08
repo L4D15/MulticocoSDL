@@ -6,6 +6,7 @@ Window::Window(int w, int h, string title)
     this->_width = w;
     this->_height = h;
     this->_isFullScreen = false;
+    this->_showDebugInfo = false;
     int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     
     if (err < 0) {
@@ -66,6 +67,7 @@ void Window::initialize()
     this->_pacman = new Entity();
 
     int animations[5] = {2,2,2,2,11};
+    
     this->_pacman->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pacman.bmp", 20, 20, animations, 5);
     this->_pacman->spriteSheet().bindAnimation(0, "UP");
     this->_pacman->spriteSheet().bindAnimation(1, "RIGHT");
@@ -73,6 +75,26 @@ void Window::initialize()
     this->_pacman->spriteSheet().bindAnimation(3, "LEFT");
     this->_pacman->spriteSheet().bindAnimation(4, "DIE");
     this->_pacman->spriteSheet().setFrameSkip(15);
+    //                                          //
+    //------------------------------------------//
+    
+    //------------------------------------------//
+    //              RED GHOST                   //
+    Enemy* ghost = new Enemy(Enemy::Type::FAST,this->_scenario);
+    ghost->setPosition(this->_scenario->enemySpawningPosition());
+    ghost->setVisible(true);
+    this->_enemies.push_back(*ghost);
+    delete ghost;
+    //                                          //
+    //------------------------------------------//
+    
+    //------------------------------------------//
+    //              PINK GHOST                  //
+    ghost = new Enemy(Enemy::Type::RANDOM, this->_scenario);
+    ghost->setPosition(this->_scenario->enemySpawningPosition() - Vector2D(20,0));
+    ghost->setVisible(true);
+    this->_enemies.push_back(*ghost);
+    delete ghost;
     //                                          //
     //------------------------------------------//
     
@@ -97,8 +119,12 @@ void Window::render()
     SDL_FillRect(this->_screen, NULL, SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255));
     
     //-----------------------------------------//
-    this->_scenario->render(this->_screen, true);
-    this->_pacman->render(this->_screen);
+    this->_scenario->render(this->_screen, this->_showDebugInfo);
+    this->_pacman->render(this->_screen, this->_showDebugInfo);
+    
+    for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
+        it->render(this->_screen);
+    }
     //-----------------------------------------//
     
     // Intercambia los buffers
@@ -116,8 +142,15 @@ void Window::update()
         this->_pacman->setDirection(0.0f, 0.0f);
         this->_pacman->moveToPreviousPosition();
     }
-    
+
+    // Pacman
     this->_pacman->move();
+    
+    // Enemigos
+    for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
+        it->update();
+        it->move();
+    }
     
     //------------------------------------------//
 }
@@ -127,9 +160,9 @@ void Window::mainLoop()
     while (this->_run) {
         // TODO: Controlar que no se dibujen demasiados frames por segundo
         // Parece que SDL capa los FPS a 60 automaticamente. ¡Bien!
-        this->render();
-        this->update();
         this->handleEvents();
+        this->update();
+        this->render();
     }
 }
 
@@ -154,6 +187,15 @@ void Window::handleEvents()
                     } else {
                         this->setFullScreen(true);
                     }
+                    break;
+                    
+                case SDLK_1:
+                    if (this->_showDebugInfo) {
+                        this->_showDebugInfo = false;
+                    } else {
+                        this->_showDebugInfo = true;
+                    }
+                    break;
                     
                     //----------------------------------//
                     //              PACMAN              //

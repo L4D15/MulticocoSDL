@@ -1,4 +1,5 @@
 #include "vector2d.h"
+#include <sstream>
 
 /**
  * Constructor por defecto. Inicializa los valores de ambas coordenadas a 0.
@@ -145,6 +146,15 @@ Vector2D& Vector2D::normalize() {
     _y *= recip;
     
     return *this;
+}
+
+std::string Vector2D::toString()
+{
+    std::stringstream str;
+    
+    str << "(" << _x << "," << _y << ")";
+    
+    return str.str();
 }
 
 

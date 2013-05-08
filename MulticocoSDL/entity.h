@@ -2,7 +2,7 @@
 #define ENTITY_H
 
 #include "vector2d.h"
-#include "sprite.h"
+#include "spritesheet.h"
 #include <SDL.h>
 #include "collisionbox.h"
 
@@ -11,20 +11,18 @@
 class Entity
 {
 public:
-							Entity(){}
+                            Entity(){ }
 	virtual					~Entity(){}
 
 	void					setPosition(float x, float y){ _position.setX(x);_position.setY(y); }
-	void					setPosition(Vector2D v){ _position = v; }
+	void					setPosition(Vector2D v){ _position.setX(v.x()); _position.setY(v.y()); }
 	void					setDirection(float x, float y){ _direction.setX(x);_direction.setY(y); }
 	void					setDirection(Vector2D& v){ _direction = v; }
     inline void				setVisible(bool v){ _visible = v; }
 	inline void				setMoving(bool m){ _moving = m; }
 	void					setSpriteSheet(const char* file, int w, int h, int* animations, int nAnimations)
                                         {   _sprite = new SpriteSheet(file,w,h,animations,nAnimations);
-                                            _collisionBox = new CollisionBox( _position,
-                                                                             w * COLLISION_BOX_RESIZE_FACTOR,
-                                                                             h * COLLISION_BOX_RESIZE_FACTOR);
+                                            _collisionBox = new CollisionBox(_position,w,h,COLLISION_BOX_RESIZE_FACTOR);
                                         }
     SpriteSheet&            spriteSheet(){ return *_sprite; }
     CollisionBox&           collisionBox(){ return *_collisionBox; }
@@ -39,12 +37,12 @@ public:
 
     virtual inline void		update(){ _sprite->nextFrame(); }
 
-	void					move(){ _previousPosition = _position; _position = _position + _direction; }
+	void					move(){ _previousPosition = _position; _position = _position + _direction; _collisionBox->updatePosition(); }
     void                    moveToPreviousPosition(){ _position = _previousPosition; }
     void                    render(SDL_Surface* screen, bool showDebugGraphics = false)
                             {
                                 if (_visible) _sprite->render(screen, this->_position);
-                                if (showDebugGraphics) _collisionBox->render(screen);
+                                if (showDebugGraphics) _collisionBox->render(screen, 255,0,255);
                             }
 
 protected:

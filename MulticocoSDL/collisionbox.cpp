@@ -1,20 +1,16 @@
 #include "collisionbox.h"
 #include <cmath>
 
-CollisionBox::CollisionBox(Vector2D& position, unsigned int width, unsigned int height):
+CollisionBox::CollisionBox(Vector2D& position, unsigned int width, unsigned int height, float rFactor):
 _position(position)
 {
-    this->_width = width;
-    this->_height = height;
+    this->_originalWidth = width;
+    this->_originalHeight = height;
+    this->_width = width * rFactor;
+    this->_height = height * rFactor;
+    this->_rFactor = rFactor;
     
-    unsigned int max;
-    if (width > height) {
-        max = width;
-    } else {
-        max = height;
-    }
-    
-    this->_radioSquared = (pow(width * 0.5f, 2)) + (width * height * 0.5f) + (2 * pow(height * 0.5f,2));
+    updatePosition();
 }
 
 /**
@@ -24,30 +20,45 @@ _position(position)
  **/
 bool CollisionBox::collides(CollisionBox &other)
 {    
-    if (!((this->_position.x() + this->_width) >= other._position.x())) {
+    if (!((this->_boxPosition.x() + this->_width) >= other._boxPosition.x())) {
         return false;
     }
     
-    if (!(this->_position.x() <= (other._position.x() + other._width))) {
+    if (!(this->_boxPosition.x() <= (other._boxPosition.x() + other._width))) {
         return false;
     }
     
-    if  (!((this->_position.y() - this->_height) <= other._position.y())) {
+    if  (!((this->_boxPosition.y() - this->_height) <= other._boxPosition.y())) {
         return false;
     }
     
-    if (!(this->_position.y() >= (other._position.y() - other._height))) {
+    if (!(this->_boxPosition.y() >= (other._boxPosition.y() - other._height))) {
         return false;
     }
     return true;
 }
 
-void CollisionBox::render(SDL_Surface *screen) {
+/**
+ @brief Actualiza la posicion de la caja de colisiones
+ **/
+void CollisionBox::updatePosition()
+{
+    unsigned int x = this->_position.x() + ((this->_originalWidth * (1 - this->_rFactor)) / 2);
+    unsigned int y = this->_position.y() + ((this->_originalHeight * (1 - this->_rFactor)) / 2);
+    
+    this->_boxPosition.setX(floor(x));
+    this->_boxPosition.setY(floor(y));
+}
+
+/**
+ 
+ **/
+void CollisionBox::render(SDL_Surface *screen, unsigned int r, unsigned int g, unsigned int b) {
     SDL_Rect rect;
-    rect.x = this->_position.x();
-    rect.y = this->_position.y();
+    rect.x = this->_boxPosition.x();
+    rect.y = this->_boxPosition.y();
     rect.w = this->_width;
     rect.h = this->_height;
     
-    SDL_FillRect(screen, &rect, SDL_MapRGBA(screen->format, 0, 255, 0,100));
+    SDL_FillRect(screen, &rect, SDL_MapRGBA(screen->format, r, g, b, 255));
 }

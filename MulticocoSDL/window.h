@@ -6,6 +6,7 @@
 #include "spritesheet.h"
 #include "entity.h"
 #include "scenario.h"
+#include "enemy.h"
 
 using namespace std;
 
@@ -35,6 +36,11 @@ private:
     //------------------------------//
     Scenario*       _scenario;
     Entity*         _pacman;
+    
+    std::list<Enemy> _enemies;
+    //------------------------------//
+    //          EVENTS STATES       //
+    bool            _showDebugInfo;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

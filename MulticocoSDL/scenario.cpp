@@ -13,6 +13,8 @@ _collisionBoxesPos(hSize * vSize)
     this->initializeScenario();
     this->createScenario();
     this->createEnemyHouse();
+    
+    this->_enemySpawningCell = Vector2D(hSize/2,vSize/2);
 }
 
 /**
@@ -269,9 +271,9 @@ bool Scenario::isCorridor(int x, int y)
  @return    Celda que corresponde a las coordenadas x e y.
  **/
 Vector2D Scenario::cell(int x, int y)
-{    
-    unsigned int cellX = reinterpret_cast<unsigned int>((x/this->_sprite->spriteWidth()));
-    unsigned int cellY = reinterpret_cast<unsigned int>((y/this->_sprite->spriteHeight()));
+{
+    unsigned int cellX = (x * this->_hSize) / (this->_position.x() + this->_sprite->spriteWidth() * this->_hSize);
+    unsigned int cellY = (y * this->_vSize) / (this->_position.y() + this->_sprite->spriteHeight() * this->_vSize);
     
     return Vector2D(cellX, cellY);
 }
@@ -317,6 +319,17 @@ Vector2D Scenario::playerSpawningPosition()
     
     unsigned int posX = origX + this->_playerSpawningCell.x() * this->_sprite->spriteWidth();
     unsigned int posY = origY + this->_playerSpawningCell.y() * this->_sprite->spriteHeight();
+    
+    return Vector2D(posX, posY);
+}
+
+Vector2D Scenario::enemySpawningPosition()
+{
+    unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
+    unsigned int origY = this->_position.y() - (this->_sprite->spriteHeight() * this->_vSize)/2;
+    
+    unsigned int posX = origX + this->_enemySpawningCell.x() * this->_sprite->spriteWidth();
+    unsigned int posY = origY + this->_enemySpawningCell.y() * this->_sprite->spriteHeight();
     
     return Vector2D(posX, posY);
 }
@@ -380,7 +393,7 @@ void Scenario::createCollisionBoxes()
                                    origY + (j * cellHeight));
                 this->_collisionBoxesPos.push_back(*pos);
                 box = new CollisionBox(this->_collisionBoxesPos.back(),
-                                       cellWidth, cellHeight);
+                                       cellWidth, cellHeight, 0.8f);
                 this->_collisionBoxes.push_back(*box);
                 delete pos;
                 delete box;
@@ -423,4 +436,47 @@ void Scenario::render(SDL_Surface *screen, bool showDebugGraphics)
         }
     }
     
+}
+
+/**
+ 
+ **/
+std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
+{
+    std::vector<Vector2D> directions;
+    Vector2D currentCell = this->cell(posX, posY);
+    
+    int x = currentCell.x();
+    int y = currentCell.y();
+    
+    // Celda de la derecha
+    if (x + 1 < this->_hSize) {
+        if (this->_scenario[x + 1][y] == CORRIDOR) {
+            directions.push_back(Vector2D(1,0));
+        }
+    }
+    
+    
+    // Celda de arriba
+    if (y + 1 < this->_vSize) {
+        if (this->_scenario[x][y + 1] == CORRIDOR) {
+            directions.push_back(Vector2D(0,1));
+        }
+    }
+    
+    // Celda de abajo
+    if (y - 1 >= 0) {
+        if (this->_scenario[x][y - 1] == CORRIDOR) {
+            directions.push_back(Vector2D(0,-1));
+        }
+    }
+    
+    // Celda de la izquierda
+    if (x - 1 >= 0) {
+        if (this->_scenario[x - 1][y] == CORRIDOR) {
+            directions.push_back(Vector2D(-1,0));
+        }
+    }
+    
+    return directions;
 }

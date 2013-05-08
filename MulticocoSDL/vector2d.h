@@ -1,6 +1,8 @@
 #ifndef VECTOR2D_H
 #define	VECTOR2D_H
 
+#include <string>
+
 class Vector2D {
 public:
 								Vector2D();
@@ -27,6 +29,8 @@ public:
     float                       distance(const Vector2D& vector);
     
     Vector2D&                   normalize();
+    
+    std::string                 toString();
     
 private:
     float                       invSqrt(float number);

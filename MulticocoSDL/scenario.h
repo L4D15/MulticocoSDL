@@ -7,6 +7,7 @@
 #include <SDL.h>
 #include "entity.h"
 #include "collisionbox.h"
+#include <vector>
 
 #define NUM_DIRECTIONS 4
 #define MAX_NEIGHBORS 8
@@ -29,6 +30,7 @@ public:
     Vector2D        playerSpawningCell();
     SpriteSheet&    spriteSheet();
     Vector2D        playerSpawningPosition();
+    Vector2D        enemySpawningPosition();
     
     void            setEnemySpawningCell(unsigned int x, unsigned int y);
     void            setPlayerSpawningCell(unsigned int x, unsigned int y);
@@ -42,6 +44,9 @@ public:
     
     bool            isWall(int x, int y);
     bool            isCorridor(int x, int y);
+    Vector2D        cell(int x, int y);
+    Vector2D        cellPosition(unsigned int x, unsigned int y);
+    std::vector<Vector2D> avalibleDirections(int posX, int posY);
     
     bool            collides(Entity& object);
     
@@ -60,10 +65,7 @@ private:
     Vector2D        randomCell();
     void            createEnemyHouse();
     
-    void            createCollisionBoxes();
-    
-    Vector2D        cell(int x, int y);
-    Vector2D        cellPosition(unsigned int x, unsigned int y);
+    void            createCollisionBoxes();    
     
 private:
     Vector2D        _position;

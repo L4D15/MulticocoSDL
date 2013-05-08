@@ -11,6 +11,11 @@
 		22400C7817353EE7001B05DD /* scenario.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22400C7617353EE7001B05DD /* scenario.cpp */; };
 		22400C7A17355EBB001B05DD /* wall.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22400C7917355EBB001B05DD /* wall.bmp */; };
 		229F7F27173307FB00F98AE2 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229F7F25173307FB00F98AE2 /* vector2d.cpp */; };
+		22A4DA4F173AA7D2006532D2 /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A4DA4D173AA7D2006532D2 /* enemy.cpp */; };
+		22A4DA51173AAF66006532D2 /* red_ghost.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A4DA50173AAF66006532D2 /* red_ghost.bmp */; };
+		22A4DA53173ABB0B006532D2 /* pink_ghost.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */; };
+		22A4DA55173AE460006532D2 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A4DA54173AE460006532D2 /* SDL_ttf.framework */; };
+		22A4DA57173AE499006532D2 /* SDL_ttf.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22A4DA56173AE499006532D2 /* SDL_ttf.framework */; };
 		22A6744B17340FA60080FCD4 /* spritesheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A6744917340FA60080FCD4 /* spritesheet.cpp */; };
 		22A6744D173431150080FCD4 /* pacman.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A6744C173431150080FCD4 /* pacman.bmp */; };
 		22CE056817327AFA006F08C7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE056717327AFA006F08C7 /* Cocoa.framework */; };
@@ -33,6 +38,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				22A4DA57173AE499006532D2 /* SDL_ttf.framework in CopyFiles */,
 				22CE059417327D50006F08C7 /* SDL.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,6 +54,12 @@
 		22400C7917355EBB001B05DD /* wall.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = wall.bmp; sourceTree = "<group>"; };
 		229F7F25173307FB00F98AE2 /* vector2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2d.cpp; sourceTree = "<group>"; };
 		229F7F26173307FB00F98AE2 /* vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
+		22A4DA4D173AA7D2006532D2 /* enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
+		22A4DA4E173AA7D2006532D2 /* enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = enemy.h; sourceTree = "<group>"; };
+		22A4DA50173AAF66006532D2 /* red_ghost.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = red_ghost.bmp; sourceTree = "<group>"; };
+		22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pink_ghost.bmp; sourceTree = "<group>"; };
+		22A4DA54173AE460006532D2 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
+		22A4DA56173AE499006532D2 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
 		22A6744917340FA60080FCD4 /* spritesheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spritesheet.cpp; sourceTree = "<group>"; };
 		22A6744A17340FA60080FCD4 /* spritesheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spritesheet.h; sourceTree = "<group>"; };
 		22A6744C173431150080FCD4 /* pacman.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman.bmp; sourceTree = "<group>"; };
@@ -78,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22A4DA55173AE460006532D2 /* SDL_ttf.framework in Frameworks */,
 				22CE059217327D03006F08C7 /* SDL.framework in Frameworks */,
 				22CE058717327B3C006F08C7 /* OpenGL.framework in Frameworks */,
 				22CE056817327AFA006F08C7 /* Cocoa.framework in Frameworks */,
@@ -90,6 +103,8 @@
 		229F7F2817330F1300F98AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */,
+				22A4DA50173AAF66006532D2 /* red_ghost.bmp */,
 				22400C7917355EBB001B05DD /* wall.bmp */,
 				22A6744C173431150080FCD4 /* pacman.bmp */,
 			);
@@ -118,6 +133,8 @@
 		22CE056617327AFA006F08C7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22A4DA56173AE499006532D2 /* SDL_ttf.framework */,
+				22A4DA54173AE460006532D2 /* SDL_ttf.framework */,
 				22CE059317327D50006F08C7 /* SDL.framework */,
 				22CE059117327D03006F08C7 /* SDL.framework */,
 				22CE058617327B3C006F08C7 /* OpenGL.framework */,
@@ -155,6 +172,8 @@
 				22CE059F17328371006F08C7 /* window.h */,
 				22023F5E17397C1E009AEFB8 /* collisionbox.cpp */,
 				22023F5F17397C1E009AEFB8 /* collisionbox.h */,
+				22A4DA4D173AA7D2006532D2 /* enemy.cpp */,
+				22A4DA4E173AA7D2006532D2 /* enemy.h */,
 			);
 			path = MulticocoSDL;
 			sourceTree = "<group>";
@@ -230,6 +249,8 @@
 				22CE057E17327AFA006F08C7 /* MainMenu.xib in Resources */,
 				22A6744D173431150080FCD4 /* pacman.bmp in Resources */,
 				22400C7A17355EBB001B05DD /* wall.bmp in Resources */,
+				22A4DA51173AAF66006532D2 /* red_ghost.bmp in Resources */,
+				22A4DA53173ABB0B006532D2 /* pink_ghost.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +269,7 @@
 				22A6744B17340FA60080FCD4 /* spritesheet.cpp in Sources */,
 				22400C7817353EE7001B05DD /* scenario.cpp in Sources */,
 				22023F6017397C1E009AEFB8 /* collisionbox.cpp in Sources */,
+				22A4DA4F173AA7D2006532D2 /* enemy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +367,10 @@
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MulticocoSDL/MulticocoSDL-Prefix.pch";
-				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL.framework/Headers;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL.framework/Headers,
+					/Library/Frameworks/SDL_ttf.framework/Headers,
+				);
 				INFOPLIST_FILE = "MulticocoSDL/MulticocoSDL-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -359,7 +384,10 @@
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MulticocoSDL/MulticocoSDL-Prefix.pch";
-				HEADER_SEARCH_PATHS = /Library/Frameworks/SDL.framework/Headers;
+				HEADER_SEARCH_PATHS = (
+					/Library/Frameworks/SDL.framework/Headers,
+					/Library/Frameworks/SDL_ttf.framework/Headers,
+				);
 				INFOPLIST_FILE = "MulticocoSDL/MulticocoSDL-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
