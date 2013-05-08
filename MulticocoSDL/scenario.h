@@ -5,6 +5,8 @@
 #include "vector2d.h"
 #include "spritesheet.h"
 #include <SDL.h>
+#include "entity.h"
+#include "collisionbox.h"
 
 #define NUM_DIRECTIONS 4
 #define MAX_NEIGHBORS 8
@@ -15,7 +17,7 @@
 class Scenario
 {
 public:
-                    Scenario(unsigned int hSize, unsigned int vSize);
+                    Scenario(unsigned int hSize, unsigned int vSize, Vector2D position);
                     Scenario(const char* file);
                     ~Scenario();
     
@@ -26,9 +28,11 @@ public:
     Vector2D        enemySpawningCell();
     Vector2D        playerSpawningCell();
     SpriteSheet&    spriteSheet();
+    Vector2D        playerSpawningPosition();
     
     void            setEnemySpawningCell(unsigned int x, unsigned int y);
     void            setPlayerSpawningCell(unsigned int x, unsigned int y);
+    void            setRandomPlayerSpawningCell();
     
     void            setSpriteSheet(const char* file, int w, int h, int* animations, int nAnimations);
     void            setWallSprite(unsigned int pos);
@@ -39,7 +43,10 @@ public:
     bool            isWall(int x, int y);
     bool            isCorridor(int x, int y);
     
-    void            render(SDL_Surface* screen, Vector2D position);
+    bool            collides(Entity& object);
+    
+    
+    void            render(SDL_Surface* screen, bool showDebugGraphics = false);
     
 private:
     void            initializeScenario();
@@ -53,7 +60,13 @@ private:
     Vector2D        randomCell();
     void            createEnemyHouse();
     
+    void            createCollisionBoxes();
+    
+    Vector2D        cell(int x, int y);
+    Vector2D        cellPosition(unsigned int x, unsigned int y);
+    
 private:
+    Vector2D        _position;
     bool**          _scenario;
     unsigned int    _hSize;
     unsigned int    _vSize;
@@ -61,6 +74,8 @@ private:
     Vector2D        _playerSpawningCell;
     
     SpriteSheet*    _sprite;
+    std::vector<CollisionBox>   _collisionBoxes;
+    std::vector<Vector2D>       _collisionBoxesPos;
 };
 
 #endif /* defined(__MulticocoSDL__scenario__) */

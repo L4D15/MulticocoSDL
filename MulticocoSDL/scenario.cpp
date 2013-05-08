@@ -2,7 +2,8 @@
 
 #include <ctime>
 
-Scenario::Scenario(unsigned int hSize, unsigned int vSize)
+Scenario::Scenario(unsigned int hSize, unsigned int vSize, Vector2D position):
+_position(position)
 {
     srand((unsigned)time(NULL));
     this->_hSize = hSize;
@@ -220,6 +221,10 @@ void Scenario::createEnemyHouse()
 void Scenario::setSpriteSheet(const char *file, int w, int h, int *animations, int nAnimations)
 {
     this->_sprite = new SpriteSheet(file,w,h,animations,nAnimations);
+    this->_collisionBoxes.clear();
+    this->_collisionBoxesPos.clear();
+    
+    this->createCollisionBoxes();
 }
 
 /**
@@ -241,18 +246,136 @@ void Scenario::setCorridorSprite(unsigned int pos)
 }
 
 /**
+ 
+ **/
+bool Scenario::isWall(int x, int y)
+{
+    return this->_scenario[x][y];
+}
+
+/**
+ 
+ **/
+bool Scenario::isCorridor(int x, int y)
+{
+    return !this->_scenario[x][y];
+}
+
+/**
+ @brief Calcula que casilla del escenario corresponde con dichas coordenadas.
+ @param x   Coordenada X.
+ @param y   Coordenada Y.
+ @return    Celda que corresponde a las coordenadas x e y.
+ **/
+Vector2D Scenario::cell(int x, int y)
+{    
+    unsigned int cellX = reinterpret_cast<unsigned int>((x/this->_sprite->spriteWidth()));
+    unsigned int cellY = reinterpret_cast<unsigned int>((y/this->_sprite->spriteHeight()));
+    
+    return Vector2D(cellX, cellY);
+}
+
+/**
+ @brief Posicion en pixeles de una celda cada.
+ **/
+Vector2D Scenario::cellPosition(unsigned int x, unsigned int y)
+{
+    unsigned int posX = x * (this->_position.x() + (this->_sprite->spriteWidth() * this->_vSize)/2)/this->_vSize;
+    unsigned int posY = y * (this->_position.y() + (this->_sprite->spriteHeight() * this->_hSize)/2)/this->_hSize;
+    
+    return Vector2D(posX,posY);
+}
+
+/**
+ 
+ **/
+bool Scenario::collides(Entity &object)
+{
+//    Vector2D cell = this->cell(object.collisionBox().position().x(),
+//                               object.collisionBox().position().y());
+//    return isWall(cell.x(), cell.y());
+    
+    for (unsigned int i = 0; i < this->_collisionBoxes.size(); i++) {
+        if (this->_collisionBoxes[i].collides(object.collisionBox())) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
+Vector2D Scenario::playerSpawningCell()
+{
+    return this->_playerSpawningCell;
+}
+
+Vector2D Scenario::playerSpawningPosition()
+{
+    return this->cellPosition(this->_playerSpawningCell.x(), this->_playerSpawningCell.y());
+}
+
+void Scenario::setRandomPlayerSpawningCell()
+{
+    int posX, posY;
+    bool free = false;
+    
+    while (!free) {
+        posX = rand() % (this->_vSize - 1);
+        posY = rand() % (this->_hSize - 1);
+        free = !this->_scenario[posX][posY];
+    }
+    this->_playerSpawningCell.setX(posX);
+    this->_playerSpawningCell.setY(posY);
+}
+
+void Scenario::createCollisionBoxes()
+{
+    CollisionBox* box;
+    Vector2D* pos;
+    
+    unsigned int cellWidth = this->_sprite->spriteWidth();
+    unsigned int cellHeight = this->_sprite->spriteHeight();
+    unsigned int x = 0;
+    unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
+    unsigned int origY = this->_position.y() - (this->_sprite->spriteHeight() * this->_vSize)/2;
+    unsigned int boxX = origX;
+    unsigned int boxY = origY;
+    unsigned int boxWidth = 0;
+    unsigned int boxHeight = cellHeight;    // Este no varia
+    for (unsigned int y = 0; y < this->_vSize; y++) {
+        
+        while (x < this->_hSize) {
+            boxX = origX + (x * boxWidth);
+            boxWidth = cellWidth;
+            while (x < (this->_hSize - 1) && this->_scenario[x][y] == WALL) {
+                boxWidth += cellWidth;
+                x++;
+            }
+            pos = new Vector2D(boxX, boxY);
+            this->_collisionBoxesPos.push_back(*pos);
+            box = new CollisionBox(this->_collisionBoxesPos.back(),
+                                   boxWidth,
+                                   boxHeight);
+            this->_collisionBoxes.push_back(*box);
+        }
+        boxY += cellHeight;
+        boxX = origX;
+    }
+}
+
+/**
  @brief Dibuja el escenario en la pantalla en la posicion indicada.
  @param screen      Pantalla en la que dibujar el escenario.
  @param position    Punto central donde dibujar el laberinto.
  @pre   Se debe haber especificado la plantilla mediante setSpriteSheet y vincular las imagenes de
         la pared y el pasillo mediante setWallSprite y setCorridorSprite.
  **/
-void Scenario::render(SDL_Surface *screen, Vector2D position)
+void Scenario::render(SDL_Surface *screen, bool showDebugGraphics)
 {
     int width = this->_sprite->spriteWidth();
     int height = this->_sprite->spriteHeight();
-    int origX = position.x() - ((width * this->_hSize)/2);
-    int origY = position.y() - ((height * this->_vSize)/2);
+    int origX = this->_position.x() - ((width * this->_hSize)/2);
+    int origY = this->_position.y() - ((height * this->_vSize)/2);
     
     Vector2D pos;
     for (int i = 0; i < this->_hSize; i++) {
@@ -265,6 +388,12 @@ void Scenario::render(SDL_Surface *screen, Vector2D position)
                 this->_sprite->setAnimation("CORRIDOR");
             }
             this->_sprite->render(screen, pos);
+        }
+    }
+    
+    if (showDebugGraphics) {
+        for (int i = 0; i < this->_collisionBoxes.size(); i++) {
+            this->_collisionBoxes[i].render(screen);
         }
     }
     

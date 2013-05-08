@@ -51,11 +51,12 @@ void Window::initialize()
     //------------------------------------------//
     //              SCENARIO                    //
     //                                          //
-    this->_scenario = new Scenario(30,30);
+    this->_scenario = new Scenario(30,30, Vector2D(this->_width/2, this->_height/2));
     int types[2] = {1,1};
     this->_scenario->setSpriteSheet("MulticocoSDL.app/Contents/Resources/wall.bmp", 20, 20, types, 2);
     this->_scenario->setWallSprite(0);
     this->_scenario->setCorridorSprite(1);
+    this->_scenario->setRandomPlayerSpawningCell();
     //                                          //
     //------------------------------------------//
     
@@ -63,6 +64,7 @@ void Window::initialize()
     //              PACMAN                      //
     //                                          //
     this->_pacman = new Entity();
+    this->_pacman->setPosition(this->_scenario->playerSpawningPosition());
     int animations[5] = {2,2,2,2,11};
     this->_pacman->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pacman.bmp", 20, 20, animations, 5);
     this->_pacman->spriteSheet().bindAnimation(0, "UP");
@@ -94,8 +96,8 @@ void Window::render()
     SDL_FillRect(this->_screen, NULL, SDL_MapRGB(this->_screen->format, 0, 0, 0));
     
     //-----------------------------------------//
-    this->_scenario->render(this->_screen, Vector2D(this->_width/2,this->_height/2));
-    this->_pacman->render(this->_screen);
+    this->_scenario->render(this->_screen, true);
+    this->_pacman->render(this->_screen, true);
     //-----------------------------------------//
     
     // Intercambia los buffers
@@ -109,8 +111,11 @@ void Window::update()
     // Actualizar elementos
     
     // Comprobar colisiones
+    if (this->_scenario->collides(*this->_pacman)) {
+        this->_pacman->setDirection(0.0f, 0.0f);
+        this->_pacman->moveToPreviousPosition();
+    }
     
-    // Mover aquellos que no colisionen
     this->_pacman->move();
     
     //------------------------------------------//
