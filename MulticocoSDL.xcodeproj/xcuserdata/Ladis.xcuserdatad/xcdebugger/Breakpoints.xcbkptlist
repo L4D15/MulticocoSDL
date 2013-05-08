@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389667990.974992"
+         timestampString = "389671567.449095"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "375"
-         endingLineNumber = "375"
+         startingLineNumber = "401"
+         endingLineNumber = "401"
          landmarkName = "Scenario::render(SDL_Surface *screen, bool showDebugGraphics)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,25 +47,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389667799.949585"
+         timestampString = "389671503.674335"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "361"
-         endingLineNumber = "361"
-         landmarkName = "Scenario::createCollisionBoxes()"
+         startingLineNumber = "315"
+         endingLineNumber = "315"
+         landmarkName = "Scenario::playerSpawningPosition()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389667799.949585"
+         filePath = "MulticocoSDL/window.cpp"
+         timestampString = "389671820.33048"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "354"
-         endingLineNumber = "354"
-         landmarkName = "Scenario::createCollisionBoxes()"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "Window::initialize()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -3,7 +3,8 @@
 #include <ctime>
 
 Scenario::Scenario(unsigned int hSize, unsigned int vSize, Vector2D position):
-_position(position)
+_position(position),
+_collisionBoxesPos(hSize * vSize)
 {
     srand((unsigned)time(NULL));
     this->_hSize = hSize;
@@ -311,7 +312,13 @@ Vector2D Scenario::playerSpawningCell()
 
 Vector2D Scenario::playerSpawningPosition()
 {
-    return this->cellPosition(this->_playerSpawningCell.x(), this->_playerSpawningCell.y());
+    unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
+    unsigned int origY = this->_position.y() - (this->_sprite->spriteHeight() * this->_vSize)/2;
+    
+    unsigned int posX = origX + this->_playerSpawningCell.x() * this->_sprite->spriteWidth();
+    unsigned int posY = origY + this->_playerSpawningCell.y() * this->_sprite->spriteHeight();
+    
+    return Vector2D(posX, posY);
 }
 
 void Scenario::setRandomPlayerSpawningCell()
@@ -335,31 +342,50 @@ void Scenario::createCollisionBoxes()
     
     unsigned int cellWidth = this->_sprite->spriteWidth();
     unsigned int cellHeight = this->_sprite->spriteHeight();
-    unsigned int x = 0;
     unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
     unsigned int origY = this->_position.y() - (this->_sprite->spriteHeight() * this->_vSize)/2;
-    unsigned int boxX = origX;
-    unsigned int boxY = origY;
-    unsigned int boxWidth = 0;
-    unsigned int boxHeight = cellHeight;    // Este no varia
-    for (unsigned int y = 0; y < this->_vSize; y++) {
-        
-        while (x < this->_hSize) {
-            boxX = origX + (x * boxWidth);
-            boxWidth = cellWidth;
-            while (x < (this->_hSize - 1) && this->_scenario[x][y] == WALL) {
-                boxWidth += cellWidth;
-                x++;
+    
+//    unsigned int cellX = 0;
+//    unsigned int boxX = origX;
+//    unsigned int boxY = origY;
+//    unsigned int boxWidth = 0;
+//    unsigned int boxHeight = cellHeight;    // Este no varia
+//
+//    for (int cellY = 0; cellY < this->_vSize; cellY++) {
+//        boxX = origX;
+//        cellX = 0;
+//        boxWidth = 0;
+//        while (cellX < this->_hSize) {
+//            while (cellX < this->_hSize && this->_scenario[cellX][cellY] == WALL) {
+//                boxWidth += cellWidth;
+//                cellX++;
+//            }
+//            pos = new Vector2D(boxX, boxY);
+//            this->_collisionBoxesPos.push_back(*pos);
+//            box = new CollisionBox(this->_collisionBoxesPos.back(),boxWidth, boxHeight);
+//            this->_collisionBoxes.push_back(*box);
+//            
+//            boxWidth = 0;
+//            cellX++;
+//        }
+//        boxY += cellHeight;
+//    }
+    
+    // Modo bruto
+    
+    for (int i = 0; i < this->_hSize; i++) {
+        for (int j = 0; j < this->_vSize; j++) {
+            if (this->_scenario[i][j] == WALL) {
+                pos = new Vector2D(origX + (i * cellWidth),
+                                   origY + (j * cellHeight));
+                this->_collisionBoxesPos.push_back(*pos);
+                box = new CollisionBox(this->_collisionBoxesPos.back(),
+                                       cellWidth, cellHeight);
+                this->_collisionBoxes.push_back(*box);
+                delete pos;
+                delete box;
             }
-            pos = new Vector2D(boxX, boxY);
-            this->_collisionBoxesPos.push_back(*pos);
-            box = new CollisionBox(this->_collisionBoxesPos.back(),
-                                   boxWidth,
-                                   boxHeight);
-            this->_collisionBoxes.push_back(*box);
         }
-        boxY += cellHeight;
-        boxX = origX;
     }
 }
 

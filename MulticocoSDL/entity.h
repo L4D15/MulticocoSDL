@@ -6,7 +6,7 @@
 #include <SDL.h>
 #include "collisionbox.h"
 
-#define COLLISION_BOX_RESIZE_FACTOR 0.9
+#define COLLISION_BOX_RESIZE_FACTOR 0.8
 
 class Entity
 {
