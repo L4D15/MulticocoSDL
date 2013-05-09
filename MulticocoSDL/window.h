@@ -7,6 +7,7 @@
 #include "entity.h"
 #include "scenario.h"
 #include "enemy.h"
+#include <SDL_ttf.h>
 
 using namespace std;
 
@@ -25,6 +26,7 @@ private:
     void            update();
     void            handleEvents();
     void            mainLoop();
+    void            renderText(const char* text, Vector2D pos);
     
 private:
     SDL_Surface*    _screen;
@@ -32,6 +34,8 @@ private:
     unsigned int    _width;
     unsigned int    _height;
     bool            _isFullScreen;
+    //------------------------------//
+    TTF_Font*       _font;
     
     //------------------------------//
     Scenario*       _scenario;

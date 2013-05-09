@@ -45,6 +45,7 @@ public:
     bool            isWall(int x, int y);
     bool            isCorridor(int x, int y);
     Vector2D        cell(int x, int y);
+    Vector2D        cell(Vector2D pos);
     Vector2D        cellPosition(unsigned int x, unsigned int y);
     std::vector<Vector2D> avalibleDirections(int posX, int posY);
     

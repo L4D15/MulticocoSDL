@@ -24,6 +24,7 @@ public:
 	bool				isVulnerable();
     
 	void				recordPlayerPosition(Vector2D pos);
+    Vector2D            destinationCell(){ return this->_destinationCell; }
     
 private:
 	void				fastIA();

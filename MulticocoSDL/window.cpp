@@ -1,5 +1,6 @@
 #include "window.h"
 #include <iostream>
+#include <sstream>
 
 Window::Window(int w, int h, string title)
 {
@@ -13,6 +14,15 @@ Window::Window(int w, int h, string title)
         // Mostrar error
         std::cout << "Error al inicializar SDL: " << SDL_GetError() << std::endl;
         exit(1);
+    }
+    
+    if (TTF_Init() == -1) {
+        std::cout << "Error al inicializar TTF" << TTF_GetError() << std::endl;
+    } else {
+        this->_font = TTF_OpenFont("MulticocoSDL.app/Contents/Resources/Minecraftia.ttf", 8);
+        if (this->_font == NULL) {
+            std::cout << TTF_GetError() << std::endl;
+        }
     }
     
     this->_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -117,6 +127,14 @@ void Window::render()
 {
     // Limpiamos la pantalla
     SDL_FillRect(this->_screen, NULL, SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255));
+    
+    //----------------------------------------//
+    stringstream str;
+    Vector2D pos = this->_scenario->cell(this->_enemies.back().position());
+    Vector2D dest = this->_enemies.back().destinationCell();
+    str << "Ghost actual cell:" << pos.toString() << "| Destination: " << dest.toString();
+    this->renderText(str.str().c_str(), Vector2D(10,10));
+    //-----------------------------------------//
     
     //-----------------------------------------//
     this->_scenario->render(this->_screen, this->_showDebugInfo);
@@ -253,4 +271,19 @@ void Window::handleEvents()
                 
         }
     }
+}
+
+void Window::renderText(const char *text, Vector2D pos)
+{
+    SDL_Color color = {255,255,255};
+    SDL_Surface* textSurface = TTF_RenderText_Solid(this->_font, text, color);
+    
+    unsigned int characters = sizeof(text) / sizeof(char);
+    SDL_Rect rect;
+    rect.x = pos.x();
+    rect.y = pos.y();
+    rect.w = characters * 5;
+    rect.h = 10;
+    
+    SDL_BlitSurface(textSurface, NULL, this->_screen, &rect);
 }

@@ -278,6 +278,11 @@ Vector2D Scenario::cell(int x, int y)
     return Vector2D(cellX, cellY);
 }
 
+Vector2D Scenario::cell(Vector2D pos)
+{
+    return this->cell(pos.x(), pos.y());
+}
+
 /**
  @brief Posicion en pixeles de una celda cada.
  **/

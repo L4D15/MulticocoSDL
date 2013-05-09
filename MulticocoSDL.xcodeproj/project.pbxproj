@@ -16,6 +16,7 @@
 		22A4DA53173ABB0B006532D2 /* pink_ghost.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */; };
 		22A4DA55173AE460006532D2 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A4DA54173AE460006532D2 /* SDL_ttf.framework */; };
 		22A4DA57173AE499006532D2 /* SDL_ttf.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22A4DA56173AE499006532D2 /* SDL_ttf.framework */; };
+		22A4DA59173AE731006532D2 /* Minecraftia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22A4DA58173AE62E006532D2 /* Minecraftia.ttf */; };
 		22A6744B17340FA60080FCD4 /* spritesheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A6744917340FA60080FCD4 /* spritesheet.cpp */; };
 		22A6744D173431150080FCD4 /* pacman.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A6744C173431150080FCD4 /* pacman.bmp */; };
 		22CE056817327AFA006F08C7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22CE056717327AFA006F08C7 /* Cocoa.framework */; };
@@ -60,6 +61,7 @@
 		22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pink_ghost.bmp; sourceTree = "<group>"; };
 		22A4DA54173AE460006532D2 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
 		22A4DA56173AE499006532D2 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = /Library/Frameworks/SDL_ttf.framework; sourceTree = "<absolute>"; };
+		22A4DA58173AE62E006532D2 /* Minecraftia.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Minecraftia.ttf; sourceTree = "<group>"; };
 		22A6744917340FA60080FCD4 /* spritesheet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spritesheet.cpp; sourceTree = "<group>"; };
 		22A6744A17340FA60080FCD4 /* spritesheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spritesheet.h; sourceTree = "<group>"; };
 		22A6744C173431150080FCD4 /* pacman.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pacman.bmp; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		229F7F2817330F1300F98AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22A4DA58173AE62E006532D2 /* Minecraftia.ttf */,
 				22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */,
 				22A4DA50173AAF66006532D2 /* red_ghost.bmp */,
 				22400C7917355EBB001B05DD /* wall.bmp */,
@@ -244,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22A4DA59173AE731006532D2 /* Minecraftia.ttf in Resources */,
 				22CE057217327AFA006F08C7 /* InfoPlist.strings in Resources */,
 				22CE057817327AFA006F08C7 /* Credits.rtf in Resources */,
 				22CE057E17327AFA006F08C7 /* MainMenu.xib in Resources */,
