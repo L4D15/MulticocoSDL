@@ -8,6 +8,11 @@
 #include "scenario.h"
 #include "enemy.h"
 #include <SDL_ttf.h>
+#include "sound.h"
+
+#define AUDIO_RATE          22050
+#define AUDIO_CHANNELS      2
+#define AUDIO_BUFFER_SIZE   4096
 
 using namespace std;
 
@@ -45,6 +50,8 @@ private:
     //------------------------------//
     //          EVENTS STATES       //
     bool            _showDebugInfo;
+    //------------------------------//
+    Sound*          _coinSound;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

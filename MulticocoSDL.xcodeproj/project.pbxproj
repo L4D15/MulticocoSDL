@@ -12,6 +12,8 @@
 		22400C7A17355EBB001B05DD /* wall.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22400C7917355EBB001B05DD /* wall.bmp */; };
 		2248EBCB1741028E003F4DF5 /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2248EBCA1741028E003F4DF5 /* SDL_mixer.framework */; };
 		2248EBCD174102CF003F4DF5 /* SDL_mixer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2248EBCC174102CF003F4DF5 /* SDL_mixer.framework */; };
+		2248EBD31741052C003F4DF5 /* sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2248EBD11741052C003F4DF5 /* sound.cpp */; };
+		2248EBD717410FE4003F4DF5 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2248EBD617410FE4003F4DF5 /* coin.wav */; };
 		229F7F27173307FB00F98AE2 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229F7F25173307FB00F98AE2 /* vector2d.cpp */; };
 		22A4DA4F173AA7D2006532D2 /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A4DA4D173AA7D2006532D2 /* enemy.cpp */; };
 		22A4DA51173AAF66006532D2 /* red_ghost.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A4DA50173AAF66006532D2 /* red_ghost.bmp */; };
@@ -58,6 +60,9 @@
 		22400C7917355EBB001B05DD /* wall.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = wall.bmp; sourceTree = "<group>"; };
 		2248EBCA1741028E003F4DF5 /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
 		2248EBCC174102CF003F4DF5 /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_mixer.framework; path = /Library/Frameworks/SDL_mixer.framework; sourceTree = "<absolute>"; };
+		2248EBD11741052C003F4DF5 /* sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sound.cpp; sourceTree = "<group>"; };
+		2248EBD21741052C003F4DF5 /* sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sound.h; sourceTree = "<group>"; };
+		2248EBD617410FE4003F4DF5 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
 		229F7F25173307FB00F98AE2 /* vector2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2d.cpp; sourceTree = "<group>"; };
 		229F7F26173307FB00F98AE2 /* vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
 		22A4DA4D173AA7D2006532D2 /* enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
@@ -111,6 +116,7 @@
 		229F7F2817330F1300F98AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2248EBD617410FE4003F4DF5 /* coin.wav */,
 				22A4DA58173AE62E006532D2 /* Minecraftia.ttf */,
 				22A4DA52173ABB0B006532D2 /* pink_ghost.bmp */,
 				22A4DA50173AAF66006532D2 /* red_ghost.bmp */,
@@ -185,6 +191,8 @@
 				22023F5F17397C1E009AEFB8 /* collisionbox.h */,
 				22A4DA4D173AA7D2006532D2 /* enemy.cpp */,
 				22A4DA4E173AA7D2006532D2 /* enemy.h */,
+				2248EBD11741052C003F4DF5 /* sound.cpp */,
+				2248EBD21741052C003F4DF5 /* sound.h */,
 			);
 			path = MulticocoSDL;
 			sourceTree = "<group>";
@@ -263,6 +271,7 @@
 				22400C7A17355EBB001B05DD /* wall.bmp in Resources */,
 				22A4DA51173AAF66006532D2 /* red_ghost.bmp in Resources */,
 				22A4DA53173ABB0B006532D2 /* pink_ghost.bmp in Resources */,
+				2248EBD717410FE4003F4DF5 /* coin.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +291,7 @@
 				22400C7817353EE7001B05DD /* scenario.cpp in Sources */,
 				22023F6017397C1E009AEFB8 /* collisionbox.cpp in Sources */,
 				22A4DA4F173AA7D2006532D2 /* enemy.cpp in Sources */,
+				2248EBD31741052C003F4DF5 /* sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

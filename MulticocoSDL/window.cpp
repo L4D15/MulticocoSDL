@@ -1,6 +1,7 @@
 #include "window.h"
 #include <iostream>
 #include <sstream>
+#include <SDL_mixer.h>
 
 Window::Window(int w, int h, string title)
 {
@@ -32,6 +33,11 @@ Window::Window(int w, int h, string title)
         exit(1);
     }
     
+    // Inicializar SDL Mixer para poder reproducir audio
+    if (Mix_OpenAudio(AUDIO_RATE, AUDIO_S16SYS, AUDIO_CHANNELS, AUDIO_BUFFER_SIZE)) {
+        std::cout << "Error al inicializar SDL_Mixer" <<Mix_GetError() << std::endl;
+    }
+    
     SDL_WM_SetCaption(title.c_str(),0);
     
     this->_run = false;
@@ -42,6 +48,7 @@ Window::Window(int w, int h, string title)
 Window::~Window()
 {
     SDL_FreeSurface(this->_screen);
+    Mix_CloseAudio();
     SDL_Quit();
 }
 
@@ -69,6 +76,11 @@ void Window::initialize()
     this->_scenario->setCorridorSprite(1);
     this->_scenario->setRandomPlayerSpawningCell();
     //                                          //
+    //------------------------------------------//
+    
+    //------------------------------------------//
+    //              SOUNDS                      //
+    this->_coinSound = new Sound("MulticocoSDL.app/Contents/Resources/coin.wav");
     //------------------------------------------//
     
     //------------------------------------------//
@@ -199,6 +211,10 @@ void Window::handleEvents()
                     } else {
                         this->_showDebugInfo = true;
                     }
+                    break;
+                    
+                case SDLK_2:
+                    this->_coinSound->play();
                     break;
                     
                     //----------------------------------//
