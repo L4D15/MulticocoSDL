@@ -81,6 +81,7 @@ void Window::initialize()
     //------------------------------------------//
     //              SOUNDS                      //
     this->_coinSound = new Sound("MulticocoSDL.app/Contents/Resources/coin.wav");
+    this->_music = new Music("MulticocoSDL.app/Contents/Resources/music.ogg");
     //------------------------------------------//
     
     //------------------------------------------//
@@ -132,6 +133,7 @@ void Window::initialize()
 void Window::startMainLoop()
 {
     this->_run = true;
+    this->_music->playLoop();
     this->mainLoop();
 }
 
@@ -217,6 +219,14 @@ void Window::handleEvents()
                     this->_coinSound->play();
                     break;
                     
+                case SDLK_3:
+                    if (this->_coinSound->isPlaying()) {
+                        this->_coinSound->stop();
+                    } else {
+                        this->_coinSound->playLoop();
+                    }
+                    break;
+                    
                     //----------------------------------//
                     //              PACMAN              //
                     //                                  //
@@ -256,7 +266,7 @@ void Window::handleEvents()
                     case SDLK_LEFT:
                     case SDLK_UP:
                     case SDLK_DOWN:
-                        this->_pacman->setDirection(0, 0);
+                        //this->_pacman->setDirection(0, 0);
                         break;
                         
                     default:

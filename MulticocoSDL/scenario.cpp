@@ -485,3 +485,11 @@ std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
     
     return directions;
 }
+
+/**
+ @brief Rellena los pasillos del escenario con monedas
+ **/
+void Scenario::fillWithCoins(float f)
+{
+    
+}

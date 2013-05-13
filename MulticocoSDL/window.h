@@ -9,6 +9,7 @@
 #include "enemy.h"
 #include <SDL_ttf.h>
 #include "sound.h"
+#include "music.h"
 
 #define AUDIO_RATE          22050
 #define AUDIO_CHANNELS      2
@@ -52,6 +53,7 @@ private:
     bool            _showDebugInfo;
     //------------------------------//
     Sound*          _coinSound;
+    Music*          _music;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

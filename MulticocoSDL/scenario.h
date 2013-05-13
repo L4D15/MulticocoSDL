@@ -51,6 +51,7 @@ public:
     
     bool            collides(Entity& object);
     
+    void            fillWithCoins(float f);
     
     void            render(SDL_Surface* screen, bool showDebugGraphics = false);
     
