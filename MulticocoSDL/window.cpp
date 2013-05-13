@@ -127,32 +127,20 @@ void Window::render()
 {
     // Limpiamos la pantalla
     SDL_FillRect(this->_screen, NULL, SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255));
-    
-    //----------------------------------------//
-    stringstream str;
-    Vector2D pos = this->_scenario->cell(this->_enemies.back().position());
-    Vector2D dest = this->_enemies.back().destinationCell();
-    str << "Ghost actual cell:" << pos.toString() << "| Destination: " << dest.toString();
-    this->renderText(str.str().c_str(), Vector2D(10,10));
-    //-----------------------------------------//
-    
-    //-----------------------------------------//
+
     this->_scenario->render(this->_screen, this->_showDebugInfo);
     this->_pacman->render(this->_screen, this->_showDebugInfo);
     
     for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
         it->render(this->_screen);
     }
-    //-----------------------------------------//
     
     // Intercambia los buffers
     SDL_Flip(this->_screen);
 }
 
 void Window::update()
-{
-    //------------------------------------------//
-    
+{    
     // Actualizar elementos
     
     // Comprobar colisiones
@@ -169,8 +157,6 @@ void Window::update()
         it->update();
         it->move();
     }
-    
-    //------------------------------------------//
 }
 
 void Window::mainLoop()

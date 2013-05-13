@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "389737606.553626"
+         timestampString = "390136550.387159"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
+         startingLineNumber = "166"
+         endingLineNumber = "166"
          landmarkName = "Window::mainLoop()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "389737606.553626"
+         timestampString = "390136550.387159"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
+         startingLineNumber = "147"
+         endingLineNumber = "147"
          landmarkName = "Window::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "389737606.553626"
+         timestampString = "390136550.387159"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
+         startingLineNumber = "157"
+         endingLineNumber = "157"
          landmarkName = "Window::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "389737606.553626"
+         timestampString = "390136550.387159"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "281"
-         endingLineNumber = "281"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
          landmarkName = "Window::renderText(const char *text, Vector2D pos)"
          landmarkType = "5">
       </FileBreakpoint>
