@@ -288,8 +288,11 @@ Vector2D Scenario::cell(Vector2D pos)
  **/
 Vector2D Scenario::cellPosition(unsigned int x, unsigned int y)
 {
-    unsigned int posX = x * (this->_position.x() + (this->_sprite->spriteWidth() * this->_vSize)/2)/this->_vSize;
-    unsigned int posY = y * (this->_position.y() + (this->_sprite->spriteHeight() * this->_hSize)/2)/this->_hSize;
+//    unsigned int posX = x * (float)(this->_position.x() + (float)(this->_sprite->spriteWidth() * this->_vSize)/(float)2)/(float)this->_vSize;
+//    unsigned int posY = y * (float)(this->_position.y() + (float)(this->_sprite->spriteHeight() * this->_hSize)/(float)2)/(float)this->_hSize;
+
+    int posX = (this->_position.x() + x * this->_sprite->spriteWidth()) - (this->_hSize * this->_sprite->spriteWidth() / 2);
+    int posY = (this->_position.y() + y * this->_sprite->spriteHeight()) - (this->_vSize * this->_sprite->spriteHeight() / 2);
     
     return Vector2D(posX,posY);
 }
@@ -299,10 +302,6 @@ Vector2D Scenario::cellPosition(unsigned int x, unsigned int y)
  **/
 bool Scenario::collides(Entity &object)
 {
-//    Vector2D cell = this->cell(object.collisionBox().position().x(),
-//                               object.collisionBox().position().y());
-//    return isWall(cell.x(), cell.y());
-    
     for (unsigned int i = 0; i < this->_collisionBoxes.size(); i++) {
         if (this->_collisionBoxes[i].collides(object.collisionBox())) {
             return true;
@@ -487,9 +486,40 @@ std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
 }
 
 /**
- @brief Rellena los pasillos del escenario con monedas
+ @brief Lista de celdas del escenario que no son pared
  **/
-void Scenario::fillWithCoins(float f)
+std::list<Vector2D> Scenario::corridorCells()
 {
+    std::list<Vector2D> cells;
     
+    for (int i = 0; i < this->_hSize; i++) {
+        for (int j = 0; j < this->_vSize; j++) {
+            if (this->_scenario[i][j] == CORRIDOR) {
+                cells.push_back(Vector2D(i,j));
+            }
+        }
+    }
+    
+    return cells;
+}
+
+/**
+ 
+ **/
+std::list<Vector2D> Scenario::corridorPositions()
+{
+    std::list<Vector2D> cells;
+    Vector2D* pos;
+    
+    for (int i = 0; i < this->_hSize; i++) {
+        for (int j = 0; j < this->_vSize; j++) {
+            if (this->_scenario[i][j] == CORRIDOR) {
+                pos = new Vector2D(this->cellPosition(i, j));
+                cells.push_back(*pos);
+                delete pos;
+            }
+        }
+    }
+    
+    return cells;
 }

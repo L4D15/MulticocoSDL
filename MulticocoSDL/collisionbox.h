@@ -18,6 +18,7 @@ public:
     
     void                render(SDL_Surface* screen, unsigned int r = 0, unsigned int g = 255, unsigned int b = 0);
     void                updatePosition();
+    void                updatePosition(Vector2D& pos);
     
 private:
     

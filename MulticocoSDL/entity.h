@@ -15,7 +15,7 @@ public:
 	virtual					~Entity(){}
 
 	void					setPosition(float x, float y){ _position.setX(x);_position.setY(y); }
-	void					setPosition(Vector2D v){ _position.setX(v.x()); _position.setY(v.y()); }
+	void					setPosition(Vector2D v){ _position.setX(v.x()); _position.setY(v.y()); this->_collisionBox->updatePosition(this->_position); }
 	void					setDirection(float x, float y){ _direction.setX(x);_direction.setY(y); }
 	void					setDirection(Vector2D& v){ _direction = v; }
     inline void				setVisible(bool v){ _visible = v; }
@@ -37,7 +37,7 @@ public:
 
     virtual inline void		update(){ _sprite->nextFrame(); }
 
-	void					move(){ _previousPosition = _position; _position = _position + _direction; _collisionBox->updatePosition(); }
+	void					move(){ _previousPosition = _position; _position = _position + _direction; _collisionBox->updatePosition(this->_position); }
     void                    moveToPreviousPosition(){ _position = _previousPosition; }
     void                    render(SDL_Surface* screen, bool showDebugGraphics = false)
                             {

@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389737696.868922"
+         timestampString = "390180780.712727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "419"
-         endingLineNumber = "419"
+         startingLineNumber = "418"
+         endingLineNumber = "418"
          landmarkName = "Scenario::render(SDL_Surface *screen, bool showDebugGraphics)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140825.471691"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "100"
-         endingLineNumber = "100"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
          landmarkName = "Window::initialize()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389737696.868922"
+         timestampString = "390180780.712727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "322"
-         endingLineNumber = "322"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
          landmarkName = "Scenario::playerSpawningPosition()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390139424.48358"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "69"
-         endingLineNumber = "69"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
          landmarkName = "Window::initialize()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/collisionbox.cpp"
-         timestampString = "389714666.291362"
+         timestampString = "390181311.448195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "58"
-         endingLineNumber = "58"
+         startingLineNumber = "68"
+         endingLineNumber = "68"
          landmarkName = "CollisionBox::render(SDL_Surface *screen, unsigned int r, unsigned int g, unsigned int b)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389737696.868922"
+         timestampString = "390180780.712727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "407"
-         endingLineNumber = "407"
+         startingLineNumber = "406"
+         endingLineNumber = "406"
          landmarkName = "Scenario::createCollisionBoxes()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389737696.868922"
+         timestampString = "390180780.712727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "408"
-         endingLineNumber = "408"
+         startingLineNumber = "407"
+         endingLineNumber = "407"
          landmarkName = "Scenario::createCollisionBoxes()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140825.471691"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "94"
-         endingLineNumber = "94"
+         startingLineNumber = "102"
+         endingLineNumber = "102"
          landmarkName = "Window::initialize()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140943.430046"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "180"
-         endingLineNumber = "180"
+         startingLineNumber = "236"
+         endingLineNumber = "236"
          landmarkName = "Window::mainLoop()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140943.430046"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "161"
-         endingLineNumber = "161"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
          landmarkName = "Window::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140943.430046"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "171"
-         endingLineNumber = "171"
+         startingLineNumber = "227"
+         endingLineNumber = "227"
          landmarkName = "Window::update()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140825.471691"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
+         startingLineNumber = "124"
+         endingLineNumber = "124"
          landmarkName = "Window::initialize()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -242,11 +242,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389737696.868922"
+         timestampString = "390180780.712727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "451"
-         endingLineNumber = "451"
+         startingLineNumber = "450"
+         endingLineNumber = "450"
          landmarkName = "Scenario::avalibleDirections(int posX, int posY)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -281,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/scenario.cpp"
-         timestampString = "389737696.868922"
+         timestampString = "390180780.712727"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "452"
-         endingLineNumber = "452"
+         startingLineNumber = "451"
+         endingLineNumber = "451"
          landmarkName = "Scenario::avalibleDirections(int posX, int posY)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,12 +294,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390140943.430046"
+         timestampString = "390182552.232328"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
-         landmarkName = "Window::renderText(const char *text, Vector2D pos)"
+         startingLineNumber = "349"
+         endingLineNumber = "349"
+         landmarkName = "Window::renderText(const char *text, Vector2D&amp; pos)"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -313,6 +313,45 @@
          startingLineNumber = "8"
          endingLineNumber = "8"
          landmarkName = "Sound::Sound(const char* file)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MulticocoSDL/window.cpp"
+         timestampString = "390182552.232328"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
+         landmarkName = "Window::generateRandomCoins(float f)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MulticocoSDL/window.cpp"
+         timestampString = "390182552.232328"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "Window::initialize()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MulticocoSDL/window.cpp"
+         timestampString = "390182552.232328"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "195"
+         endingLineNumber = "195"
+         landmarkName = "Window::render()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

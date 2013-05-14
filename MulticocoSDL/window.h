@@ -15,6 +15,10 @@
 #define AUDIO_CHANNELS      2
 #define AUDIO_BUFFER_SIZE   4096
 
+#define COIN_FILL_FACTOR    0.7
+
+#define COIN_SCORE          100
+
 using namespace std;
 
 class Window
@@ -32,7 +36,9 @@ private:
     void            update();
     void            handleEvents();
     void            mainLoop();
-    void            renderText(const char* text, Vector2D pos);
+    void            renderText(const char* text, Vector2D& pos);
+    void            renderText(const char* text, int x, int y);
+    void            generateRandomCoins(float f);
     
 private:
     SDL_Surface*    _screen;
@@ -41,12 +47,11 @@ private:
     unsigned int    _height;
     bool            _isFullScreen;
     //------------------------------//
-    TTF_Font*       _font;
-    
+    TTF_Font*       _font;    
     //------------------------------//
     Scenario*       _scenario;
     Entity*         _pacman;
-    
+    std::list<Entity>   _coins;    
     std::list<Enemy> _enemies;
     //------------------------------//
     //          EVENTS STATES       //
@@ -54,6 +59,8 @@ private:
     //------------------------------//
     Sound*          _coinSound;
     Music*          _music;
+    //------------------------------//
+    unsigned int    _score;
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

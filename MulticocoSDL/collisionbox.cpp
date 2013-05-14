@@ -53,6 +53,16 @@ void CollisionBox::updatePosition()
 /**
  
  **/
+void CollisionBox::updatePosition(Vector2D &pos)
+{
+    this->_position = pos;
+    
+    this->updatePosition();
+}
+
+/**
+ 
+ **/
 void CollisionBox::render(SDL_Surface *screen, unsigned int r, unsigned int g, unsigned int b) {
     SDL_Rect rect;
     rect.x = this->_boxPosition.x();

@@ -16,6 +16,7 @@
 		2248EBD717410FE4003F4DF5 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2248EBD617410FE4003F4DF5 /* coin.wav */; };
 		2248EBDB174113E5003F4DF5 /* music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 2248EBDA174113C6003F4DF5 /* music.ogg */; };
 		2248EBDE1741A02B003F4DF5 /* music.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2248EBDC1741A02B003F4DF5 /* music.cpp */; };
+		2248EBE21741AA80003F4DF5 /* coin.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 2248EBE11741AA80003F4DF5 /* coin.bmp */; };
 		229F7F27173307FB00F98AE2 /* vector2d.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 229F7F25173307FB00F98AE2 /* vector2d.cpp */; };
 		22A4DA4F173AA7D2006532D2 /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 22A4DA4D173AA7D2006532D2 /* enemy.cpp */; };
 		22A4DA51173AAF66006532D2 /* red_ghost.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 22A4DA50173AAF66006532D2 /* red_ghost.bmp */; };
@@ -68,6 +69,7 @@
 		2248EBDA174113C6003F4DF5 /* music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = music.ogg; sourceTree = "<group>"; };
 		2248EBDC1741A02B003F4DF5 /* music.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = music.cpp; sourceTree = "<group>"; };
 		2248EBDD1741A02B003F4DF5 /* music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = music.h; sourceTree = "<group>"; };
+		2248EBE11741AA80003F4DF5 /* coin.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = coin.bmp; sourceTree = "<group>"; };
 		229F7F25173307FB00F98AE2 /* vector2d.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = vector2d.cpp; sourceTree = "<group>"; };
 		229F7F26173307FB00F98AE2 /* vector2d.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector2d.h; sourceTree = "<group>"; };
 		22A4DA4D173AA7D2006532D2 /* enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 		229F7F2817330F1300F98AE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2248EBE11741AA80003F4DF5 /* coin.bmp */,
 				2248EBDA174113C6003F4DF5 /* music.ogg */,
 				2248EBD617410FE4003F4DF5 /* coin.wav */,
 				22A4DA58173AE62E006532D2 /* Minecraftia.ttf */,
@@ -281,6 +284,7 @@
 				22A4DA51173AAF66006532D2 /* red_ghost.bmp in Resources */,
 				22A4DA53173ABB0B006532D2 /* pink_ghost.bmp in Resources */,
 				2248EBD717410FE4003F4DF5 /* coin.wav in Resources */,
+				2248EBE21741AA80003F4DF5 /* coin.bmp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

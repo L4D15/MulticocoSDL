@@ -8,6 +8,7 @@
 #include "entity.h"
 #include "collisionbox.h"
 #include <vector>
+#include <list>
 
 #define NUM_DIRECTIONS 4
 #define MAX_NEIGHBORS 8
@@ -51,7 +52,8 @@ public:
     
     bool            collides(Entity& object);
     
-    void            fillWithCoins(float f);
+    std::list<Vector2D> corridorCells();
+    std::list<Vector2D> corridorPositions();
     
     void            render(SDL_Surface* screen, bool showDebugGraphics = false);
     

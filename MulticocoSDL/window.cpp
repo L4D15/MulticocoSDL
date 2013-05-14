@@ -67,6 +67,11 @@ void Window::setFullScreen(bool full)
 void Window::initialize()
 {
     //------------------------------------------//
+    //              GAME                        //
+    this->_score = 0;
+    //------------------------------------------//
+    
+    //------------------------------------------//
     //              SCENARIO                    //
     //                                          //
     this->_scenario = new Scenario(20,20, Vector2D(this->_width/2, this->_height/2));
@@ -75,6 +80,9 @@ void Window::initialize()
     this->_scenario->setWallSprite(0);
     this->_scenario->setCorridorSprite(1);
     this->_scenario->setRandomPlayerSpawningCell();
+    
+    this->generateRandomCoins(COIN_FILL_FACTOR);
+    std::cout << this->_scenario->cellPosition(0, 0).toString() << std::endl;
     //                                          //
     //------------------------------------------//
     
@@ -130,6 +138,34 @@ void Window::initialize()
     //------------------------------------------//
 }
 
+/**
+ @brief
+ **/
+void Window::generateRandomCoins(float f)
+{
+    Entity* coin;
+    int animations[1];
+    animations[0] = 4;
+    
+    std::list<Vector2D> coinPositions = this->_scenario->corridorPositions();
+    for (std::list<Vector2D>::iterator it = coinPositions.begin(); it != coinPositions.end(); it++) {
+        float random = (float)(rand()) / (float)(RAND_MAX);
+        
+        if (random <= f) {
+            // Crear nueva moneda
+            coin = new Entity();
+            coin->setSpriteSheet("MulticocoSDL.app/Contents/Resources/coin.bmp", 20, 20, animations, 1);
+            coin->spriteSheet().setFrameSkip(15);
+            coin->setPosition(*it);
+            coin->setVisible(true);
+            
+            this->_coins.push_back(*coin);
+            
+            delete coin;
+        }        
+    }
+}
+
 void Window::startMainLoop()
 {
     this->_run = true;
@@ -142,11 +178,21 @@ void Window::render()
     // Limpiamos la pantalla
     SDL_FillRect(this->_screen, NULL, SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255));
 
+        // Puntuacion
+    stringstream str;
+    
+    str << "Puntuación: " << this->_score;
+    this->renderText(str.str().c_str(), 10,10);
+    
     this->_scenario->render(this->_screen, this->_showDebugInfo);
     this->_pacman->render(this->_screen, this->_showDebugInfo);
     
     for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
-        it->render(this->_screen);
+        it->render(this->_screen, this->_showDebugInfo);
+    }
+    
+    for (std::list<Entity>::iterator it = this->_coins.begin(); it != this->_coins.end(); it++) {
+        it->render(this->_screen, this->_showDebugInfo);
     }
     
     // Intercambia los buffers
@@ -162,7 +208,17 @@ void Window::update()
         this->_pacman->setDirection(0.0f, 0.0f);
         this->_pacman->moveToPreviousPosition();
     }
-
+    
+        // Colisiones con monedas
+    for (std::list<Entity>::iterator it = this->_coins.begin(); it != this->_coins.end(); it++) {
+        if (it->collisionBox().collides(this->_pacman->collisionBox())) {
+            // Reproducir sonido
+            this->_coinSound->play();
+            this->_coins.erase(it);
+            this->_score += COIN_SCORE;
+        }
+    }
+    
     // Pacman
     this->_pacman->move();
     
@@ -285,7 +341,7 @@ void Window::handleEvents()
     }
 }
 
-void Window::renderText(const char *text, Vector2D pos)
+void Window::renderText(const char *text, Vector2D& pos)
 {
     SDL_Color color = {255,255,255};
     SDL_Surface* textSurface = TTF_RenderText_Solid(this->_font, text, color);
@@ -294,6 +350,21 @@ void Window::renderText(const char *text, Vector2D pos)
     SDL_Rect rect;
     rect.x = pos.x();
     rect.y = pos.y();
+    rect.w = characters * 5;
+    rect.h = 10;
+    
+    SDL_BlitSurface(textSurface, NULL, this->_screen, &rect);
+}
+
+void Window::renderText(const char *text, int x, int y)
+{
+    SDL_Color color = {255,255,255};
+    SDL_Surface* textSurface = TTF_RenderText_Solid(this->_font, text, color);
+    
+    unsigned int characters = sizeof(text) / sizeof(char);
+    SDL_Rect rect;
+    rect.x = x;
+    rect.y = y;
     rect.w = characters * 5;
     rect.h = 10;
     
