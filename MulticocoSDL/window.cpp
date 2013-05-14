@@ -9,6 +9,7 @@ Window::Window(int w, int h, string title)
     this->_height = h;
     this->_isFullScreen = false;
     this->_showDebugInfo = false;
+    this->_gameOver = false;
     int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     
     if (err < 0) {
@@ -82,13 +83,13 @@ void Window::initialize()
     this->_scenario->setRandomPlayerSpawningCell();
     
     this->generateRandomCoins(COIN_FILL_FACTOR);
-    std::cout << this->_scenario->cellPosition(0, 0).toString() << std::endl;
     //                                          //
     //------------------------------------------//
     
     //------------------------------------------//
     //              SOUNDS                      //
     this->_coinSound = new Sound("MulticocoSDL.app/Contents/Resources/coin.wav");
+    this->_coinSoundAux = new Sound("MulticocoSDL.app/Contents/Resources/coin.wav");
     this->_music = new Music("MulticocoSDL.app/Contents/Resources/music.ogg");
     //------------------------------------------//
     
@@ -181,7 +182,7 @@ void Window::render()
         // Puntuacion
     stringstream str;
     
-    str << "Puntuación: " << this->_score;
+    str << "Score: " << this->_score;
     this->renderText(str.str().c_str(), 10,10);
     
     this->_scenario->render(this->_screen, this->_showDebugInfo);
@@ -195,37 +196,56 @@ void Window::render()
         it->render(this->_screen, this->_showDebugInfo);
     }
     
+    if (this->_gameOver) {
+        renderText("Game Over", this->_width / 2, this->_height / 10);
+    }
+    
     // Intercambia los buffers
     SDL_Flip(this->_screen);
 }
 
 void Window::update()
 {    
-    // Actualizar elementos
-    
-    // Comprobar colisiones
-    if (this->_scenario->collides(*this->_pacman)) {
-        this->_pacman->setDirection(0.0f, 0.0f);
-        this->_pacman->moveToPreviousPosition();
-    }
-    
-        // Colisiones con monedas
-    for (std::list<Entity>::iterator it = this->_coins.begin(); it != this->_coins.end(); it++) {
-        if (it->collisionBox().collides(this->_pacman->collisionBox())) {
-            // Reproducir sonido
-            this->_coinSound->play();
-            this->_coins.erase(it);
-            this->_score += COIN_SCORE;
+    // Comprobar fin del juego
+    if (this->_coins.size() == 0) {
+        this->_pacman->setDirection(0, 0);
+        this->_pacman->spriteSheet().pause();
+        for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
+            it->setDirection(0, 0);
+            it->spriteSheet().pause();
         }
-    }
-    
-    // Pacman
-    this->_pacman->move();
-    
-    // Enemigos
-    for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
-        it->update();
-        it->move();
+        this->_gameOver = true;
+        
+    } else {
+        // Comprobar colisiones
+        if (this->_scenario->collides(*this->_pacman)) {
+            this->_pacman->setDirection(0.0f, 0.0f);
+            this->_pacman->moveToPreviousPosition();
+        }
+        
+        // Colisiones con monedas
+        for (std::list<Entity>::iterator it = this->_coins.begin(); it != this->_coins.end(); it++) {
+            if (it->collisionBox().collides(this->_pacman->collisionBox())) {
+                // Reproducir sonido
+                if (!this->_coinSound->isPlaying()) {
+                    this->_coinSound->play();
+                } else {
+                    this->_coinSoundAux->play();
+                }
+                
+                this->_coins.erase(it);
+                this->_score += COIN_SCORE;
+            }
+        }
+        
+        // Pacman
+        this->_pacman->move();
+        
+        // Enemigos
+        for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
+            it->update();
+            it->move();
+        }
     }
 }
 

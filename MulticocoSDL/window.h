@@ -15,7 +15,7 @@
 #define AUDIO_CHANNELS      2
 #define AUDIO_BUFFER_SIZE   4096
 
-#define COIN_FILL_FACTOR    0.7
+#define COIN_FILL_FACTOR    0.2
 
 #define COIN_SCORE          100
 
@@ -56,8 +56,10 @@ private:
     //------------------------------//
     //          EVENTS STATES       //
     bool            _showDebugInfo;
+    bool            _gameOver;
     //------------------------------//
     Sound*          _coinSound;
+    Sound*          _coinSoundAux;
     Music*          _music;
     //------------------------------//
     unsigned int    _score;
