@@ -1,6 +1,7 @@
 \documentclass[parskip=half*]{scrartcl}
 \usepackage[spanish, activeacute]{babel}
-\usepackage{graphicx, wrapfig, makeidx, listings, color, hyperref}
+\usepackage{graphicx, hyperref}
+\usepackage{minted}
 
 % CONFIGURACION INICIAL
 \title{MulticocoSDL}
@@ -9,33 +10,6 @@
 
 %-------------------DOCUMENTO-----------------
 \begin{document}
-
-%\lstset{language=C++, breakindent=40pt, breaklines}
-
-\lstset{ %
-language=C++,                	% choose the language of the code
-basicstyle=\footnotesize,       % the size of the fonts that are used for the code
-numbers=none,                   % where to put the line-numbers
-numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
-stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
-numbersep=5pt,                  % how far the line-numbers are from the code
-backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
-showspaces=false,               % show spaces adding particular underscores
-showstringspaces=false,         % underline spaces within strings
-showtabs=false,                 % show tabs within strings adding particular underscores
-frame=lines,           			% adds a frame around the code
-tabsize=2,          			% sets default tabsize to 2 spaces
-captionpos=b,           		% sets the caption-position to bottom
-breaklines=true,        		% sets automatic line breaking
-breakatwhitespace=false,    	% sets if automatic breaks should only happen at whitespace
-escapeinside={\%*}{*)},         % if you want to add a comment within your code
-basicstyle=\ttfamily,
-keywordstyle=\color{magenta}\ttfamily,
-stringstyle=\color{red}\ttfamily,
-commentstyle=\color{green}\ttfamily,
-morecomment=[l][\color{magenta}]{\#}
-}
-
 %-------------------PRIMERA PAGINA------------
 \maketitle
 \vfill
@@ -137,15 +111,15 @@ En esta secci\'on explicaremos las clases relacionadas con el apartado visual de
 		\subsubsection{Inicializaci\'on}
 			SDL nos proporciona facilidades a la hora de crear una ventana preparada para renderizar im\'agenes, pero antes de poder usarlas necesitamos inicializar SDL.
 
-			\begin{lstlisting}
+			\begin{minted}[frame=lines, samepage=true]{cpp}
 int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     
-    if (err < 0) {
-        // Mostrar error
-        std::cout << "Error al inicializar SDL: " << SDL_GetError() << std::endl;
-        exit(1);
-    }
-			\end{lstlisting}
+if (err < 0) {
+    // Mostrar error
+    std::cout << "Error al inicializar SDL: " << SDL_GetError() << std::endl;
+    exit(1);
+}
+			\end{minted}
 
 			Mediante los flags SDL\_INIT\_AUDIO y SDL\_INIT\_VIDEO le indicamos que nuestra aplicaci\'on va a hacer uso de estas dos funcionalidades. Si no indicaramos, por ejemplo, el flag de audio, nuestra aplicaci\'on no reproducir\'ia audio.
 
@@ -154,9 +128,9 @@ int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 			\subsubsection{Creaci\'on}
 				Ahora que SDL ya est\'a preparado para funcionar procedemos a crear nuestra ventana.
 
-				\begin{lstlisting}
+				\begin{minted}[frame=lines, samepage=true]{cpp}
 this->_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
-				\end{lstlisting}
+				\end{minted}
 
 				Donde \_screen es un SDL\_Surface*, w es la anchura y h la altura de nuestra ventana (y por consiguiente la resoluci\'on en pixeles de nuestro canvas), 16 es la profundidad de bits por pixel (o bpp) y los \'ultimos dos son flags que indican lo siguiente:
 
@@ -169,16 +143,19 @@ this->_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
 			\subsubsection{Renderizado}
 				Una vez la ventana ha sido creada debemos mostrar los elementos que componen el juego. Si bien el m\'etodo render de la clase Windows contiene mucho m\'as c\'odigo, nuestro objetivo aqu\'i es explicar su funcionamiento, por lo que presentamos una versi\'on resumida en la que se renderiza un objeto de ejemplo (clase Entity explicada m\'as adelante) llamado object.
 
-				\begin{lstlisting}
+				\begin{minted}[frame=lines, samepage=true]{cpp}
 void Window::render()
 {
-    SDL_FillRect(this->_screen, NULL, SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255));
-
+    SDL_FillRect(
+    	this->_screen,
+    	NULL,
+    	SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255)
+    );
     object.render(this->_screen);
-    
+
     SDL_Flip(this->_screen);
 }
-				\end{lstlisting}
+				\end{minted}
 
 				La primera funci\'on llena el canvas con color negro. Los par\'ametros que se le pasan son una SDL\_Surface*, que ser\'a la superficie a rellenar con color; despu\'es un SDL\_Rect* que indicar\'a el area que queremos rellenar y que al pasarle NULL lo que hace es coger toda el area; y por \'ultimo el color del que queremos rellenar el area, que en este caso ser\'a negro. 
 
@@ -189,21 +166,21 @@ void Window::render()
 			\subsubsection{Eliminaci\'on}
 				Hay que tener cuidado al trabajar con las SDL\_Surface pues indicamos a SDL que guarde la informaci\'on visual de nuestra ventana en la memoria gr\'afica. Esto quiere decir que si hicieramos esto:
 
-				\begin{lstlisting}
+				\begin{minted}[frame=lines, samepage=true]{cpp}
 delete this->_screen;
-				\end{lstlisting}
+				\end{minted}
 
 				Estar\'iamos dejando basura en la memoria gr\'afica, ya que delete borra la informaci\'on de la memoria principal, pero no sabe trabajar con la memoria gr\'afica. Es por esto que cuando no necesitemos m\'as una SDL\_Surface se debe liberar usando una funci\'on espec\'ifica de SDL que se encarga tanto de eliminarla de memoria gr\'afica como de memoria principal (la informaci\'on visual, es decir, los pixels, est\'an en memoria gr\'afica, pero otra mucha informaci\'on se guarda en memoria principal tambi\'en).
 
 				Para lidiar con esto hay que declarar los destructores de las clases que hagan uso de alguna SDL\_Surface para que la liberen antes de ser borrados. Mostramos aqu\'i el de la clase Window y omitiremos esta explicaci\'on para el resto de clases.
 
-				\begin{lstlisting}
+				\begin{minted}[frame=lines, samepage=true]{cpp}
 Window::~Window()
 {
     SDL_FreeSurface(this->_screen);
     SDL_Quit();
 }
-				\end{lstlisting}
+				\end{minted}
 
 				La funci\'on SDL\_Quit() debe llamarse una vez nuestra aplicaci\'on vaya a finalizar y no necesitemos m\'as SDL, pues liberar\'a los recursos que internamente haya reservado cuando lo inicializamos. Como nuestra aplicaci\'on est\'a vinculada a la existencia de la ventana, una vez esta sea destruida debemos ``terminar'' con SDL, por eso se ha incluido en el destructor.
 
@@ -222,7 +199,7 @@ Window::~Window()
 
 		Para manejar esta sistema de animaci\'on necesitamos algo m\'as que simplemente llamar a la funci\'on SDL\_BlitSurface(...) de SDL, y ese es el cometido de la clase Sprite.
 
-		\begin{lstlisting}
+		\begin{minted}[frame=lines, samepage=true]{cpp}
 class Sprite
 {
 public:
@@ -244,7 +221,7 @@ private:
     unsigned int    _frameSkip;
     unsigned int    _framesSkipped;
 };
-		\end{lstlisting}
+		\end{minted}
 
 		Cada uno de los atributos tiene un cometido espec\'ifico:
 
@@ -265,29 +242,29 @@ private:
 		\subsubsection{Transparencia}
 			Veamos c\'omo podemos asignar transparencia al Sprite cuendo se crea:
 
-			\begin{lstlisting}
+			\begin{minted}[frame=lines, samepage=true]{cpp}
 Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
 {
 	// Asignacion de atributos [omitido]
 	// ...
 
 	SDL_SetColorKey(
-					this->_bitmap,
-					SDL_SRCCOLORKEY,
-					SDL_MapRGB(this->_bitmap->format,255,0,255)
-					);
+		this->_bitmap,
+		SDL_SRCCOLORKEY,
+		SDL_MapRGB(this->_bitmap->format,255,0,255)
+	);
 
 	// Creacion de los rectangulos de cada frame [omitido]
 	//...
 }
-			\end{lstlisting}
+			\end{minted}
 
 			Nos interesa analizar el uso de SDL\_SetColorKey. Esta funci\'on lo que hace es indicar a la imagen cual es su color clave. El color clave es aquel que se usa como transparencia, de modo que a la hora de dibujar la imagen se dibuja todo menos ese color. En nuestro caso y como se hace en la mayor\'ia de los Sprites de videojuegos hemos usado como color clave un magenta puro, que corresponde con los valores R = 255, G = 0 y B = 255. Se puede ver este color como fondo en la imagen de la moneda presentada anteriormente.
 
 		\subsubsection{Renderizado y animaci\'on}
 			Respecto al renderizado y la animaci\'on debemos hablar de dos m\'etodos de la clase Sprite: render y nextFrame.
 
-			\begin{lstlisting}
+			\begin{minted}[frame=lines, samepage=true]{cpp}
 void Sprite::render(SDL_Surface *screen, Vector2D& pos)
 {
     SDL_Rect source = this->_frames[this->_currentFrame];
@@ -299,13 +276,13 @@ void Sprite::render(SDL_Surface *screen, Vector2D& pos)
     
     SDL_BlitSurface(this->_bitmap, &source, screen, &destination);
 }
-			\end{lstlisting}
+			\end{minted}
 
 			Podemos ver que el rect\'angulo correspondiente con el frame actual (\_currentFrame) se obtiene de la colecci\'on de rect\'angulos que creamos durante el constructor, y el rect\'angulo de destino que define el area donde se dibujar\'a en el canvas de destino se calcula a partir de la posici\'on y del ancho y alto del frame. Despu\'es solo hace falta una llamada a la ya mencionada funci\'on SDL\_BlitSurface(...) y nuestro Sprite se dibujar\'a.
 
 			\textquestiondown Y c\'omo se anima el Sprite si el \'indice \_currentFrame no avanza? Para eso est\'a el m\'etodo nextFrame que hace que la animaci\'on del Sprite avance siguiendo las restricciones impuestas por el frame skip indicado.
 
-			\begin{lstlisting}
+			\begin{minted}[frame=lines, samepage=true]{cpp}
 void Sprite::nextFrame()
 {
     if (this->_framesSkipped == this->_frameSkip) {
@@ -315,7 +292,7 @@ void Sprite::nextFrame()
         this->_framesSkipped++;
     }
 }
-			\end{lstlisting}
+			\end{minted}
 
 	%-----------------------------------------
 	%---------------SPRITESHEET---------------
@@ -330,32 +307,41 @@ void Sprite::nextFrame()
 
 		Nuestra clase debe manejar varias animaciones y adem\'as, con n\'umeros de frames distintos.
 
-		\begin{lstlisting}
-SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAnimations)
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+SpriteSheet::SpriteSheet(const char* img,
+			int w, int h,
+			int* animations, int nAnimations)
 {  
     SDL_Surface* spriteSheet = SDL_LoadBMP(img);    
     SDL_Surface* currentSprite;
     for (int i = 0; i < nAnimations; i++) {
-        // Creamos una nueva superficie donde dibujar
-        currentSprite = SDL_CreateRGBSurface(SDL_HWSURFACE, w * animations[i], h, 16, 0, 0, 0, 0);
-        
-        // Seleccionamos el area que queremos coger de la plantilla
+        // Creamos una nueva superficie vacia
+        currentSprite = SDL_CreateRGBSurface(
+        				SDL_HWSURFACE,
+        				w * animations[i], h,
+        				16, 0, 0, 0, 0);        
+        // Area del SpriteSheet a copiar en el Sprite
         SDL_Rect origin;
         origin.x = 0;
         origin.y = i * h;
-        origin.w = w * animations[i];   // El ancho sera la suma de los anchos de cada animacion
-        origin.h = h;
-        
+        origin.w = w * animations[i];   
+
         // Dibujamos parte del SpriteSheet
-        SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL); // NULL para que pille todo el sprite
-        
-        // Creamos un nuevo Sprite
+        SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL);
+
+        // Insertamos un nuevo Sprite en la coleccion
         this->_sprites.push_back(new Sprite(currentSprite,animations[i],w,h));
     }
-    SDL_FreeSurface(spriteSheet);   // Ya no necesitamos la plantilla    
+    SDL_FreeSurface(spriteSheet);    
 }
-		\end{lstlisting}
+		\end{minted}
 
+		De esta forma hemos dividido la imagen en Sprites que corresponden a cada una de las filas (animaciones) del SpriteSheet.
+
+		\subsubection{Vincular animaciones}
+			Tenemos las distintas animaciones del SpriteSheet separadas pero, \textquestiondown C\'omo elegimos qu\'e animaci\'on queremos reproducir? SpriteSheet guarda un \'indice con la posici\'on en la colecci\'on donde se encuentra la posici\'on actual, que ser\'a la que se dibuje si llamamos a SpriteSheet::render(). Dado que este \'indice es un valor num\'erico, debemos conocer la posici\'on dentro de la colecci\'on de la animaci\'on que queremos reproducir. Esto implica que cambiar la animaci\'on actual requerir\'ia saber qu\'e fila corresponde a la animaci\'on en cada SpriteSheet distinto, lo cual puede ser poco intuitivo en cuanto comencemos a trabajar con SpriteSheets distintos.
+
+			Para resolver este problema la clase SpriteSheet
 	%-----------------------------------------
 %---------------------------------------------
 
