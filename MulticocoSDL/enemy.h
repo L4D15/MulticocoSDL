@@ -23,6 +23,7 @@ public:
     bool				isAlive();
 	bool				isVulnerable();
     
+    Vector2D            positionCentered();
 	void				recordPlayerPosition(Vector2D pos);
     Vector2D            destinationCell(){ return this->_destinationCell; }
     

@@ -1,6 +1,7 @@
 #include "scenario.h"
 
 #include <ctime>
+#include <cmath>
 
 Scenario::Scenario(unsigned int hSize, unsigned int vSize, Vector2D position):
 _position(position),
@@ -14,6 +15,8 @@ _collisionBoxesPos(hSize * vSize)
     this->createScenario();
     this->createEnemyHouse();
     this->repairCorridors();
+    
+    printScenarioByConsole();
     
     this->_enemySpawningCell = Vector2D(hSize/2,vSize/2);
 }
@@ -312,8 +315,14 @@ bool Scenario::isCorridor(int x, int y)
  **/
 Vector2D Scenario::cell(int x, int y)
 {
-    unsigned int cellX = (x * this->_hSize) / (this->_position.x() + this->_sprite->spriteWidth() * this->_hSize);
-    unsigned int cellY = (y * this->_vSize) / (this->_position.y() + this->_sprite->spriteHeight() * this->_vSize);
+    unsigned int originX = _position.x() - this->width()/2;
+    unsigned int originY = _position.y() - this->height()/2;
+    unsigned int cellX = (x - originX)/this->_sprite->spriteWidth();
+    unsigned int cellY = (y - originY)/this->_sprite->spriteHeight();
+    
+    //esto estaba mal
+    //unsigned int cellX = (x * this->_hSize) / (this->_position.x() + this->_sprite->spriteWidth() * this->_hSize);
+    //unsigned int cellY = (y * this->_vSize) / (this->_position.y() + this->_sprite->spriteHeight() * this->_vSize);
     
     return Vector2D(cellX, cellY);
 }
@@ -492,37 +501,49 @@ std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
     
     int x = currentCell.x();
     int y = currentCell.y();
+    std::cout<<"current cell: x = "<<x<<" y = "<<y<<std::endl;
     
     // Celda de la derecha
     if (x + 1 < this->_hSize) {
-        if (this->_scenario[x + 1][y] == CORRIDOR) {
+        if (this->_scenario[x+1][y] == CORRIDOR) {
             directions.push_back(Vector2D(1,0));
         }
     }
     
     
     // Celda de arriba
-    if (y + 1 < this->_vSize) {
-        if (this->_scenario[x][y + 1] == CORRIDOR) {
-            directions.push_back(Vector2D(0,1));
+    if (y - 1 >= 0) {
+        if (this->_scenario[x][y-1] == CORRIDOR) {
+            directions.push_back(Vector2D(0,-1));
         }
     }
     
     // Celda de abajo
-    if (y - 1 >= 0) {
-        if (this->_scenario[x][y - 1] == CORRIDOR) {
-            directions.push_back(Vector2D(0,-1));
+    if (y + 1 < _vSize) {
+        if (this->_scenario[x][y+1] == CORRIDOR) {
+            directions.push_back(Vector2D(0,1));
         }
     }
     
     // Celda de la izquierda
     if (x - 1 >= 0) {
-        if (this->_scenario[x - 1][y] == CORRIDOR) {
+        if (this->_scenario[x-1][y] == CORRIDOR) {
             directions.push_back(Vector2D(-1,0));
         }
     }
     
     return directions;
+}
+
+void Scenario::printScenarioByConsole()
+{
+    for(int j=0; j<_hSize; j++){
+        std::cout<<std::endl;
+        for(int i=0; i<_vSize; i++){
+            char toPrint = _scenario[i][j] == CORRIDOR ? '0' : '1';
+            std::cout << toPrint << " ";
+        }
+    }
 }
 
 /**

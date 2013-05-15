@@ -7,6 +7,7 @@ Enemy::Enemy(Type type, Scenario* scenario)
     this->_vulnerable = false;
     this->_type = type;
     this->_arrivedDestination = true;
+    this->_direction = Vector2D(-1,0);
 
     int animations[] = {2,2,2,2};
     switch (type) {
@@ -121,47 +122,37 @@ void Enemy::predictionIA()
  */
 void Enemy::randomIA()
 {
-    if (this->_scenario->cell(this->_position.x() - this->_sprite->spriteWidth(),
-                              this->_position.y() - this->_sprite->spriteHeight()) == this->_destinationCell) {
-        this->_arrivedDestination = true;
+    Vector2D forbiddenDirection = this->_direction * -1.0f; // No puede ir por donde venia
+    //calculamos la casilla en la que estamos
+    // Direcciones permitidas por el escenario (no hay muros)
+    Vector2D center(positionCentered());
+    std::vector<Vector2D> directions = this->_scenario->avalibleDirections(center.x(),center.y());
+        
+    // Borramos la direccion prohibida
+    bool directionStillAvaiable = false;
+    for (unsigned int i = 0; i < directions.size(); i++) {
+        if(directions[i] == _direction)
+            directionStillAvaiable = true;
+        if(directions[i] == forbiddenDirection)
+            directions.erase(directions.begin()+i);
     }
-    
-    if (this->_arrivedDestination) {
-        Vector2D forbiddenDirection = this->_direction * -1.0f; // No puede ir por donde venia
-        
-        // Direcciones permitidas por el escenario (no hay muros)
-        std::vector<Vector2D> directions = this->_scenario->avalibleDirections(this->_position.x(),
-                                                                               this->_position.y());
-        
-        // Borramos la direccion prohibida
-        for (unsigned int i = 0; i < directions.size(); i++) {
-            if (forbiddenDirection.x() < 0 && directions[i].x() < 0) {
-                directions.erase(directions.begin() + i);
-                
-            } else if (forbiddenDirection.x() > 0 && directions[i].x() > 0) {
-                directions.erase(directions.begin() + i);
-                
-            } else if (forbiddenDirection.y() > 0 && directions[i].y() > 0) {
-                directions.erase(directions.begin() + i);
-                
-            } else if (forbiddenDirection.y() < 0 && directions[i].y() < 0) {
-                directions.erase(directions.begin() + i);
-            }
-        }
         
         // Comprobamos que no nos vayamos a quedar atascados
-        if (directions.size() == 0) {
-            // Al menos volvemos por donde venimos, aunque este prohibido
-            directions.push_back(forbiddenDirection);
-        }
-        
-        Vector2D direction = directions[rand() % directions.size()];
-        Vector2D currentCell = this->_scenario->cell(this->_position.x(), this->_position.y());
-        Vector2D destinationCell = currentCell + direction;
-        this->_destinationCell = destinationCell;
-        this->_direction = direction;
-        this->_arrivedDestination = false;
+    if (directions.size() == 0) {
+        // Al menos volvemos por donde venimos, aunque este prohibido
+        directions.push_back(forbiddenDirection);
     }
+    if(directionStillAvaiable == false || (float)rand()/RAND_MAX < 0.001){
+        Vector2D direction = directions[rand() % directions.size()];
+        this->_direction = direction;
+        std::cout<<"moviendo hacia x = "<<_direction.x()<<" y = "<<_direction.y()<<std::endl;
+    }
+}
+
+Vector2D Enemy::positionCentered()
+{
+    Vector2D toAdd(_scenario->spriteSheet().spriteWidth()/2, _scenario->spriteSheet().spriteHeight()/2);
+    return _position + toAdd;
 }
 
 /**

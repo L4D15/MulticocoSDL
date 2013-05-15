@@ -70,7 +70,7 @@ private:
     Vector2D        randomPerimeterCell();
     Vector2D        randomCell();
     void            createEnemyHouse();
-    
+    void            printScenarioByConsole();
     void            createCollisionBoxes();    
     
 private:
