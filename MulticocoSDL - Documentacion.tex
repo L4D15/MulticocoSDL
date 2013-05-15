@@ -1,6 +1,6 @@
 \documentclass[parskip=half*]{scrartcl}
 \usepackage[spanish, activeacute]{babel}
-\usepackage{graphicx, wrapfig, makeidx, listings, color}
+\usepackage{graphicx, wrapfig, makeidx, listings, color, hyperref}
 
 % CONFIGURACION INICIAL
 \title{MulticocoSDL}
@@ -45,26 +45,82 @@ morecomment=[l][\color{magenta}]{\#}
 
 %-------------------INTRODUCCION--------------
 \section{Introducci\'on}
+MulticocoSDL es un juego arcade que emula al famoso Pacman realizado como proyecto para la asignatura Sistemas Multimedia del Grado de Ingenier\'ia Inform\'atica de la Universidad de Ja\'en.
+
+El objetivo de MulticocoSDL es alcanzar varias areas multimedia en un mismo programa haciendo uso de los tres elementos principales del software multimedia:
+
+\begin{description}
+	\item[Emplazamiento espacial]	\hfill \\	Los distintos elementos visuales (enemigos, escenario, pacman) son dibujados sobre un canvas en posiciones específicas y además se puede mover por él.
+	\item[Control temporal] 		\hfill \\	El jugador puede moverse por el escenario a una determinada velocidad así como los enemigos, estando todos ellos animados.
+	\item[Interacci\'on]			\hfill \\	Mediante el teclado el jugador puede dar \'ordenes a pacman de forma que este se mueva en la direcci\'on que el jugador le indica.
+\end{description}
+
+El c\'odigo se encuentra alojado en GitHub en el siguiente enlace y contiene un archivo de proyecto de XCode para Mac OS X, si bien el c\'odigo es portable a Windows y Linux. \\
+
+\centerline{\url{https://github.com/L4D15/MulticocoSDL}}
 
 %---------------------------------------------
-
 
 %-------------------BIBLIOTECAS---------------
 \newpage
 \section{Bibliotecas}
+Se ha hecho uso de la biblioteca Simple DirecMedia Layer as\'i como de algunos subm\'odulos de esta para trabajar con el renderizado de im\'agenes, texto y reproducci\'on de audio. A continuaci\'on explicamos qu\'e tareas ha realizado cada una.
+
+Para m\'as información sobre Simple DirecMedia Layer: \\
+
+\centerline{\url{http://www.libsdl.org/}}
 
 	%---------------SDL-----------------------
 	\subsection{SDL}
+	Biblioteca con las operaciones b\'asicas para crear una ventana y dibujar en ella. Algunas de las utilidades m\'as usadas han sido:
+	\begin{description}
+		\item[SDL\_Rec] \hfill \\		Estructura para definir un rect\'angulo. Usado a la hora de recorta un \'area de un SpriteSheet y dibujar en un canvas.
+		
+		\item[SDL\_Surface] \hfill \\	Superficie o canvas sobre el que dibujar, usado no solo en la ventana principal como contexto de renderizado, sino tambi\'en para almacenar en la memoria de la tarjeta gr\'afica los distintos Sprites a renderizar.
+		
+		\item[SDL\_BlitSurface(SDL\_Surface*,SDL\_Rec*,SDL\_Surface*,SDL\_Rec*)] \hfill \\ Mediante esta funci\'on se puede dibujar un \'area seleccionada de un canvas origen en un \'area de un canvas de destino. Se ha usado tanto para dibujar en la ventana principal como para separar los distintos Sprites del SpriteSheet.
 
+		\item[SDL\_LoadBMP(const char*)] \hfill \\	Como bien indica su nombre carga una imagen en formato BMP, la guarda en memoria gr\'afica y devuelve un puntero a una SDL\_Surface, de modo que podamos usar la imagen cargada.
+	\end{description}
+
+	Esta biblioteca puede descargase desde el siguiente enlace: \\
+
+	\centerline{\url{http://www.libsdl.org/download-1.2.php}}
 	%-----------------------------------------
 	%---------------SDL_MIXER-----------------
 	\subsection{SDL\_Mixer}
+	Biblioteca modular de SDL que facilita el trabajo con la reproducci\'on de sonido y m\'usica. Los elementos m\'as destacados de esta biblioteca son:
+
+	\begin{description}
+		\item[Mix\_Chunk] \hfill \\	Contenedor de sonido, igual que SDL\_Surface lo era de im\'agenes.
+
+		\item[Mix\_Music] \hfill \\ Contenedor de sonido espec\'ifico para m\'usica.
+
+		\item[Mix\_LoadWAV(const char*)] \hfill \\	Carga un archivo en formato WAV y devuelve un puntero a Mix\_Chunk para poder trabajar con el audio del archivo.
+
+		\item[Mix\_LoadMUS(const char*)] \hfill \\	Carga un archivo en formato WAV, OGG, MP3 o FLAC devolviendo un puntero a Mix\_Music. Esta funci\'on es espec\'ifica para cargar m\'usica ya que SDL\_Mixer trabaja de forma distinta los sonidos y la m\'usica.
+	\end{description}
+
+	La biblioteca se puede descargar desde: \\
+
+	\centerline{\url{http://www.libsdl.org/projects/SDL_mixer/}}
 
 	%-----------------------------------------
 	%---------------SDL_TTF-------------------
 	\subsection{SDL\_TTF}
+	A la hora de mostrar la puntuaci\'on del jugador necesit\'abamos mostrar texto por pantalla, por lo que recurrimos a esta biblioteca (otro m\'odulo del proyecto SDL) espec\'ifica para mostrar texto por pantalla. Una curiosidad sobre esta biblioteca es que hace uso de fuentes TTF en lugar de recurrir a fuentes en archivos bitmap como sucede, por ejemplo, al renderizar texto en OpenGL.
 
+	De esta biblioteca hemos usado:
+
+	\begin{description}
+		\item[TTF\_Font] \hfill \\	Contenedor para la informaci\'on de la fuente a usar a la hora de renderizar el texto.
+
+		\item[TTF\_OpenFont(const char*, int)] \hfill \\ Carga una fuente desde el archivo en formato TTF especificado y usando el tamaño indicado.
+
+		\item[TTF\_RenderText\_Solid(TTF\_Font,const char*,SDL\_Color)] \hfill \\ Crea una superficie sobre la que dibuja el texto pasado usando la fuente indicada y el color deseado. Una vez tengamos esa superficie habr\'a que dibujarla usando el m\'etodo que se mostr\'o antes con SDL\_BlitSurface(...). 
+	\end{description}
 	%-----------------------------------------
+
 %---------------------------------------------
 
 %-------------------IMAGEN--------------------
@@ -83,6 +139,7 @@ morecomment=[l][\color{magenta}]{\#}
 
 	%-----------------------------------------
 %---------------------------------------------
+
 %-------------------AUDIO---------------------
 \newpage
 \section{Audio}
@@ -95,6 +152,7 @@ morecomment=[l][\color{magenta}]{\#}
 
 	%-----------------------------------------
 %---------------------------------------------
+
 %-------------------LÓGICA--------------------
 \newpage
 \section{L\'ogica}
@@ -107,6 +165,7 @@ morecomment=[l][\color{magenta}]{\#}
 
 	%-----------------------------------------
 %---------------------------------------------
+
 %-------------------JUEGO---------------------
 \newpage
 \section{Juego}

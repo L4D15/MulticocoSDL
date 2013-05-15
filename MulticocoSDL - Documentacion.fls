@@ -56,31 +56,50 @@ INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/graphics/color.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/graphics/color.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/color.cfg
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/color.cfg
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/hpdftex.def
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 INPUT MulticocoSDL - Documentacion.aux
 INPUT MulticocoSDL - Documentacion.aux
 OUTPUT MulticocoSDL - Documentacion.aux
 INPUT /usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
 INPUT /usr/local/texlive/2012/texmf-dist/tex/context/base/supp-pdf.mkii
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/ifpdf.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/grfext.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/grfext.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/etexcmds.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT /usr/local/texlive/2012/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT MulticocoSDL - Documentacion.out
+INPUT MulticocoSDL - Documentacion.out
+INPUT MulticocoSDL - Documentacion.out
+INPUT MulticocoSDL - Documentacion.out
+OUTPUT MulticocoSDL - Documentacion.pdf
+INPUT ./MulticocoSDL - Documentacion.out
+INPUT ./MulticocoSDL - Documentacion.out
+OUTPUT MulticocoSDL - Documentacion.out
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/local/texlive/2012/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -105,10 +124,13 @@ INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
 OUTPUT MulticocoSDL - Documentacion.toc
-OUTPUT MulticocoSDL - Documentacion.pdf
 INPUT /usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT MulticocoSDL - Documentacion.aux
+INPUT ./MulticocoSDL - Documentacion.out
+INPUT ./MulticocoSDL - Documentacion.out
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
+INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
