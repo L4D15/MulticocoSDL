@@ -142,17 +142,17 @@ void Window::initialize()
 /**
  @brief
  **/
-void Window::generateRandomCoins(float f)
+void Window::generateRandomCoins(float fillFactor)
 {
     Entity* coin;
     int animations[1];
     animations[0] = 4;
     
-    std::list<Vector2D> coinPositions = this->_scenario->corridorPositions();
+    std::list<Vector2D> coinPositions = this->_scenario->corridorPositionsWithoutGhostHouse();
     for (std::list<Vector2D>::iterator it = coinPositions.begin(); it != coinPositions.end(); it++) {
         float random = (float)(rand()) / (float)(RAND_MAX);
         
-        if (random <= f) {
+        if (random <= fillFactor) {
             // Crear nueva moneda
             coin = new Entity();
             coin->setSpriteSheet("MulticocoSDL.app/Contents/Resources/coin.bmp", 20, 20, animations, 1);

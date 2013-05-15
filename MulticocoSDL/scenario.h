@@ -54,6 +54,7 @@ public:
     
     std::list<Vector2D> corridorCells();
     std::list<Vector2D> corridorPositions();
+    std::list<Vector2D> corridorPositionsWithoutGhostHouse();
     
     void            render(SDL_Surface* screen, bool showDebugGraphics = false);
     

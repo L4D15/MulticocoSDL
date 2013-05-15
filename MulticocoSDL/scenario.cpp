@@ -57,6 +57,11 @@ unsigned int Scenario::height()
     return this->_vSize * this->_sprite->spriteHeight();
 }
 
+SpriteSheet& Scenario::spriteSheet()
+{
+    return *_sprite;
+}
+
 /**
  @brief Crea el esquema base del escenario, rodeandolo de muros.
  **/
@@ -549,6 +554,26 @@ std::list<Vector2D> Scenario::corridorPositions()
     for (int i = 0; i < this->_hSize; i++) {
         for (int j = 0; j < this->_vSize; j++) {
             if (this->_scenario[i][j] == CORRIDOR) {
+                pos = new Vector2D(this->cellPosition(i, j));
+                cells.push_back(*pos);
+                delete pos;
+            }
+        }
+    }
+    
+    return cells;
+}
+
+std::list<Vector2D> Scenario::corridorPositionsWithoutGhostHouse()
+{
+    std::list<Vector2D> cells;
+    Vector2D* pos;
+    int xhalf = this->_hSize/2;
+    int yhalf = this->_vSize/2;
+    
+    for (int i = 0; i < this->_hSize; i++) {
+        for (int j = 0; j < this->_vSize; j++) {
+            if (this->_scenario[i][j] == CORRIDOR && (i<xhalf-2 || i>xhalf+1 || j<yhalf-2 || j>yhalf+2)) {
                 pos = new Vector2D(this->cellPosition(i, j));
                 cells.push_back(*pos);
                 delete pos;
