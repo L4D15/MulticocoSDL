@@ -13,8 +13,16 @@ _collisionBoxesPos(hSize * vSize)
     this->initializeScenario();
     this->createScenario();
     this->createEnemyHouse();
+    this->repairCorridors();
     
     this->_enemySpawningCell = Vector2D(hSize/2,vSize/2);
+}
+
+Scenario::~Scenario()
+{
+    for (unsigned int i = 0; i < this->_vSize; i++)
+        delete[] _scenario[i];
+    delete[] _scenario;
 }
 
 /**
@@ -75,6 +83,33 @@ void Scenario::initializeScenario()
 }
 
 /**
+ * @brief Repara los corredores que sólo tengan una salida (minimo dos y máximo cuatro).
+ */
+bool Scenario::repairCorridors()
+{
+    bool result = false;
+    Vector2D directions[] = {
+        Vector2D(-1,0), Vector2D(1,0), Vector2D(0,-1), Vector2D(0,1)
+    };
+    while(!result){
+        result = true;
+        for (unsigned int i = 2; i < this->_vSize-1; i++) {
+            for (unsigned int j = 2; j < this->_hSize-1; j++) {
+                Vector2D currentCell(j,i);
+                if (this->_scenario[i][j] == CORRIDOR && this->freeNeighborCells(currentCell) < 2) {
+                    Vector2D cellToRepair(currentCell + directions[rand()%NUM_DIRECTIONS]);
+                    int y = cellToRepair.y();
+                    int x = cellToRepair.x();
+                    this->_scenario[y][x] = CORRIDOR;
+                    result = false;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/**
  @brief Construye el escenario interior (sin contar los muros exteriores).
  **/
 void Scenario::createScenario()
@@ -86,7 +121,7 @@ void Scenario::createScenario()
     while (maxWalls > 0 && errors < (this->_hSize * this->_vSize)) {
         Vector2D origin = this->randomCell();
         
-        if (this->freeNeighborCellsExtended(origin) >= maxNeighbors) {
+        if (this->freeNeighborCellsExtended(origin) >= maxNeighbors && this->freeNeighborCells(origin) >= 2) {
             int result = 1 + this->createRandomWalls(Vector2D(0,0), origin, 0, maxWalls, maxNeighbors - 1);
             maxWalls -= result;
             
@@ -101,7 +136,7 @@ void Scenario::createScenario()
 
 /**
  @brief Casilla aleatoria.
- @return    Una casilla aleatoria del escenario.
+ @return    Una casilla aleatoria del escenario sin contar los bordes.
  **/
 Vector2D Scenario::randomCell()
 {
@@ -124,7 +159,7 @@ int Scenario::freeNeighborCells(Vector2D cell)
         Vector2D* currentDirection = &directions[i];
         Vector2D neighbor = cell + *currentDirection;
         int x = neighbor.x(), y = neighbor.y();
-        if(this->_scenario[y][x] == CORRIDOR)
+        if(x >= 0 && x < this->_hSize && y >= 0 && y < this->_vSize && this->_scenario[y][x] == CORRIDOR)
             freeNeighbors++;
     }
     return freeNeighbors;

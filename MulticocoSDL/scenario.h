@@ -60,6 +60,7 @@ public:
 private:
     void            initializeScenario();
     void            createScenario();
+    bool            repairCorridors();
     int             createRandomWalls(Vector2D previousCell, Vector2D currentCell,
                                       int depth, int maxDepth,
                                       int minFreeNeighbors);
