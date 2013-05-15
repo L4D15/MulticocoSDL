@@ -74,11 +74,11 @@ Para m\'as información sobre Simple DirecMedia Layer: \\
 	\subsection{SDL}
 	Biblioteca con las operaciones b\'asicas para crear una ventana y dibujar en ella. Algunas de las utilidades m\'as usadas han sido:
 	\begin{description}
-		\item[SDL\_Rec] \hfill \\		Estructura para definir un rect\'angulo. Usado a la hora de recorta un \'area de un SpriteSheet y dibujar en un canvas.
+		\item[SDL\_Rect] \hfill \\		Estructura para definir un rect\'angulo. Usado a la hora de recorta un \'area de un SpriteSheet y dibujar en un canvas.
 		
 		\item[SDL\_Surface] \hfill \\	Superficie o canvas sobre el que dibujar, usado no solo en la ventana principal como contexto de renderizado, sino tambi\'en para almacenar en la memoria de la tarjeta gr\'afica los distintos Sprites a renderizar.
 		
-		\item[SDL\_BlitSurface(SDL\_Surface*,SDL\_Rec*,SDL\_Surface*,SDL\_Rec*)] \hfill \\ Mediante esta funci\'on se puede dibujar un \'area seleccionada de un canvas origen en un \'area de un canvas de destino. Se ha usado tanto para dibujar en la ventana principal como para separar los distintos Sprites del SpriteSheet.
+		\item[SDL\_BlitSurface(SDL\_Surface*,SDL\_Rect*,SDL\_Surface*,SDL\_Rect*)] \hfill \\ Mediante esta funci\'on se puede dibujar un \'area seleccionada de un canvas origen en un \'area de un canvas de destino. Se ha usado tanto para dibujar en la ventana principal como para separar los distintos Sprites del SpriteSheet.
 
 		\item[SDL\_LoadBMP(const char*)] \hfill \\	Como bien indica su nombre carga una imagen en formato BMP, la guarda en memoria gr\'afica y devuelve un puntero a una SDL\_Surface, de modo que podamos usar la imagen cargada.
 	\end{description}
@@ -133,11 +133,11 @@ Para m\'as información sobre Simple DirecMedia Layer: \\
 En esta secci\'on explicaremos las clases relacionadas con el apartado visual de la aplicaci\'on, desde la creaci\'on de la ventana hasta la animaci\'on de los personajes que aparecen en pantalla.
 	%---------------WINDOW--------------------
 	\subsection{Window}
-	Antes de poder dibujar nada en pantalla primero necesitamos una ventana para nuestra aplicaci\'on, y una vez esta est\'e creada necesitamos controlar el flujo del juego. Vayamos por partes.
+	Antes de poder dibujar nada en pantalla primero necesitamos una ventana para nuestra aplicaci\'on.
 		\subsubsection{Inicializaci\'on}
-		SDL nos proporciona facilidades a la hora de crear una ventana preparada para renderizar im\'agenes, pero antes de poder usarlas necesitamos inicializar SDL.
+			SDL nos proporciona facilidades a la hora de crear una ventana preparada para renderizar im\'agenes, pero antes de poder usarlas necesitamos inicializar SDL.
 
-		\begin{lstlisting}
+			\begin{lstlisting}
 int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     
     if (err < 0) {
@@ -145,11 +145,67 @@ int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
         std::cout << "Error al inicializar SDL: " << SDL_GetError() << std::endl;
         exit(1);
     }
-		\end{lstlisting}
+			\end{lstlisting}
 
-		Mediante los flags SDL\_INIT\_AUDIO y SDL\_INIT\_VIDEO le indicamos que nuestra aplicaci\'on va a hacer uso de estas dos funcionalidades. Si no indicaramos, por ejemplo, el flag de audio, nuestra aplicaci\'on no reproducir\'ia audio.
+			Mediante los flags SDL\_INIT\_AUDIO y SDL\_INIT\_VIDEO le indicamos que nuestra aplicaci\'on va a hacer uso de estas dos funcionalidades. Si no indicaramos, por ejemplo, el flag de audio, nuestra aplicaci\'on no reproducir\'ia audio.
 
-		Si hubiera alg\'un problema durante la incialzaci\'on, SDL puede darnos informaci\'on sobre el fallo mediante SDL\_GetError(). El uso de esta funci\'on para obtener informaci\'on sobre fallos durante el uso de SDL ser\'a una constante a lo largo del proyecto, por lo que se omitir\'a el tratamiento de errores de ahora en adelante. Para m\'as detalles sobre ello consultar el c\'odigo fuente.
+			Si hubiera alg\'un problema durante la incialzaci\'on, SDL puede darnos informaci\'on sobre el fallo mediante SDL\_GetError(). El uso de esta funci\'on para obtener informaci\'on sobre fallos durante el uso de SDL ser\'a una constante a lo largo del proyecto, por lo que se omitir\'a el tratamiento de errores de ahora en adelante. Para m\'as detalles sobre ello consultar el c\'odigo fuente.
+
+			\subsubsection{Creaci\'on}
+				Ahora que SDL ya est\'a preparado para funcionar procedemos a crear nuestra ventana.
+
+				\begin{lstlisting}
+this->_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
+				\end{lstlisting}
+
+				Donde \_screen es un SDL\_Surface*, w es la anchura y h la altura de nuestra ventana (y por consiguiente la resoluci\'on en pixeles de nuestro canvas), 16 es la profundidad de bits por pixel (o bpp) y los últimos dos son dos flags que indican lo siguiente:
+
+				\begin{itemize}
+					\item SDL\_HWSURFACE --- La informaci\'on es guardada en la memoria de la gr\'afica, de forma que es m\'as r\'apido trabajar con ella.
+
+					\item SDL\_DOUBLEBUF --- Indica que este canvas tiene doble buffer. Esto es importante para que podamos dibujar sobre un buffer mientras el otro se est\'a mostrando y una vez terminamos de dibujar se intercambian los buffers. De esta forma evitamos que el usuario vea c\'omo se dibujan los elementos poco a poco.
+				\end{itemize}
+
+			\subsubsection{Renderizado}
+				Una vez la ventana ha sido creada debemos mostrar los elementos que componen el juego. Si bien el m\'etodo render de la clase Windows contiene mucho m\'as c\'odigo, nuestro objetivo aqu\'i es explicar su funcionamiento, por lo que presentamos una versi\'on resumida en la que se renderiza un objeto de ejemplo (clase Entity explicada m\'as adelante) llamado object.
+
+				\begin{lstlisting}
+void Window::render()
+{
+    SDL_FillRect(this->_screen, NULL, SDL_MapRGBA(this->_screen->format, 0, 0, 0, 255));
+
+    object.render(this->_screen);
+    
+    SDL_Flip(this->_screen);
+}
+				\end{lstlisting}
+
+				La primera funci\'on llena el canvas con color negro. Los par\'ametros que se le pasan son una SDL\_Surface*, que ser\'a la superficie a rellenar con color; despu\'es un SDL\_Rect* que indicar\'a el area que queremos rellenar y que al pasarle NULL lo que hace es coger toda el area; y por \'ultimo el color del que queremos rellenar el area, que en este caso ser\'a negro. 
+
+				Despu\'es llamamos al m\'etodo render del objeto al que le pasamos un SDL\_Surface*, es decir, la superficie en la que queremos dibujarlo. Como queremos dibujarlo en la ventana, le pasamos el puntero al canvas creado anteriormente y que tenemos guardado en el atributo \_screen de nuestra clase.
+
+				Por \'ultimo intercambiamos los buffers de la ventana.
+
+			\subsubsection{Eliminaci\'on}
+				Hay que tener cuidado al trabajar con las SDL\_Surface pues indicamos a SDL que guarde la informaci\'on visual de nuestra ventana en la memoria gr\'afica. Esto quiere decir que si hicieramos esto:
+
+				\begin{lstlisting}
+delete this->_screen;
+				\end{lstlisting}
+
+				Estar\'iamos dejando basura en la memoria gr\'afica, ya que delete borra la informaci\'on de la memoria principal, pero no sabe trabajar con la memoria gr\'afica. Es por esto que cuando no necesitemos m\'as una SDL\_Surface se debe liberar usando una funci\'on espec\'ifica de SDL que se encarga tanto de eliminarla de memoria gr\'afica como de memoria principal (la informaci\'on visual, es decir, los pixels, est\'an en memoria gr\'afica, pero otra mucha informaci\'on se guarda en memoria principal tambi\'en).
+
+				Para lidiar con esto hay que declarar los destructores de las clases que hagan uso de alguna SDL\_Surface para que la liberen antes de ser borrados. Mostramos aqu\'i el de la clase Window y omitiremos esta explicaci\'on para el resto de clases.
+
+				\begin{lstlisting}
+Window::~Window()
+{
+    SDL_FreeSurface(this->_screen);
+    SDL_Quit();
+}
+				\end{lstlisting}
+
+				La funci\'on SDL\_Quit() debe llamarse una vez nuestra aplicaci\'on vaya a finalizar y no necesitemos m\'as SDL, pues liberar\'a los recursos que internamente haya reservado cuando lo inicializamos. Como nuestra aplicaci\'on est\'a vinculada a la existencia de la ventana, una vez esta sea destruida debemos ``terminar'' con SDL, por eso se ha incluido en el destructor.
 
 	%-----------------------------------------
 	%---------------SPRITE--------------------
@@ -186,6 +242,12 @@ int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 	\subsection{CollisionBox}
 
 	%-----------------------------------------
+
+	%-----------------------------------------
+	%---------------ENTITY--------------------
+	\subsection{Entity}
+
+	%-----------------------------------------
 %---------------------------------------------
 
 %-------------------JUEGO---------------------
@@ -195,8 +257,8 @@ int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 	\subsection{Inicializaci\'on}
 
 	%-----------------------------------------
-	%---------------VISUALIZACION-------------
-	\subsection{Visualizaci\'on}
+	%---------------BUCLE PRINCIPAL-----------
+	\subsection{Bucle principal}
 
 	%-----------------------------------------
 	%---------------EVENTOS-------------------
