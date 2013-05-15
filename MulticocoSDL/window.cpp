@@ -10,6 +10,7 @@ Window::Window(int w, int h, string title)
     this->_isFullScreen = false;
     this->_showDebugInfo = false;
     this->_gameOver = false;
+    
     int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
     
     if (err < 0) {

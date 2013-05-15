@@ -117,7 +117,7 @@ Para m\'as información sobre Simple DirecMedia Layer: \\
 
 		\item[TTF\_OpenFont(const char*, int)] \hfill \\ Carga una fuente desde el archivo en formato TTF especificado y usando el tamaño indicado.
 
-		\item[TTF\_RenderText\_Solid(TTF\_Font, const char*, SDL\_Color)] \hfill \\ Crea una superficie sobre la que dibuja el texto pasado usando la fuente indicada y el color deseado. Una vez tengamos esa superficie habr\'a que dibujarla usando el m\'etodo que se mostr\'o antes con SDL\_BlitSurface(...). 
+		\item[TTF\_RenderText\_Solid(TTF\_Font, const char*, SDL\_Color)] \hfill \\ Crea una superficie sobre la que dibuja el texto pasado usando la fuente indicada y el color deseado. Una vez tengamos esa superficie habr\'a que dibujarla usando la funci\'on SDL\_BlitSurface(...). 
 	\end{description}
 
 	Esta biblioteca est\'a disponible en: \\
@@ -130,8 +130,26 @@ Para m\'as información sobre Simple DirecMedia Layer: \\
 %-------------------IMAGEN--------------------
 \newpage
 \section{Imagen}
+En esta secci\'on explicaremos las clases relacionadas con el apartado visual de la aplicaci\'on, desde la creaci\'on de la ventana hasta la animaci\'on de los personajes que aparecen en pantalla.
 	%---------------WINDOW--------------------
 	\subsection{Window}
+	Antes de poder dibujar nada en pantalla primero necesitamos una ventana para nuestra aplicaci\'on, y una vez esta est\'e creada necesitamos controlar el flujo del juego. Vayamos por partes.
+		\subsubsection{Inicializaci\'on}
+		SDL nos proporciona facilidades a la hora de crear una ventana preparada para renderizar im\'agenes, pero antes de poder usarlas necesitamos inicializar SDL.
+
+		\begin{lstlisting}
+int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
+    
+    if (err < 0) {
+        // Mostrar error
+        std::cout << "Error al inicializar SDL: " << SDL_GetError() << std::endl;
+        exit(1);
+    }
+		\end{lstlisting}
+
+		Mediante los flags SDL\_INIT\_AUDIO y SDL\_INIT\_VIDEO le indicamos que nuestra aplicaci\'on va a hacer uso de estas dos funcionalidades. Si no indicaramos, por ejemplo, el flag de audio, nuestra aplicaci\'on no reproducir\'ia audio.
+
+		Si hubiera alg\'un problema durante la incialzaci\'on, SDL puede darnos informaci\'on sobre el fallo mediante SDL\_GetError(). El uso de esta funci\'on para obtener informaci\'on sobre fallos durante el uso de SDL ser\'a una constante a lo largo del proyecto, por lo que se omitir\'a el tratamiento de errores de ahora en adelante. Para m\'as detalles sobre ello consultar el c\'odigo fuente.
 
 	%-----------------------------------------
 	%---------------SPRITE--------------------
