@@ -127,6 +127,12 @@ OUTPUT MulticocoSDL - Documentacion.toc
 INPUT /usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT MulticocoSDL/img/sprite_example.png
+INPUT ./MulticocoSDL/img/sprite_example.png
+INPUT ./MulticocoSDL/img/sprite_example.png
+INPUT MulticocoSDL/img/pacman_example.png
+INPUT ./MulticocoSDL/img/pacman_example.png
+INPUT ./MulticocoSDL/img/pacman_example.png
 INPUT MulticocoSDL - Documentacion.aux
 INPUT ./MulticocoSDL - Documentacion.out
 INPUT ./MulticocoSDL - Documentacion.out

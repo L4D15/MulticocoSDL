@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1368623062 "MulticocoSDL - Documentacion.tex" "MulticocoSDL - Documentacion.pdf" "MulticocoSDL - Documentacion" 1368623062
+["pdflatex"] 1368637329 "MulticocoSDL - Documentacion.tex" "MulticocoSDL - Documentacion.pdf" "MulticocoSDL - Documentacion" 1368637330
   "/usr/local/texlive/2012/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1136768653 1528 abec98dbc43e172678c11b3b9031252a ""
   "/usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -65,10 +65,12 @@
   "/usr/local/texlive/2012/texmf-var/web2c/pdftex/pdflatex.fmt" 1368475447 3691572 0b9bea57907361dca45c113e264353f9 ""
   "/usr/local/texlive/2012/texmf.cnf" 1341108668 572 7ea7194897937febeb63145e1c3a1f03 ""
   "/usr/local/texlive/2012/texmf/web2c/texmf.cnf" 1336865692 31299 729e216d9b945005c0d4b079c0500bc9 ""
-  "MulticocoSDL - Documentacion.aux" 1368623062 3021 92ff944353eb23371b09d75ad9630cf3 ""
-  "MulticocoSDL - Documentacion.out" 1368623062 1374 4c83b99b81ba253fca482ef6aa046614 ""
-  "MulticocoSDL - Documentacion.tex" 1368623061 14380 ad4a311b85fe01cbe0c1376fb67ac773 ""
-  "MulticocoSDL - Documentacion.toc" 1368623062 1788 86b77663dfeb7b2ab5be2587fdc55808 ""
+  "MulticocoSDL - Documentacion.aux" 1368637329 3468 fee895eabbdfde336e7cb99ad3fa134c ""
+  "MulticocoSDL - Documentacion.out" 1368637329 1533 816ebc7a2dd41607fd6f5107373d3d63 ""
+  "MulticocoSDL - Documentacion.tex" 1368637328 21087 41a0cec06ad68a5b986a51c0a82e1893 ""
+  "MulticocoSDL - Documentacion.toc" 1368637329 1986 73131a7ffd941a3fb95d8f54839efe64 ""
+  "MulticocoSDL/img/pacman_example.png" 1368636530 3564 e25e0060caca047acd437a288e718677 ""
+  "MulticocoSDL/img/sprite_example.png" 1368626676 4273 d3e9eaa0e7b78502a2663a7c2a4544fb ""
   (generated)
   "MulticocoSDL - Documentacion.toc"
   "MulticocoSDL - Documentacion.pdf"

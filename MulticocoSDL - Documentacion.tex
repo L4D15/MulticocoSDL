@@ -158,7 +158,7 @@ int err = SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 this->_screen = SDL_SetVideoMode(w, h, 16, SDL_HWSURFACE | SDL_DOUBLEBUF);
 				\end{lstlisting}
 
-				Donde \_screen es un SDL\_Surface*, w es la anchura y h la altura de nuestra ventana (y por consiguiente la resoluci\'on en pixeles de nuestro canvas), 16 es la profundidad de bits por pixel (o bpp) y los últimos dos son dos flags que indican lo siguiente:
+				Donde \_screen es un SDL\_Surface*, w es la anchura y h la altura de nuestra ventana (y por consiguiente la resoluci\'on en pixeles de nuestro canvas), 16 es la profundidad de bits por pixel (o bpp) y los \'ultimos dos son flags que indican lo siguiente:
 
 				\begin{itemize}
 					\item SDL\_HWSURFACE --- La informaci\'on es guardada en la memoria de la gr\'afica, de forma que es m\'as r\'apido trabajar con ella.
@@ -210,10 +210,151 @@ Window::~Window()
 	%-----------------------------------------
 	%---------------SPRITE--------------------
 	\subsection{Sprite}
+		Los Sprites ser\'an las im\'agenes que representen los objetos de nuestro juego. Estos Sprites podr\'an estar animados, para lo cu\'al necesitar\'an una imagen preparada para ello. Nuestra aplicaci\'on soportar\'a Sprites animados siempre y cuando todos los frames tengan las mismas dimensiones.
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics{MulticocoSDL/img/sprite_example.png}
+			\caption{Ejemplo de Sprite}
+		\end{figure}
+
+		De esta forma a la hora de renderizar el sprite se renderizar\'a solo una secci\'on de la imagen correspondiente al frame actual de la animaci\'on.
+
+		Para manejar esta sistema de animaci\'on necesitamos algo m\'as que simplemente llamar a la funci\'on SDL\_BlitSurface(...) de SDL, y ese es el cometido de la clase Sprite.
+
+		\begin{lstlisting}
+class Sprite
+{
+public:
+                    Sprite(SDL_Surface* img, int animations, int w, int h);
+                    ~Sprite();
+    
+    void            render(SDL_Surface* screen, Vector2D& pos);
+    void            nextFrame();
+    void            setFrameSkip(unsigned int f);
+    
+private:
+    SDL_Surface*    _bitmap;
+    unsigned int    _width;
+    unsigned int    _height;
+
+    unsigned int    _nAnimations;
+    SDL_Rect*       _frames;
+    unsigned int    _currentFrame;    
+    unsigned int    _frameSkip;
+    unsigned int    _framesSkipped;
+};
+		\end{lstlisting}
+
+		Cada uno de los atributos tiene un cometido espec\'ifico:
+
+		\begin{description}
+			\item[\_bitmap] \hfill \\	Contiene la informaci\'on de la imagen guarda en memoria gr\'afica. Se trata de una sola imagen con todos los frames de la animaci\'on.
+
+			\item[\_width y \_height] \hfill \\	Ancho y alto de cada frame individual que componen la animaci\'on.
+
+			\item[\_nAnimations] \hfill \\	N\'umero de frames que componen la animaci\'on.
+
+			\item[\_frames] \hfill \\	Rect\'angulos que corresponden al area de la imagen de cada frame de la animaci\'on. Por ejemplo, si recortamos la imagen \_bitmap usando el rect\'angulo de la primera posici\'on, obtendremos el primer frame de la animaci\'on, si usamos el de la segunda posici\'on, el segundo frame y as\'i sucesivamente.
+
+			\item[\_currentFrame] \hfill \\	Indica en qu\'e frame de la animaci\'on nos encontramos actualmente. De este modo cuando se llame al m\'etodo render se renderizar\'a el frame que corresponde a la animaci\'on actual de forma autom\'atica.
+
+			\item[\_frameSkip y \_frameSkipped] \hfill \\	Usados para controlar la velocidad de animaci\'on. Cuanto mayor sea el frameSkip, m\'as lenta ser\'a la animaci\'on.
+		\end{description}
+
+		\subsubsection{Transparencia}
+			Veamos c\'omo podemos asignar transparencia al Sprite cuendo se crea:
+
+			\begin{lstlisting}
+Sprite::Sprite(SDL_Surface* img, int animations, int w, int h)
+{
+	// Asignacion de atributos [omitido]
+	// ...
+
+	SDL_SetColorKey(
+					this->_bitmap,
+					SDL_SRCCOLORKEY,
+					SDL_MapRGB(this->_bitmap->format,255,0,255)
+					);
+
+	// Creacion de los rectangulos de cada frame [omitido]
+	//...
+}
+			\end{lstlisting}
+
+			Nos interesa analizar el uso de SDL\_SetColorKey. Esta funci\'on lo que hace es indicar a la imagen cual es su color clave. El color clave es aquel que se usa como transparencia, de modo que a la hora de dibujar la imagen se dibuja todo menos ese color. En nuestro caso y como se hace en la mayor\'ia de los Sprites de videojuegos hemos usado como color clave un magenta puro, que corresponde con los valores R = 255, G = 0 y B = 255. Se puede ver este color como fondo en la imagen de la moneda presentada anteriormente.
+
+		\subsubsection{Renderizado y animaci\'on}
+			Respecto al renderizado y la animaci\'on debemos hablar de dos m\'etodos de la clase Sprite: render y nextFrame.
+
+			\begin{lstlisting}
+void Sprite::render(SDL_Surface *screen, Vector2D& pos)
+{
+    SDL_Rect source = this->_frames[this->_currentFrame];
+    SDL_Rect destination;
+    destination.x = pos.x();
+    destination.y = pos.y();
+    destination.w = this->_width;
+    destination.h = this->_height;
+    
+    SDL_BlitSurface(this->_bitmap, &source, screen, &destination);
+}
+			\end{lstlisting}
+
+			Podemos ver que el rect\'angulo correspondiente con el frame actual (\_currentFrame) se obtiene de la colecci\'on de rect\'angulos que creamos durante el constructor, y el rect\'angulo de destino que define el area donde se dibujar\'a en el canvas de destino se calcula a partir de la posici\'on y del ancho y alto del frame. Despu\'es solo hace falta una llamada a la ya mencionada funci\'on SDL\_BlitSurface(...) y nuestro Sprite se dibujar\'a.
+
+			\textquestiondown Y c\'omo se anima el Sprite si el \'indice \_currentFrame no avanza? Para eso est\'a el m\'etodo nextFrame que hace que la animaci\'on del Sprite avance siguiendo las restricciones impuestas por el frame skip indicado.
+
+			\begin{lstlisting}
+void Sprite::nextFrame()
+{
+    if (this->_framesSkipped == this->_frameSkip) {
+        this->_currentFrame = (this->_currentFrame + 1) % this->_nAnimations;
+        this->_framesSkipped = 0;
+    } else {
+        this->_framesSkipped++;
+    }
+}
+			\end{lstlisting}
 
 	%-----------------------------------------
 	%---------------SPRITESHEET---------------
 	\subsection{SpriteSheet}
+		Nuestra clase Sprite solo puede manejar una animaci\'on por Sprite, lo cual nos limita bastante a la hora de animar objetos m\'as complejos que una moneda, como por ejemplo, a Pacman o a los fantasmas. Para ello haremos uso de la clase SpriteSheet que gestionar\'a varios Sprites para un mismo archivo y que adem\'as nos facilitar\'a el manejo de las animaciones.
+
+		\begin{figure}
+			\centering
+			\includegraphics{MulticocoSDL/img/pacman_example.png}
+			\caption{Spritesheet de Pacman}
+		\end{figure}
+
+		Nuestra clase debe manejar varias animaciones y adem\'as, con n\'umeros de frames distintos.
+
+		\begin{lstlisting}
+SpriteSheet::SpriteSheet(const char* img, int w, int h, int* animations, int nAnimations)
+{  
+    SDL_Surface* spriteSheet = SDL_LoadBMP(img);    
+    SDL_Surface* currentSprite;
+    for (int i = 0; i < nAnimations; i++) {
+        // Creamos una nueva superficie donde dibujar
+        currentSprite = SDL_CreateRGBSurface(SDL_HWSURFACE, w * animations[i], h, 16, 0, 0, 0, 0);
+        
+        // Seleccionamos el area que queremos coger de la plantilla
+        SDL_Rect origin;
+        origin.x = 0;
+        origin.y = i * h;
+        origin.w = w * animations[i];   // El ancho sera la suma de los anchos de cada animacion
+        origin.h = h;
+        
+        // Dibujamos parte del SpriteSheet
+        SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL); // NULL para que pille todo el sprite
+        
+        // Creamos un nuevo Sprite
+        this->_sprites.push_back(new Sprite(currentSprite,animations[i],w,h));
+    }
+    SDL_FreeSurface(spriteSheet);   // Ya no necesitamos la plantilla    
+}
+		\end{lstlisting}
 
 	%-----------------------------------------
 %---------------------------------------------
