@@ -23,6 +23,7 @@ public:
     bool				isAlive();
 	bool				isVulnerable();
     
+    Vector2D            positionCentered();
 	void				recordPlayerPosition(Vector2D pos);
     Vector2D            destinationCell(){ return this->_destinationCell; }
     
@@ -31,7 +32,7 @@ private:
 	void				normalIA();
 	void				predictionIA();
 	void				randomIA();
-	void				avaiableDirections(std::vector<Vector2D>& avaiableDirections);
+    std::vector<Vector2D>   avaliableDirections();
 	Vector2D			getInverseDirection(){return _direction * (-1.0f);}
     
 private:

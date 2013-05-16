@@ -1,6 +1,7 @@
 #include "scenario.h"
 
 #include <ctime>
+#include <cmath>
 
 Scenario::Scenario(unsigned int hSize, unsigned int vSize, Vector2D position):
 _position(position),
@@ -13,8 +14,18 @@ _collisionBoxesPos(hSize * vSize)
     this->initializeScenario();
     this->createScenario();
     this->createEnemyHouse();
+    this->repairCorridors();
+    
+    printScenarioByConsole();
     
     this->_enemySpawningCell = Vector2D(hSize/2,vSize/2);
+}
+
+Scenario::~Scenario()
+{
+    for (unsigned int i = 0; i < this->_vSize; i++)
+        delete[] _scenario[i];
+    delete[] _scenario;
 }
 
 /**
@@ -49,6 +60,11 @@ unsigned int Scenario::height()
     return this->_vSize * this->_sprite->spriteHeight();
 }
 
+SpriteSheet& Scenario::spriteSheet()
+{
+    return *_sprite;
+}
+
 /**
  @brief Crea el esquema base del escenario, rodeandolo de muros.
  **/
@@ -75,6 +91,33 @@ void Scenario::initializeScenario()
 }
 
 /**
+ * @brief Repara los corredores que sólo tengan una salida (minimo dos y máximo cuatro).
+ */
+bool Scenario::repairCorridors()
+{
+    bool result = false;
+    Vector2D directions[] = {
+        Vector2D(-1,0), Vector2D(1,0), Vector2D(0,-1), Vector2D(0,1)
+    };
+    while(!result){
+        result = true;
+        for (unsigned int i = 2; i < this->_vSize-1; i++) {
+            for (unsigned int j = 2; j < this->_hSize-1; j++) {
+                Vector2D currentCell(j,i);
+                if (this->_scenario[i][j] == CORRIDOR && this->freeNeighborCells(currentCell) < 2) {
+                    Vector2D cellToRepair(currentCell + directions[rand()%NUM_DIRECTIONS]);
+                    int y = cellToRepair.y();
+                    int x = cellToRepair.x();
+                    this->_scenario[y][x] = CORRIDOR;
+                    result = false;
+                }
+            }
+        }
+    }
+    return result;
+}
+
+/**
  @brief Construye el escenario interior (sin contar los muros exteriores).
  **/
 void Scenario::createScenario()
@@ -86,7 +129,7 @@ void Scenario::createScenario()
     while (maxWalls > 0 && errors < (this->_hSize * this->_vSize)) {
         Vector2D origin = this->randomCell();
         
-        if (this->freeNeighborCellsExtended(origin) >= maxNeighbors) {
+        if (this->freeNeighborCellsExtended(origin) >= maxNeighbors && this->freeNeighborCells(origin) >= 2) {
             int result = 1 + this->createRandomWalls(Vector2D(0,0), origin, 0, maxWalls, maxNeighbors - 1);
             maxWalls -= result;
             
@@ -101,7 +144,7 @@ void Scenario::createScenario()
 
 /**
  @brief Casilla aleatoria.
- @return    Una casilla aleatoria del escenario.
+ @return    Una casilla aleatoria del escenario sin contar los bordes.
  **/
 Vector2D Scenario::randomCell()
 {
@@ -124,7 +167,7 @@ int Scenario::freeNeighborCells(Vector2D cell)
         Vector2D* currentDirection = &directions[i];
         Vector2D neighbor = cell + *currentDirection;
         int x = neighbor.x(), y = neighbor.y();
-        if(this->_scenario[y][x] == CORRIDOR)
+        if(x >= 0 && x < this->_hSize && y >= 0 && y < this->_vSize && this->_scenario[y][x] == CORRIDOR)
             freeNeighbors++;
     }
     return freeNeighbors;
@@ -272,8 +315,14 @@ bool Scenario::isCorridor(int x, int y)
  **/
 Vector2D Scenario::cell(int x, int y)
 {
-    unsigned int cellX = (x * this->_hSize) / (this->_position.x() + this->_sprite->spriteWidth() * this->_hSize);
-    unsigned int cellY = (y * this->_vSize) / (this->_position.y() + this->_sprite->spriteHeight() * this->_vSize);
+    unsigned int originX = _position.x() - this->width()/2;
+    unsigned int originY = _position.y() - this->height()/2;
+    unsigned int cellX = (x - originX)/this->_sprite->spriteWidth();
+    unsigned int cellY = (y - originY)/this->_sprite->spriteHeight();
+    
+    //esto estaba mal
+    //unsigned int cellX = (x * this->_hSize) / (this->_position.x() + this->_sprite->spriteWidth() * this->_hSize);
+    //unsigned int cellY = (y * this->_vSize) / (this->_position.y() + this->_sprite->spriteHeight() * this->_vSize);
     
     return Vector2D(cellX, cellY);
 }
@@ -452,37 +501,49 @@ std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
     
     int x = currentCell.x();
     int y = currentCell.y();
+    //std::cout<<"current cell: x = "<<x<<" y = "<<y<<std::endl;
     
     // Celda de la derecha
     if (x + 1 < this->_hSize) {
-        if (this->_scenario[x + 1][y] == CORRIDOR) {
+        if (this->_scenario[x+1][y] == CORRIDOR) {
             directions.push_back(Vector2D(1,0));
         }
     }
     
     
     // Celda de arriba
-    if (y + 1 < this->_vSize) {
-        if (this->_scenario[x][y + 1] == CORRIDOR) {
-            directions.push_back(Vector2D(0,1));
+    if (y - 1 >= 0) {
+        if (this->_scenario[x][y-1] == CORRIDOR) {
+            directions.push_back(Vector2D(0,-1));
         }
     }
     
     // Celda de abajo
-    if (y - 1 >= 0) {
-        if (this->_scenario[x][y - 1] == CORRIDOR) {
-            directions.push_back(Vector2D(0,-1));
+    if (y + 1 < _vSize) {
+        if (this->_scenario[x][y+1] == CORRIDOR) {
+            directions.push_back(Vector2D(0,1));
         }
     }
     
     // Celda de la izquierda
     if (x - 1 >= 0) {
-        if (this->_scenario[x - 1][y] == CORRIDOR) {
+        if (this->_scenario[x-1][y] == CORRIDOR) {
             directions.push_back(Vector2D(-1,0));
         }
     }
     
     return directions;
+}
+
+void Scenario::printScenarioByConsole()
+{
+    for(int j=0; j<_hSize; j++){
+        std::cout<<std::endl;
+        for(int i=0; i<_vSize; i++){
+            char toPrint = _scenario[i][j] == CORRIDOR ? '0' : '1';
+            std::cout << toPrint << " ";
+        }
+    }
 }
 
 /**
@@ -514,6 +575,26 @@ std::list<Vector2D> Scenario::corridorPositions()
     for (int i = 0; i < this->_hSize; i++) {
         for (int j = 0; j < this->_vSize; j++) {
             if (this->_scenario[i][j] == CORRIDOR) {
+                pos = new Vector2D(this->cellPosition(i, j));
+                cells.push_back(*pos);
+                delete pos;
+            }
+        }
+    }
+    
+    return cells;
+}
+
+std::list<Vector2D> Scenario::corridorPositionsWithoutGhostHouse()
+{
+    std::list<Vector2D> cells;
+    Vector2D* pos;
+    int xhalf = this->_hSize/2;
+    int yhalf = this->_vSize/2;
+    
+    for (int i = 0; i < this->_hSize; i++) {
+        for (int j = 0; j < this->_vSize; j++) {
+            if (this->_scenario[i][j] == CORRIDOR && (i<xhalf-2 || i>xhalf+1 || j<yhalf-2 || j>yhalf+2)) {
                 pos = new Vector2D(this->cellPosition(i, j));
                 cells.push_back(*pos);
                 delete pos;

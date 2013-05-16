@@ -54,12 +54,14 @@ public:
     
     std::list<Vector2D> corridorCells();
     std::list<Vector2D> corridorPositions();
+    std::list<Vector2D> corridorPositionsWithoutGhostHouse();
     
     void            render(SDL_Surface* screen, bool showDebugGraphics = false);
     
 private:
     void            initializeScenario();
     void            createScenario();
+    bool            repairCorridors();
     int             createRandomWalls(Vector2D previousCell, Vector2D currentCell,
                                       int depth, int maxDepth,
                                       int minFreeNeighbors);
@@ -68,7 +70,7 @@ private:
     Vector2D        randomPerimeterCell();
     Vector2D        randomCell();
     void            createEnemyHouse();
-    
+    void            printScenarioByConsole();
     void            createCollisionBoxes();    
     
 private:

@@ -65,7 +65,8 @@ Vector2D Vector2D::operator +(const Vector2D& vector)
  * @param f     Factor de escala del vector.
  * @return      Vector resultado de la escala por el factor.
  */
-Vector2D Vector2D::operator *(float f) {
+Vector2D Vector2D::operator *(float f)
+{
     return Vector2D(_x * f,_y * f);
 }
 
@@ -88,7 +89,8 @@ bool Vector2D::operator ==(const Vector2D &vector)
  * Calcula la longitud cuadratica del vector.
  * @return      Longitud cuadratica (sin aplicar la raiz) del vector.
  */
-float Vector2D::lengthSquared() {
+float Vector2D::lengthSquared()
+{
     return (_x * _x + _y * _y);
 }
 
@@ -96,6 +98,7 @@ float Vector2D::lengthSquared() {
  * Calcula la longitud del vector.
  * @return      Longitud del vector.
  */
+
 float Vector2D::length() {
     return sqrt(_x * _x + _y * _y);
 }
