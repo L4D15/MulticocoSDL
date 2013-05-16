@@ -32,7 +32,7 @@ private:
 	void				normalIA();
 	void				predictionIA();
 	void				randomIA();
-	void				avaiableDirections(std::vector<Vector2D>& avaiableDirections);
+    std::vector<Vector2D>   avaliableDirections();
 	Vector2D			getInverseDirection(){return _direction * (-1.0f);}
     
 private:

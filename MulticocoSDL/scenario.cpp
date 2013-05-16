@@ -501,7 +501,7 @@ std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
     
     int x = currentCell.x();
     int y = currentCell.y();
-    std::cout<<"current cell: x = "<<x<<" y = "<<y<<std::endl;
+    //std::cout<<"current cell: x = "<<x<<" y = "<<y<<std::endl;
     
     // Celda de la derecha
     if (x + 1 < this->_hSize) {

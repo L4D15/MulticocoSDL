@@ -7,7 +7,10 @@ Enemy::Enemy(Type type, Scenario* scenario)
     this->_vulnerable = false;
     this->_type = type;
     this->_arrivedDestination = true;
-    this->_direction = Vector2D(-1,0);
+    if(_type != Type::FAST)
+        this->_direction = Vector2D(-1.0f, 0.0f);
+    else
+        this->_direction = Vector2D(-2.0f, 0.0f);
 
     int animations[] = {2,2,2,2};
     switch (type) {
@@ -97,7 +100,33 @@ void Enemy::update()
  */
 void Enemy::fastIA()
 {
-
+    float speedIncrement = 2.0f; //10% más rápido
+    Vector2D forbiddenDirection = this->_direction * (-1.0f * speedIncrement); // No puede ir por donde venia
+    //calculamos la casilla en la que estamos
+    // Direcciones permitidas por el escenario (no hay muros)
+    Vector2D center(positionCentered());
+    std::vector<Vector2D> directions = this->_scenario->avalibleDirections(center.x(), center.y());
+    
+    // Borramos la direccion prohibida
+    bool directionStillAvaiable = false;
+    for (unsigned int i = 0; i < directions.size(); i++) {
+        directions[i] = directions[i]*speedIncrement;
+        if(directions[i] == _direction)
+            directionStillAvaiable = true;
+        if(directions[i] == forbiddenDirection)
+            directions.erase(directions.begin()+i);
+    }
+    
+    // Comprobamos que no nos vayamos a quedar atascados
+    if (directions.size() == 0) {
+        // Al menos volvemos por donde venimos, aunque este prohibido
+        directions.push_back(forbiddenDirection);
+    }
+    if(directionStillAvaiable == false){
+        Vector2D direction = directions[rand() % directions.size()];
+        this->_direction = direction;
+        //std::cout<<"moviendo hacia x = "<<_direction.x()<<" y = "<<_direction.y()<<std::endl;
+    }
 }
 
 /**
@@ -126,7 +155,7 @@ void Enemy::randomIA()
     //calculamos la casilla en la que estamos
     // Direcciones permitidas por el escenario (no hay muros)
     Vector2D center(positionCentered());
-    std::vector<Vector2D> directions = this->_scenario->avalibleDirections(center.x(),center.y());
+    std::vector<Vector2D> directions = this->_scenario->avalibleDirections(center.x(), center.y());
         
     // Borramos la direccion prohibida
     bool directionStillAvaiable = false;
@@ -143,26 +172,43 @@ void Enemy::randomIA()
         directions.push_back(forbiddenDirection);
     }
     if(directionStillAvaiable == false || (float)rand()/RAND_MAX < 0.001){
+        /*
+        int spriteWidth = this->spriteSheet().spriteWidth()/2;
+        int spriteHeight = this->spriteSheet().spriteHeight()/2;
+        _position = _position + Vector2D(_direction.x() * spriteWidth,_direction.y() * spriteHeight);
+        */
+        
         Vector2D direction = directions[rand() % directions.size()];
         this->_direction = direction;
-        std::cout<<"moviendo hacia x = "<<_direction.x()<<" y = "<<_direction.y()<<std::endl;
+
+        //std::cout<<"moviendo hacia x = "<<_direction.x()<<" y = "<<_direction.y()<<std::endl;
     }
+}
+
+std::vector<Vector2D> Enemy::avaliableDirections()
+{
+    Vector2D forbiddenDirection = this->_direction * -1.0f; // No puede ir por donde venia
+    //calculamos la casilla en la que estamos
+    // Direcciones permitidas por el escenario (no hay muros)
+    Vector2D center(positionCentered());
+    std::vector<Vector2D> directions = this->_scenario->avalibleDirections(center.x(), center.y());
+    
+    // Borramos la direccion prohibida
+    for (unsigned int i = 0; i < directions.size(); i++) {
+        if(directions[i] == forbiddenDirection)
+            directions.erase(directions.begin()+i);
+    }
+    
+    // Comprobamos que no nos vayamos a quedar atascados
+    if (directions.size() == 0) {
+        // Al menos volvemos por donde venimos, aunque esté prohibido
+        directions.push_back(forbiddenDirection);
+    }
+    return directions;
 }
 
 Vector2D Enemy::positionCentered()
 {
     Vector2D toAdd(_scenario->spriteSheet().spriteWidth()/2, _scenario->spriteSheet().spriteHeight()/2);
     return _position + toAdd;
-}
-
-/**
- * @brief               Calcula las posibles direcciones que puede tomar un ghost.
- *                      Para que una dirección sea aceptada debe:
- *                      - No contener un muro
- *                      - No ser la dirección inversa
- * @param               avaiableDirections vector que va a ser modificado
- */
-void Enemy::avaiableDirections(std::vector<Vector2D>& avaiableDirections)
-{
-    
 }
