@@ -19,8 +19,16 @@ Enemy::Enemy(Type type, Scenario* scenario)
             break;
         case RANDOM:
             this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
-            
+        case PREDICTION:
+            //TDODO Ladis, yo te invoco! Corrige la ruta con el nuevo bmp que hagas plz :-)
+            this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
+            break;
+        case NORMAL:
+            //TDODO Ladis, yo te invoco de nuevo!
+            this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
+            break;
         default:
+            this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
             break;
     }
     
