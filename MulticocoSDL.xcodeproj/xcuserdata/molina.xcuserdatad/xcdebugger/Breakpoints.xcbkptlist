@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/window.cpp"
-         timestampString = "390422735.009311"
+         timestampString = "390431990.646176"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "165"
-         endingLineNumber = "165"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
          landmarkName = "Window::generateRandomCoins(float fillFactor)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,24 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "390410408.302345"
+         timestampString = "390432068.185059"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "159"
-         endingLineNumber = "159"
-         landmarkName = "Enemy::randomIA()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "390410408.302345"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "178"
-         endingLineNumber = "178"
+         startingLineNumber = "194"
+         endingLineNumber = "194"
          landmarkName = "Enemy::randomIA()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "390410408.302345"
+         timestampString = "390432068.185059"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "212"
-         endingLineNumber = "212"
+         startingLineNumber = "240"
+         endingLineNumber = "240"
          landmarkName = "Enemy::positionCentered()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "390410408.302345"
+         timestampString = "390432068.185059"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "213"
-         endingLineNumber = "213"
+         startingLineNumber = "241"
+         endingLineNumber = "241"
          landmarkName = "Enemy::positionCentered()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "390408824.313253"
+         timestampString = "390432068.185059"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "126"
-         endingLineNumber = "126"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
          landmarkName = "Enemy::fastIA()"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "390410408.302345"
+         timestampString = "390432068.185059"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "128"
-         endingLineNumber = "128"
+         startingLineNumber = "138"
+         endingLineNumber = "138"
          landmarkName = "Enemy::fastIA()"
          landmarkType = "5">
       </FileBreakpoint>

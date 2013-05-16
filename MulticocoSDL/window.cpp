@@ -49,6 +49,8 @@ Window::Window(int w, int h, string title)
 
 Window::~Window()
 {
+    delete _pacman;
+    delete _scenario;
     SDL_FreeSurface(this->_screen);
     Mix_CloseAudio();
     SDL_Quit();
@@ -112,8 +114,16 @@ void Window::initialize()
     //------------------------------------------//
     
     //------------------------------------------//
+    //              TESTING                     //
+    this->_pacman->setPosition(this->_scenario->playerSpawningPosition());
+    this->_pacman->spriteSheet().setAnimation("RIGHT");
+    this->_pacman->setVisible(true);
+    //                                          //
+    //------------------------------------------//
+    
+    //------------------------------------------//
     //              RED GHOST                   //
-    Enemy* ghost = new Enemy(Enemy::Type::FAST,this->_scenario);
+    Enemy* ghost = new Enemy(Enemy::Type::FAST,this->_scenario, _pacman);
     ghost->setPosition(this->_scenario->enemySpawningPosition());
     ghost->setVisible(true);
     this->_enemies.push_back(*ghost);
@@ -123,7 +133,7 @@ void Window::initialize()
     
     //------------------------------------------//
     //              PINK GHOST                  //
-    ghost = new Enemy(Enemy::Type::RANDOM, this->_scenario);
+    ghost = new Enemy(Enemy::Type::RANDOM, this->_scenario, _pacman);
     ghost->setPosition(this->_scenario->enemySpawningPosition() - Vector2D(20,0));
     ghost->setVisible(true);
     this->_enemies.push_back(*ghost);
@@ -133,7 +143,7 @@ void Window::initialize()
     
     //------------------------------------------//
     //              MOLY GHOST                  //
-    ghost = new Enemy(Enemy::Type::NORMAL, this->_scenario);
+    ghost = new Enemy(Enemy::Type::NORMAL, this->_scenario, _pacman);
     ghost->setPosition(this->_scenario->enemySpawningPosition() - Vector2D(0,20));
     ghost->setVisible(true);
     this->_enemies.push_back(*ghost);
@@ -143,7 +153,7 @@ void Window::initialize()
     
     //------------------------------------------//
     //              MOLY2 GHOST                  //
-    ghost = new Enemy(Enemy::Type::PREDICTION, this->_scenario);
+    ghost = new Enemy(Enemy::Type::PREDICTION, this->_scenario, _pacman);
     ghost->setPosition(this->_scenario->enemySpawningPosition() - Vector2D(0,-20));
     ghost->setVisible(true);
     this->_enemies.push_back(*ghost);
@@ -151,13 +161,6 @@ void Window::initialize()
     //                                          //
     //------------------------------------------//
     
-    //------------------------------------------//
-    //              TESTING                     //
-    this->_pacman->setPosition(this->_scenario->playerSpawningPosition());
-    this->_pacman->spriteSheet().setAnimation("RIGHT");
-    this->_pacman->setVisible(true);
-    //                                          //
-    //------------------------------------------//
 }
 
 /**

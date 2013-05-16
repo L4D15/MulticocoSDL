@@ -1,12 +1,13 @@
 #include "enemy.h"
 
-Enemy::Enemy(Type type, Scenario* scenario)
+Enemy::Enemy(Type type, Scenario* scenario, Entity* pacman)
 {
     this->_scenario = scenario;
     this->_alive = true;
     this->_vulnerable = false;
     this->_type = type;
     this->_arrivedDestination = true;
+    this->_pacman = pacman;
     if(_type != Type::FAST)
         this->_direction = Vector2D(-1.0f, 0.0f);
     else
@@ -20,11 +21,11 @@ Enemy::Enemy(Type type, Scenario* scenario)
         case RANDOM:
             this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
         case PREDICTION:
-            //TDODO Ladis, yo te invoco! Corrige la ruta con el nuevo bmp que hagas plz :-)
+            //TODO Ladis, yo te invoco! Corrige la ruta con el nuevo bmp que hagas plz :-)
             this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
             break;
         case NORMAL:
-            //TDODO Ladis, yo te invoco de nuevo!
+            //TODO Ladis, yo te invoco de nuevo!
             this->setSpriteSheet("MulticocoSDL.app/Contents/Resources/pink_ghost.bmp", 20, 20, animations, 4);
             break;
         default:
@@ -95,6 +96,7 @@ void Enemy::update()
             break;
             
         default:
+            randomIA();
             break;
     }
     
@@ -142,7 +144,33 @@ void Enemy::fastIA()
  */
 void Enemy::normalIA()
 {
+    std::vector<Vector2D> avaliableDirections = this->avaliableDirections();
+    Vector2D pacmanPosition = _pacman->position();
+    Vector2D distance = this->_position - pacmanPosition;
     
+    Vector2D directionX = Vector2D(distance.x(), 0.0f).normalize();
+    Vector2D directionY = Vector2D(0.0f, distance.y()).normalize();
+    
+    bool containsDirectionX = false;
+    bool containsDirectionY = false;
+    for(unsigned int i=0; i<avaliableDirections.size(); i++){
+        if(avaliableDirections[i] == directionX)
+            containsDirectionX = true;
+        else if(avaliableDirections[i] == directionY)
+            containsDirectionY = true;
+    }
+    
+    Vector2D finalDirection;
+    if(containsDirectionX && containsDirectionY)
+        finalDirection = rand()%2 == 0 ? directionX : directionY;
+    else if(containsDirectionX)
+        finalDirection = directionX;
+    else if(containsDirectionY)
+        finalDirection = directionY;
+    else
+        finalDirection = avaliableDirections[rand()%avaliableDirections.size()];
+    
+    this->_direction = finalDirection;
 }
 
 /**
@@ -151,7 +179,8 @@ void Enemy::normalIA()
  */
 void Enemy::predictionIA()
 {
-
+    //sólo en modo prueba:
+    randomIA();
 }
 
 /**
@@ -160,8 +189,6 @@ void Enemy::predictionIA()
 void Enemy::randomIA()
 {
     Vector2D forbiddenDirection = this->_direction * -1.0f; // No puede ir por donde venia
-    //calculamos la casilla en la que estamos
-    // Direcciones permitidas por el escenario (no hay muros)
     Vector2D center(positionCentered());
     std::vector<Vector2D> directions = this->_scenario->avalibleDirections(center.x(), center.y());
         
@@ -179,17 +206,10 @@ void Enemy::randomIA()
         // Al menos volvemos por donde venimos, aunque este prohibido
         directions.push_back(forbiddenDirection);
     }
+    
     if(directionStillAvaiable == false || (float)rand()/RAND_MAX < 0.001){
-        /*
-        int spriteWidth = this->spriteSheet().spriteWidth()/2;
-        int spriteHeight = this->spriteSheet().spriteHeight()/2;
-        _position = _position + Vector2D(_direction.x() * spriteWidth,_direction.y() * spriteHeight);
-        */
-        
         Vector2D direction = directions[rand() % directions.size()];
         this->_direction = direction;
-
-        //std::cout<<"moviendo hacia x = "<<_direction.x()<<" y = "<<_direction.y()<<std::endl;
     }
 }
 
