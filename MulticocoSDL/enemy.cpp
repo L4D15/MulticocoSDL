@@ -1,13 +1,12 @@
 #include "enemy.h"
 
-Enemy::Enemy(Type type, Scenario* scenario, Entity* pacman)
+Enemy::Enemy(Type type, Scenario* scenario)
 {
     this->_scenario = scenario;
     this->_alive = true;
     this->_vulnerable = false;
     this->_type = type;
     this->_arrivedDestination = true;
-    this->_pacman = pacman;
     if(_type != Type::FAST)
         this->_direction = Vector2D(-1.0f, 0.0f);
     else
@@ -140,12 +139,12 @@ void Enemy::fastIA()
 }
 
 /**
- * @brief               Va hacia la casilla en la que se encuentra el pacman
+ * @brief               Va hacia la casilla en la que se encuentra el pacman [NO IMPLEMENTADO]
  */
 void Enemy::normalIA()
 {
     std::vector<Vector2D> avaliableDirections = this->avaliableDirections();
-    Vector2D pacmanPosition = _pacman->position();
+    Vector2D pacmanPosition = Vector2D(0,0);    // QUITADO PARA EVITAR FALLOS
     Vector2D distance = this->_position - pacmanPosition;
     
     Vector2D directionX = Vector2D(distance.x(), 0.0f).normalize();
@@ -175,11 +174,11 @@ void Enemy::normalIA()
 
 /**
  * @brief               Va hacia la casilla en la que predice que se va a encontrar al pacman
- *                      según su casilla y su dirección actuales
+ *                      según su casilla y su dirección actuales [NO IMPLEMENTADO]
  */
 void Enemy::predictionIA()
 {
-    //sólo en modo prueba:
+    // No implementado
     randomIA();
 }
 

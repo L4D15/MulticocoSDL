@@ -15,7 +15,7 @@ public:
         FAST, NORMAL, PREDICTION, RANDOM
     }Type;
     
-                        Enemy(Type type, Scenario* scenario, Entity* pacman);
+                        Enemy(Type type, Scenario* scenario);
                         ~Enemy();
     
     void                update();
@@ -36,7 +36,6 @@ private:
 	Vector2D			getInverseDirection(){return _direction * (-1.0f);}
     
 private:
-    Entity*             _pacman;
     Type                _type;
     bool                _alive;
     bool                _vulnerable;

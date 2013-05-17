@@ -182,7 +182,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "258"
          endingLineNumber = "258"
-         landmarkName = "Window::mainLoop()"
+         landmarkName = "Window::update()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -203,12 +203,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "389734964.425162"
+         timestampString = "390510868.946465"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "Enemy::randomIA()"
+         startingLineNumber = "129"
+         endingLineNumber = "129"
+         landmarkName = "Enemy::fastIA()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -229,12 +229,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "389734964.425162"
+         timestampString = "390510868.946465"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
-         landmarkName = "Enemy::randomIA()"
+         startingLineNumber = "132"
+         endingLineNumber = "132"
+         landmarkName = "Enemy::fastIA()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -242,12 +242,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MulticocoSDL/enemy.cpp"
-         timestampString = "389734964.425162"
+         timestampString = "390510868.946465"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "134"
-         endingLineNumber = "134"
-         landmarkName = "Enemy::randomIA()"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
+         landmarkName = "Enemy::fastIA()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -273,7 +273,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "371"
          endingLineNumber = "371"
-         landmarkName = "Window::renderText(const char *text, Vector2D&amp; pos)"
+         landmarkName = "Window::handleEvents()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -299,7 +299,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "155"
          endingLineNumber = "155"
-         landmarkName = "Window::generateRandomCoins(float f)"
+         landmarkName = "Window::initialize()"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -325,7 +325,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "198"
          endingLineNumber = "198"
-         landmarkName = "Window::render()"
+         landmarkName = "Window::startMainLoop()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
