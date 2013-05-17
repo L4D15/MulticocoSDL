@@ -266,44 +266,57 @@ void Window::render()
  Mueve los enemigos y el pacman del jugador y detecta las distintas colisiones de los elementos del juego.
  **/
 void Window::update()
-{    
+{ 
     // Comprobar fin del juego
-    if (this->_coins.size() == 0) {
+    
+    if (this->_gameOver) {
+        // No hacer nada, se ha acabado el juego
         this->_pacman->setDirection(0, 0);
         this->_pacman->spriteSheet().pause();
         for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
             it->setDirection(0, 0);
             it->spriteSheet().pause();
         }
-        this->_gameOver = true;
-        
     } else {
-        // Comprobar colisiones
-        if (this->_scenario->collides(*this->_pacman)) {
-            this->_pacman->setDirection(0.0f, 0.0f);
-            this->_pacman->moveToPreviousPosition();
-        }
-        
-        // Colisiones con monedas
-        for (std::list<Entity>::iterator it = this->_coins.begin(); it != this->_coins.end(); it++) {
-            if (it->collisionBox().collides(this->_pacman->collisionBox())) {
-                // Reproducir sonido
-                if (!this->_coinSound->isPlaying()) {
-                    this->_coinSound->play();
-                }
-                
-                this->_coins.erase(it);
-                this->_score += COIN_SCORE;
+    
+        for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
+            if (this->_pacman->collisionBox().collides(it->collisionBox())) {
+                this->_gameOver = true;
             }
         }
         
-        // Pacman
-        this->_pacman->move();
-        
-        // Enemigos
-        for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
-            it->update();
-            it->move();
+        if (this->_coins.size() == 0) {
+            
+            this->_gameOver = true;
+            
+        } else {
+            // Comprobar colisiones
+            if (this->_scenario->collides(*this->_pacman)) {
+                this->_pacman->setDirection(0.0f, 0.0f);
+                this->_pacman->moveToPreviousPosition();
+            }
+            
+            // Colisiones con monedas
+            for (std::list<Entity>::iterator it = this->_coins.begin(); it != this->_coins.end(); it++) {
+                if (it->collisionBox().collides(this->_pacman->collisionBox())) {
+                    // Reproducir sonido
+                    if (!this->_coinSound->isPlaying()) {
+                        this->_coinSound->play();
+                    }
+                    
+                    this->_coins.erase(it);
+                    this->_score += COIN_SCORE;
+                }
+            }
+            
+            // Pacman
+            this->_pacman->move();
+            
+            // Enemigos
+            for (std::list<Enemy>::iterator it = this->_enemies.begin(); it != this->_enemies.end(); it++) {
+                it->update();
+                it->move();
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ var searchData=
   ['setcorridorsprite',['setCorridorSprite',['../class_scenario.html#a5a16a90c0b3bbccc8b79316a159631ec',1,'Scenario']]],
   ['setframeskip',['setFrameSkip',['../class_sprite_sheet.html#aef9b39ad26d9558fb74da2fb5b38b468',1,'SpriteSheet::setFrameSkip(const std::string name, unsigned int value)'],['../class_sprite_sheet.html#a875c5f4942c40f42cc8e68a00cce0c07',1,'SpriteSheet::setFrameSkip(const unsigned int value)']]],
   ['setfullscreen',['setFullScreen',['../class_window.html#ab4195686ce0df358d615c9f6a7577b33',1,'Window']]],
+  ['setrandomplayerspawningcell',['setRandomPlayerSpawningCell',['../class_scenario.html#a75e4afed8ae12a12fbf822d2a23aebf4',1,'Scenario']]],
   ['setwallsprite',['setWallSprite',['../class_scenario.html#a264bcbcfb4cf26c79fcd0bb92e6a6991',1,'Scenario']]],
   ['sprite',['Sprite',['../class_sprite.html#a9c3c167ff294a793b862429798f3b17f',1,'Sprite']]],
   ['spriteheight',['spriteHeight',['../class_sprite_sheet.html#add41556b6575aa5ad6a4fedfa9b8e5d6',1,'SpriteSheet']]],

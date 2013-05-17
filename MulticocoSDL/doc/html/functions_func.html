@@ -82,9 +82,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow4" class="tabs3">
     <ul class="tablist">
+      <li><a href="#index_a"><span>a</span></a></li>
       <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
       <li><a href="#index_l"><span>l</span></a></li>
@@ -131,6 +133,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <div class="contents">
 &#160;
 
+<h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
+<li>avalibleDirections()
+: <a class="el" href="class_scenario.html#a501950a0beb5aaeb0e31704818097ae4">Scenario</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_b"></a>- b -</h3><ul>
 <li>bindAnimation()
 : <a class="el" href="class_sprite_sheet.html#a807184db56f47aca2d7a603fd82604b5">SpriteSheet</a>
@@ -147,9 +156,16 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>collides()
 : <a class="el" href="class_collision_box.html#a3e0464e8fd1958d4365595adcaef7f62">CollisionBox</a>
+, <a class="el" href="class_scenario.html#a4cad7d000c20baab4301e2561c82f514">Scenario</a>
 </li>
 <li>corridorCells()
 : <a class="el" href="class_scenario.html#a0789f28647f405ff79bde8a2cb03931c">Scenario</a>
+</li>
+<li>corridorPositions()
+: <a class="el" href="class_scenario.html#af50bc8b0ac052db72a77a1d265078b6b">Scenario</a>
+</li>
+<li>corridorPositionsWithoutGhostHouse()
+: <a class="el" href="class_scenario.html#abf51342b7ef5c8461b05085a085af2b2">Scenario</a>
 </li>
 </ul>
 
@@ -160,6 +176,13 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>distanceSquared()
 : <a class="el" href="class_vector2_d.html#a93d8b715cbf485be515754d664a59532">Vector2D</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>enemySpawningPosition()
+: <a class="el" href="class_scenario.html#a2415ebf67ac30ed8a32f074a07b16904">Scenario</a>
 </li>
 </ul>
 
@@ -178,8 +201,14 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>isAlive()
 : <a class="el" href="class_enemy.html#a2cce7194016cb90b9e457b3da131fd8a">Enemy</a>
 </li>
+<li>isCorridor()
+: <a class="el" href="class_scenario.html#ac55d32b9280231f5f3c608b88fb79222">Scenario</a>
+</li>
 <li>isVulnerable()
 : <a class="el" href="class_enemy.html#aaab62fdc7c1ddcc63aca532bed8bf613">Enemy</a>
+</li>
+<li>isWall()
+: <a class="el" href="class_scenario.html#ab0df7d43602535a535b30db82115c912">Scenario</a>
 </li>
 </ul>
 
@@ -221,6 +250,12 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <li>pause()
 : <a class="el" href="class_sprite_sheet.html#a40ed270049d05bde987ad9b863976be6">SpriteSheet</a>
 </li>
+<li>playerSpawningCell()
+: <a class="el" href="class_scenario.html#a867a2986faf6ab2b027d783edc0d9a00">Scenario</a>
+</li>
+<li>playerSpawningPosition()
+: <a class="el" href="class_scenario.html#a95e4e91a8989095a0aff9eccdc4b2180">Scenario</a>
+</li>
 </ul>
 
 
@@ -253,6 +288,9 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 </li>
 <li>setFullScreen()
 : <a class="el" href="class_window.html#ab4195686ce0df358d615c9f6a7577b33">Window</a>
+</li>
+<li>setRandomPlayerSpawningCell()
+: <a class="el" href="class_scenario.html#a75e4afed8ae12a12fbf822d2a23aebf4">Scenario</a>
 </li>
 <li>setWallSprite()
 : <a class="el" href="class_scenario.html#a264bcbcfb4cf26c79fcd0bb92e6a6991">Scenario</a>
@@ -321,7 +359,7 @@ $(document).ready(function(){initNavTree('functions_func.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Sat May 18 2013 00:14:24 for MulticocoSDL by
+    <li class="footer">Generated on Sat May 18 2013 00:33:04 for MulticocoSDL by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1 </li>
   </ul>
