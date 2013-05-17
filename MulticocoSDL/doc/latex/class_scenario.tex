@@ -1,0 +1,266 @@
+\hypertarget{class_scenario}{\section{Scenario Class Reference}
+\label{class_scenario}\index{Scenario@{Scenario}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_scenario_a8189517ddf6e34f006df80cf8fb6a71f}{Scenario} (unsigned int h\-Size, unsigned int v\-Size, \hyperlink{class_vector2_d}{Vector2\-D} position)
+\begin{DoxyCompactList}\small\item\em Crea un escenario de forma aleatoria, excepto el cuadro central que sirve como casa para los enemigos. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_ad4e825abd3b69f660fe0eadf02496321}{{\bfseries Scenario} (const char $\ast$file)}\label{class_scenario_ad4e825abd3b69f660fe0eadf02496321}
+
+\item 
+\hypertarget{class_scenario_aa7e7548858cbc52614d46723c0333038}{\hyperlink{class_scenario_aa7e7548858cbc52614d46723c0333038}{$\sim$\-Scenario} ()}\label{class_scenario_aa7e7548858cbc52614d46723c0333038}
+
+\begin{DoxyCompactList}\small\item\em Destructor. Libera los recursos. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_scenario_a457b1626f68e6a2659aaf6a2038c7aa1}{horizontal\-Size} ()
+\begin{DoxyCompactList}\small\item\em Numero de casillas en horizontal del escenario. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_scenario_a210693b48fbbc4b02ebc4824131ea0ad}{vertical\-Size} ()
+\begin{DoxyCompactList}\small\item\em Numero de casillas en vertical. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_scenario_a2b098ae8cf7bfdbf9d281d72e241bb88}{width} ()
+\begin{DoxyCompactList}\small\item\em Ancho total del escenario en pixeles. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{class_scenario_ad46654c66f78b69b2ceff9fbed9fd31d}{height} ()
+\begin{DoxyCompactList}\small\item\em Altura total del escenario en pixeles. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_a5c42393e886cffc17d929d518dfec392}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries enemy\-Spawning\-Cell} ()}\label{class_scenario_a5c42393e886cffc17d929d518dfec392}
+
+\item 
+\hypertarget{class_scenario_a867a2986faf6ab2b027d783edc0d9a00}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries player\-Spawning\-Cell} ()}\label{class_scenario_a867a2986faf6ab2b027d783edc0d9a00}
+
+\item 
+\hyperlink{class_sprite_sheet}{Sprite\-Sheet} \& \hyperlink{class_scenario_a823adba186e44615fcb34990713d9d4c}{sprite\-Sheet} ()
+\begin{DoxyCompactList}\small\item\em Acceso al sprite asociado. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_a95e4e91a8989095a0aff9eccdc4b2180}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries player\-Spawning\-Position} ()}\label{class_scenario_a95e4e91a8989095a0aff9eccdc4b2180}
+
+\item 
+\hypertarget{class_scenario_a2415ebf67ac30ed8a32f074a07b16904}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries enemy\-Spawning\-Position} ()}\label{class_scenario_a2415ebf67ac30ed8a32f074a07b16904}
+
+\item 
+\hypertarget{class_scenario_a6b4df480c24ac6e608b0db70213d1756}{void {\bfseries set\-Enemy\-Spawning\-Cell} (unsigned int x, unsigned int y)}\label{class_scenario_a6b4df480c24ac6e608b0db70213d1756}
+
+\item 
+\hypertarget{class_scenario_a696289efceb56b7e53b9ebd657b69c3e}{void {\bfseries set\-Player\-Spawning\-Cell} (unsigned int x, unsigned int y)}\label{class_scenario_a696289efceb56b7e53b9ebd657b69c3e}
+
+\item 
+\hypertarget{class_scenario_a75e4afed8ae12a12fbf822d2a23aebf4}{void {\bfseries set\-Random\-Player\-Spawning\-Cell} ()}\label{class_scenario_a75e4afed8ae12a12fbf822d2a23aebf4}
+
+\item 
+\hypertarget{class_scenario_a3d9f5b2d8f7fe2ff636c4d9d7b96caa7}{void {\bfseries set\-Sprite\-Sheet} (const char $\ast$file, int w, int h, int $\ast$animations, int n\-Animations)}\label{class_scenario_a3d9f5b2d8f7fe2ff636c4d9d7b96caa7}
+
+\item 
+void \hyperlink{class_scenario_a264bcbcfb4cf26c79fcd0bb92e6a6991}{set\-Wall\-Sprite} (unsigned int pos)
+\begin{DoxyCompactList}\small\item\em Indica qué fila de la plantilla asignada corresponde al sprite del muro. \end{DoxyCompactList}\item 
+void \hyperlink{class_scenario_a5a16a90c0b3bbccc8b79316a159631ec}{set\-Corridor\-Sprite} (unsigned int pos)
+\begin{DoxyCompactList}\small\item\em Indica qué fila de la plantilla asignada corresponde al sprite del pasillo. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_abc3b44c28bf74a91f9e7a052f8010269}{bool {\bfseries save} (const char $\ast$file)}\label{class_scenario_abc3b44c28bf74a91f9e7a052f8010269}
+
+\item 
+\hypertarget{class_scenario_ab0df7d43602535a535b30db82115c912}{bool {\bfseries is\-Wall} (int x, int y)}\label{class_scenario_ab0df7d43602535a535b30db82115c912}
+
+\item 
+\hypertarget{class_scenario_ac55d32b9280231f5f3c608b88fb79222}{bool {\bfseries is\-Corridor} (int x, int y)}\label{class_scenario_ac55d32b9280231f5f3c608b88fb79222}
+
+\item 
+\hyperlink{class_vector2_d}{Vector2\-D} \hyperlink{class_scenario_ad48f84e44fef3ae985cdd3245acf065d}{cell} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Calcula que casilla del escenario corresponde con dichas coordenadas. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_a7164ece5fdfe79405863ebed3590fb0d}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries cell} (\hyperlink{class_vector2_d}{Vector2\-D} pos)}\label{class_scenario_a7164ece5fdfe79405863ebed3590fb0d}
+
+\item 
+\hypertarget{class_scenario_a3a0f6033d2652feb47b69d9838af31b0}{\hyperlink{class_vector2_d}{Vector2\-D} \hyperlink{class_scenario_a3a0f6033d2652feb47b69d9838af31b0}{cell\-Position} (unsigned int x, unsigned int y)}\label{class_scenario_a3a0f6033d2652feb47b69d9838af31b0}
+
+\begin{DoxyCompactList}\small\item\em Posicion en pixeles de una celda cada. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_a501950a0beb5aaeb0e31704818097ae4}{std\-::vector$<$ \hyperlink{class_vector2_d}{Vector2\-D} $>$ {\bfseries avalible\-Directions} (int pos\-X, int pos\-Y)}\label{class_scenario_a501950a0beb5aaeb0e31704818097ae4}
+
+\item 
+\hypertarget{class_scenario_a4cad7d000c20baab4301e2561c82f514}{bool {\bfseries collides} (\hyperlink{class_entity}{Entity} \&object)}\label{class_scenario_a4cad7d000c20baab4301e2561c82f514}
+
+\item 
+\hypertarget{class_scenario_a0789f28647f405ff79bde8a2cb03931c}{std\-::list$<$ \hyperlink{class_vector2_d}{Vector2\-D} $>$ \hyperlink{class_scenario_a0789f28647f405ff79bde8a2cb03931c}{corridor\-Cells} ()}\label{class_scenario_a0789f28647f405ff79bde8a2cb03931c}
+
+\begin{DoxyCompactList}\small\item\em Lista de celdas del escenario que no son pared. \end{DoxyCompactList}\item 
+\hypertarget{class_scenario_af50bc8b0ac052db72a77a1d265078b6b}{std\-::list$<$ \hyperlink{class_vector2_d}{Vector2\-D} $>$ {\bfseries corridor\-Positions} ()}\label{class_scenario_af50bc8b0ac052db72a77a1d265078b6b}
+
+\item 
+\hypertarget{class_scenario_abf51342b7ef5c8461b05085a085af2b2}{std\-::list$<$ \hyperlink{class_vector2_d}{Vector2\-D} $>$ {\bfseries corridor\-Positions\-Without\-Ghost\-House} ()}\label{class_scenario_abf51342b7ef5c8461b05085a085af2b2}
+
+\item 
+void \hyperlink{class_scenario_aa1479dc291201e8d2e3cbad06f87659b}{render} (S\-D\-L\-\_\-\-Surface $\ast$screen, bool show\-Debug\-Graphics=false)
+\begin{DoxyCompactList}\small\item\em Dibuja el escenario en la pantalla en la posicion indicada. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_scenario_a8189517ddf6e34f006df80cf8fb6a71f}{\index{Scenario@{Scenario}!Scenario@{Scenario}}
+\index{Scenario@{Scenario}!Scenario@{Scenario}}
+\subsubsection[{Scenario}]{\setlength{\rightskip}{0pt plus 5cm}Scenario\-::\-Scenario (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{h\-Size, }
+\item[{unsigned int}]{v\-Size, }
+\item[{{\bf Vector2\-D}}]{position}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a8189517ddf6e34f006df80cf8fb6a71f}
+
+
+Crea un escenario de forma aleatoria, excepto el cuadro central que sirve como casa para los enemigos. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em h\-Size} & Tamaño horizontal del tablero en número de casillas. \\
+\hline
+{\em v\-Size} & Tamaño vertical del tablero en número de casillas. \\
+\hline
+{\em position} & Posicion en la pantalla del punto central del laberinto. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_scenario_ad48f84e44fef3ae985cdd3245acf065d}{\index{Scenario@{Scenario}!cell@{cell}}
+\index{cell@{cell}!Scenario@{Scenario}}
+\subsubsection[{cell}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Vector2\-D} Scenario\-::cell (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_ad48f84e44fef3ae985cdd3245acf065d}
+
+
+Calcula que casilla del escenario corresponde con dichas coordenadas. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Coordenada X. \\
+\hline
+{\em y} & Coordenada Y. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Celda que corresponde a las coordenadas x e y. 
+\end{DoxyReturn}
+\hypertarget{class_scenario_ad46654c66f78b69b2ceff9fbed9fd31d}{\index{Scenario@{Scenario}!height@{height}}
+\index{height@{height}!Scenario@{Scenario}}
+\subsubsection[{height}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Scenario\-::height (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_ad46654c66f78b69b2ceff9fbed9fd31d}
+
+
+Altura total del escenario en pixeles. 
+
+\begin{DoxyReturn}{Returns}
+Tamaño vertical en pixels. 
+\end{DoxyReturn}
+\hypertarget{class_scenario_a457b1626f68e6a2659aaf6a2038c7aa1}{\index{Scenario@{Scenario}!horizontal\-Size@{horizontal\-Size}}
+\index{horizontal\-Size@{horizontal\-Size}!Scenario@{Scenario}}
+\subsubsection[{horizontal\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Scenario\-::horizontal\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a457b1626f68e6a2659aaf6a2038c7aa1}
+
+
+Numero de casillas en horizontal del escenario. 
+
+\begin{DoxyReturn}{Returns}
+Tamaño horizontal en casillas del esceario. 
+\end{DoxyReturn}
+\hypertarget{class_scenario_aa1479dc291201e8d2e3cbad06f87659b}{\index{Scenario@{Scenario}!render@{render}}
+\index{render@{render}!Scenario@{Scenario}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}void Scenario\-::render (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{screen, }
+\item[{bool}]{show\-Debug\-Graphics = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_aa1479dc291201e8d2e3cbad06f87659b}
+
+
+Dibuja el escenario en la pantalla en la posicion indicada. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em screen} & Pantalla en la que dibujar el escenario. \\
+\hline
+{\em position} & Punto central donde dibujar el laberinto. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+Se debe haber especificado la plantilla mediante set\-Sprite\-Sheet y vincular las imagenes de la pared y el pasillo mediante set\-Wall\-Sprite y set\-Corridor\-Sprite. 
+\end{DoxyPrecond}
+\hypertarget{class_scenario_a5a16a90c0b3bbccc8b79316a159631ec}{\index{Scenario@{Scenario}!set\-Corridor\-Sprite@{set\-Corridor\-Sprite}}
+\index{set\-Corridor\-Sprite@{set\-Corridor\-Sprite}!Scenario@{Scenario}}
+\subsubsection[{set\-Corridor\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}void Scenario\-::set\-Corridor\-Sprite (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a5a16a90c0b3bbccc8b79316a159631ec}
+
+
+Indica qué fila de la plantilla asignada corresponde al sprite del pasillo. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Posicion de la fila en la plantilla. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_scenario_a264bcbcfb4cf26c79fcd0bb92e6a6991}{\index{Scenario@{Scenario}!set\-Wall\-Sprite@{set\-Wall\-Sprite}}
+\index{set\-Wall\-Sprite@{set\-Wall\-Sprite}!Scenario@{Scenario}}
+\subsubsection[{set\-Wall\-Sprite}]{\setlength{\rightskip}{0pt plus 5cm}void Scenario\-::set\-Wall\-Sprite (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a264bcbcfb4cf26c79fcd0bb92e6a6991}
+
+
+Indica qué fila de la plantilla asignada corresponde al sprite del muro. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Posicion de la fila en la plantilla. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_scenario_a823adba186e44615fcb34990713d9d4c}{\index{Scenario@{Scenario}!sprite\-Sheet@{sprite\-Sheet}}
+\index{sprite\-Sheet@{sprite\-Sheet}!Scenario@{Scenario}}
+\subsubsection[{sprite\-Sheet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sprite\-Sheet} \& Scenario\-::sprite\-Sheet (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a823adba186e44615fcb34990713d9d4c}
+
+
+Acceso al sprite asociado. 
+
+\begin{DoxyReturn}{Returns}
+Referencia al sprite que usa el escenario para renderizarse. 
+\end{DoxyReturn}
+\hypertarget{class_scenario_a210693b48fbbc4b02ebc4824131ea0ad}{\index{Scenario@{Scenario}!vertical\-Size@{vertical\-Size}}
+\index{vertical\-Size@{vertical\-Size}!Scenario@{Scenario}}
+\subsubsection[{vertical\-Size}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Scenario\-::vertical\-Size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a210693b48fbbc4b02ebc4824131ea0ad}
+
+
+Numero de casillas en vertical. 
+
+\begin{DoxyReturn}{Returns}
+Tamaño vertical en casillas del escenario. 
+\end{DoxyReturn}
+\hypertarget{class_scenario_a2b098ae8cf7bfdbf9d281d72e241bb88}{\index{Scenario@{Scenario}!width@{width}}
+\index{width@{width}!Scenario@{Scenario}}
+\subsubsection[{width}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int Scenario\-::width (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_scenario_a2b098ae8cf7bfdbf9d281d72e241bb88}
+
+
+Ancho total del escenario en pixeles. 
+
+\begin{DoxyReturn}{Returns}
+Tamaño horizontal en pixels. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/scenario.\-h\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/scenario.\-cpp\end{DoxyCompactItemize}

@@ -8,6 +8,9 @@
 
 #define COLLISION_BOX_RESIZE_FACTOR 0.8
 
+/**
+ Representa cualquier objeto que se muestra en el juego, desde Pacman a las monedas.
+ **/
 class Entity
 {
 public:

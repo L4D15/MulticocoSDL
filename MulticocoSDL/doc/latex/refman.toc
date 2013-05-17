@@ -1,0 +1,56 @@
+\contentsline {chapter}{\numberline {1}Hierarchical Index}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}
+\contentsline {chapter}{\numberline {3}Class Documentation}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Collision\discretionary {-}{}{}Box Class Reference}{5}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Member Function Documentation}{5}{subsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.1.1}collides}{5}{subsubsection.3.1.1.1}
+\contentsline {section}{\numberline {3.2}C\discretionary {-}{}{}P\discretionary {-}{}{}S\discretionary {-}{}{}Process\discretionary {-}{}{}Ser\discretionary {-}{}{}Num Struct Reference}{5}{section.3.2}
+\contentsline {section}{\numberline {3.3}Enemy Class Reference}{6}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Member Function Documentation}{6}{subsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1.1}is\discretionary {-}{}{}Alive}{6}{subsubsection.3.3.1.1}
+\contentsline {subsubsection}{\numberline {3.3.1.2}is\discretionary {-}{}{}Vulnerable}{6}{subsubsection.3.3.1.2}
+\contentsline {subsubsection}{\numberline {3.3.1.3}record\discretionary {-}{}{}Player\discretionary {-}{}{}Position}{6}{subsubsection.3.3.1.3}
+\contentsline {section}{\numberline {3.4}Entity Class Reference}{7}{section.3.4}
+\contentsline {section}{\numberline {3.5}Music Class Reference}{7}{section.3.5}
+\contentsline {section}{\numberline {3.6}N\discretionary {-}{}{}S\discretionary {-}{}{}Application(S\discretionary {-}{}{}D\discretionary {-}{}{}L\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Missing\discretionary {-}{}{}\_\discretionary {-}{}{}\discretionary {-}{}{}Methods) Category Reference}{8}{section.3.6}
+\contentsline {section}{\numberline {3.7}N\discretionary {-}{}{}S\discretionary {-}{}{}Application(S\discretionary {-}{}{}D\discretionary {-}{}{}L\discretionary {-}{}{}Application) Category Reference}{8}{section.3.7}
+\contentsline {section}{\numberline {3.8}N\discretionary {-}{}{}S\discretionary {-}{}{}String(Replace\discretionary {-}{}{}Sub\discretionary {-}{}{}String) Category Reference}{8}{section.3.8}
+\contentsline {section}{\numberline {3.9}Scenario Class Reference}{8}{section.3.9}
+\contentsline {subsection}{\numberline {3.9.1}Member Function Documentation}{9}{subsection.3.9.1}
+\contentsline {subsubsection}{\numberline {3.9.1.1}cell}{9}{subsubsection.3.9.1.1}
+\contentsline {subsubsection}{\numberline {3.9.1.2}render}{9}{subsubsection.3.9.1.2}
+\contentsline {subsubsection}{\numberline {3.9.1.3}set\discretionary {-}{}{}Corridor\discretionary {-}{}{}Sprite}{10}{subsubsection.3.9.1.3}
+\contentsline {subsubsection}{\numberline {3.9.1.4}set\discretionary {-}{}{}Wall\discretionary {-}{}{}Sprite}{10}{subsubsection.3.9.1.4}
+\contentsline {section}{\numberline {3.10}S\discretionary {-}{}{}D\discretionary {-}{}{}L\discretionary {-}{}{}Main Class Reference}{10}{section.3.10}
+\contentsline {section}{\numberline {3.11}Sound Class Reference}{10}{section.3.11}
+\contentsline {section}{\numberline {3.12}Sprite Class Reference}{10}{section.3.12}
+\contentsline {subsection}{\numberline {3.12.1}Constructor \& Destructor Documentation}{11}{subsection.3.12.1}
+\contentsline {subsubsection}{\numberline {3.12.1.1}Sprite}{11}{subsubsection.3.12.1.1}
+\contentsline {section}{\numberline {3.13}Sprite\discretionary {-}{}{}Sheet Class Reference}{11}{section.3.13}
+\contentsline {subsection}{\numberline {3.13.1}Constructor \& Destructor Documentation}{12}{subsection.3.13.1}
+\contentsline {subsubsection}{\numberline {3.13.1.1}Sprite\discretionary {-}{}{}Sheet}{12}{subsubsection.3.13.1.1}
+\contentsline {subsection}{\numberline {3.13.2}Member Function Documentation}{12}{subsection.3.13.2}
+\contentsline {subsubsection}{\numberline {3.13.2.1}bind\discretionary {-}{}{}Animation}{12}{subsubsection.3.13.2.1}
+\contentsline {subsubsection}{\numberline {3.13.2.2}render}{12}{subsubsection.3.13.2.2}
+\contentsline {subsubsection}{\numberline {3.13.2.3}set\discretionary {-}{}{}Animation}{12}{subsubsection.3.13.2.3}
+\contentsline {subsubsection}{\numberline {3.13.2.4}set\discretionary {-}{}{}Frame\discretionary {-}{}{}Skip}{13}{subsubsection.3.13.2.4}
+\contentsline {subsubsection}{\numberline {3.13.2.5}set\discretionary {-}{}{}Frame\discretionary {-}{}{}Skip}{13}{subsubsection.3.13.2.5}
+\contentsline {section}{\numberline {3.14}Vector2\discretionary {-}{}{}D Class Reference}{13}{section.3.14}
+\contentsline {subsection}{\numberline {3.14.1}Constructor \& Destructor Documentation}{14}{subsection.3.14.1}
+\contentsline {subsubsection}{\numberline {3.14.1.1}Vector2\discretionary {-}{}{}D}{14}{subsubsection.3.14.1.1}
+\contentsline {subsubsection}{\numberline {3.14.1.2}Vector2\discretionary {-}{}{}D}{14}{subsubsection.3.14.1.2}
+\contentsline {subsubsection}{\numberline {3.14.1.3}Vector2\discretionary {-}{}{}D}{14}{subsubsection.3.14.1.3}
+\contentsline {subsubsection}{\numberline {3.14.1.4}$\sim $\discretionary {-}{}{}Vector2\discretionary {-}{}{}D}{14}{subsubsection.3.14.1.4}
+\contentsline {subsection}{\numberline {3.14.2}Member Function Documentation}{14}{subsection.3.14.2}
+\contentsline {subsubsection}{\numberline {3.14.2.1}distance}{14}{subsubsection.3.14.2.1}
+\contentsline {subsubsection}{\numberline {3.14.2.2}distance\discretionary {-}{}{}Squared}{14}{subsubsection.3.14.2.2}
+\contentsline {subsubsection}{\numberline {3.14.2.3}length}{15}{subsubsection.3.14.2.3}
+\contentsline {subsubsection}{\numberline {3.14.2.4}length\discretionary {-}{}{}Squared}{15}{subsubsection.3.14.2.4}
+\contentsline {subsubsection}{\numberline {3.14.2.5}normalize}{15}{subsubsection.3.14.2.5}
+\contentsline {subsubsection}{\numberline {3.14.2.6}operator$\ast $}{15}{subsubsection.3.14.2.6}
+\contentsline {subsubsection}{\numberline {3.14.2.7}operator+}{15}{subsubsection.3.14.2.7}
+\contentsline {subsubsection}{\numberline {3.14.2.8}operator=}{15}{subsubsection.3.14.2.8}
+\contentsline {section}{\numberline {3.15}Window Class Reference}{16}{section.3.15}
+\contentsline {part}{Index}{16}{section*.16}

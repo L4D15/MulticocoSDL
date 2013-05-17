@@ -3,6 +3,12 @@
 #include <sstream>
 #include <SDL_mixer.h>
 
+/**
+ @brief     Crea un contexto de renderización para el juego e inicializa la lógica de este.
+ @param w   Ancho de la resolución de renderización.
+ @param h   Alto de la resolución de renderización.
+ @param title   Titulo de la ventana que renderiza el juego.
+ */
 Window::Window(int w, int h, string title)
 {
     this->_width = w;
@@ -47,6 +53,11 @@ Window::Window(int w, int h, string title)
     this->initialize();
 }
 
+/**
+ @brief Destructor de la clase
+ 
+ Libera los recursos utilizados por la clase y indica a SDL y SDL_Mixer que cierrer sus respectivos contextos.
+ **/
 Window::~Window()
 {
     delete _pacman;
@@ -56,6 +67,10 @@ Window::~Window()
     SDL_Quit();
 }
 
+/**
+ @brief Cambia la visualización a pantalla completa o modo ventana.
+ @param full    true = Pantalla completa, false = Modo ventana.
+ **/
 void Window::setFullScreen(bool full)
 {
     SDL_FreeSurface(_screen);
@@ -68,6 +83,11 @@ void Window::setFullScreen(bool full)
     }
 }
 
+/**
+ @brief Inicializa los recursos de la aplicación.
+ 
+ Crea el escenario, los enemigos, el pacman, los sonidos y la música y asignas los distintos sprites a cada uno.
+ **/
 void Window::initialize()
 {
     //------------------------------------------//
@@ -92,7 +112,6 @@ void Window::initialize()
     //------------------------------------------//
     //              SOUNDS                      //
     this->_coinSound = new Sound("MulticocoSDL.app/Contents/Resources/coin.wav");
-    this->_coinSoundAux = new Sound("MulticocoSDL.app/Contents/Resources/coin.wav");
     this->_music = new Music("MulticocoSDL.app/Contents/Resources/music.ogg");
     //------------------------------------------//
     
@@ -164,7 +183,9 @@ void Window::initialize()
 }
 
 /**
- @brief
+ @brief Genera las monedas que el jugador debe recolectar.
+ @param fillFactor  Factor de relleno de monedas. Con 1.0 llenará todas las casillas con monedas, con 0.5 la mitad etc...
+ @post  Llena la colección de monedas con monedas asociadas a una casilla del escenario.
  **/
 void Window::generateRandomCoins(float fillFactor)
 {
@@ -191,6 +212,12 @@ void Window::generateRandomCoins(float fillFactor)
     }
 }
 
+/**
+ @brief Inicia el bucle principal de la aplicación.
+ 
+ Esta función hace que la aplicación entre en el bucle principal de modo que el juego comienza a funcionar.
+ También inicia la reproducción de la música.
+ **/
 void Window::startMainLoop()
 {
     this->_run = true;
@@ -198,6 +225,11 @@ void Window::startMainLoop()
     this->mainLoop();
 }
 
+/**
+ @brief Muestra la escena actual.
+ 
+ Renderiza los elementos del videojuego en la ventana creada.
+ **/
 void Window::render()
 {
     // Limpiamos la pantalla
@@ -228,6 +260,11 @@ void Window::render()
     SDL_Flip(this->_screen);
 }
 
+/**
+ @brief Actualiza la lógica del juego.
+ 
+ Mueve los enemigos y el pacman del jugador y detecta las distintas colisiones de los elementos del juego.
+ **/
 void Window::update()
 {    
     // Comprobar fin del juego
@@ -253,8 +290,6 @@ void Window::update()
                 // Reproducir sonido
                 if (!this->_coinSound->isPlaying()) {
                     this->_coinSound->play();
-                } else {
-                    this->_coinSoundAux->play();
                 }
                 
                 this->_coins.erase(it);
@@ -273,6 +308,12 @@ void Window::update()
     }
 }
 
+/**
+ @brief Ciclo principal de la aplicación.
+ 
+ Sigue el esquema de cualquier videojuego: comprobar eventos de teclado/raton, actualizar y renderizar.
+ Todo esto se hace mientras la variable _run sea true.
+ **/
 void Window::mainLoop()
 {    
     while (this->_run) {
@@ -284,7 +325,11 @@ void Window::mainLoop()
     }
 }
 
-
+/**
+ @brief Manejo de eventos de la aplicación.
+ 
+ Comprueba los eventos lanzados por el teclado/ratón y actúa en consecuencia.
+ **/
 void Window::handleEvents()
 {
     SDL_Event event;
@@ -385,6 +430,11 @@ void Window::handleEvents()
     }
 }
 
+/**
+ @brief Renderiza un texto dado usando la fuente por defecto de la ventana.
+ @param text    Texto a renderizar.
+ @param pos     Posicion en la que dibujar el texto. Esta posición corresponde a la esquina superior izquierda.
+ **/
 void Window::renderText(const char *text, Vector2D& pos)
 {
     SDL_Color color = {255,255,255};
@@ -400,6 +450,12 @@ void Window::renderText(const char *text, Vector2D& pos)
     SDL_BlitSurface(textSurface, NULL, this->_screen, &rect);
 }
 
+/**
+ @brief Renderiza un texto dado usando la fuente por defecto de la ventana.
+ @param text    Texto a renderizar.
+ @param x       Coordenada x de la posición en la que queremos el texto.
+ @param y       Coordenada y de la posición en la que queremos el texto.
+ **/
 void Window::renderText(const char *text, int x, int y)
 {
     SDL_Color color = {255,255,255};

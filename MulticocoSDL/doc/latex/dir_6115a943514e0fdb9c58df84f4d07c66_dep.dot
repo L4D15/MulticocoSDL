@@ -1,0 +1,9 @@
+digraph "MulticocoSDL/MulticocoSDL" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_8130f45d1316457b48fd9b7ae1ea15f0 {
+    graph [ bgcolor="#ddddee", pencolor="black", label="MulticocoSDL" fontname="Helvetica", fontsize="10", URL="dir_8130f45d1316457b48fd9b7ae1ea15f0.html"]
+  dir_6115a943514e0fdb9c58df84f4d07c66 [shape=box, label="MulticocoSDL", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_6115a943514e0fdb9c58df84f4d07c66.html"];
+  }
+}

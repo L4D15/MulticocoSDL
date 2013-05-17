@@ -21,6 +21,12 @@
 
 using namespace std;
 
+/**
+ @brief Muestra y controla el juego.
+ 
+ Esta clase está encargada de crear la ventana que renderizará el juego así como de controlar la lógica de este.
+ */
+
 class Window
 {
 public:
@@ -41,28 +47,21 @@ private:
     void            generateRandomCoins(float f);
     
 private:
-    SDL_Surface*    _screen;
-    bool            _run;
-    unsigned int    _width;
-    unsigned int    _height;
-    bool            _isFullScreen;
-    //------------------------------//
-    TTF_Font*       _font;    
-    //------------------------------//
-    Scenario*       _scenario;
-    Entity*         _pacman;
-    std::list<Entity>   _coins;    
-    std::list<Enemy> _enemies;
-    //------------------------------//
-    //          EVENTS STATES       //
-    bool            _showDebugInfo;
-    bool            _gameOver;
-    //------------------------------//
-    Sound*          _coinSound;
-    Sound*          _coinSoundAux;
-    Music*          _music;
-    //------------------------------//
-    unsigned int    _score;
+    SDL_Surface*    _screen;        /** Vetana de la aplicación. */
+    bool            _run;           /** Indica si la aplicación debe ejecutarse. Al ponerse en false la aplicación termina. */
+    unsigned int    _width;         /** Ancho de la ventana. */
+    unsigned int    _height;        /** Alto de la ventana. */
+    bool            _isFullScreen;  /** Indica si la ventana está en pantalla completa o no.*/
+    TTF_Font*       _font;          /** Fuente para renderizar texto en la ventana. */
+    Scenario*       _scenario;      /** Escenario mostrado en la ventana. */
+    Entity*         _pacman;        /** Personaje que usa el jugador para moverse por el escenario */
+    std::list<Entity>   _coins;     /** Monedas que el jugador debe recolectar */
+    std::list<Enemy> _enemies;      /** Enemigos que recorren el escenario y que pueden acabar con el jugador */
+    bool            _showDebugInfo; /** Flag para mostrar información adicional (como cajas de colisiones) */
+    bool            _gameOver;      /** Indica si el juego ha terminado */
+    Sound*          _coinSound;     /** Sonido que se reproduce al conseguir una moneda */
+    Music*          _music;         /** Musica reproducida durante el juego */
+    unsigned int    _score;         /** Puntuación del jugador */
 };
 
 #endif /* defined(__MulticocoSDL__window__) */

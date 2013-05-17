@@ -1,0 +1,14 @@
+digraph "Enemy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="{Enemy\n||+ Enemy()\l+ ~Enemy()\l+ update()\l+ isAlive()\l+ isVulnerable()\l+ positionCentered()\l+ recordPlayerPosition()\l+ destinationCell()\l}",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",arrowtail="onormal",fontname="Helvetica"];
+  Node2 [label="{Entity\n|# _visible\l# _moving\l|+ Entity()\l+ ~Entity()\l+ setPosition()\l+ setPosition()\l+ setDirection()\l+ setDirection()\l+ setVisible()\l+ setMoving()\l+ setSpriteSheet()\l+ spriteSheet()\land 10 more...\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_entity.html"];
+  Node3 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #_sprite" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node3 [label="{SpriteSheet\n||+ SpriteSheet()\l+ ~SpriteSheet()\l+ spriteWidth()\l+ spriteHeight()\l+ bindAnimation()\l+ setAnimation()\l+ nextFrame()\l+ setFrameSkip()\l+ setFrameSkip()\l+ render()\l+ pause()\l+ resume()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_sprite_sheet.html"];
+  Node4 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #_position\n#_direction\n#_previousPosition" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node4 [label="{Vector2D\n||+ Vector2D()\l+ Vector2D()\l+ Vector2D()\l+ ~Vector2D()\l+ operator=()\l+ operator+()\l+ operator*()\l+ operator-()\l+ operator!=()\l+ operator==()\land 10 more...\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_vector2_d.html"];
+  Node5 -> Node2 [color="grey25",fontsize="10",style="solid",label=" #_collisionBox" ,arrowhead="odiamond",fontname="Helvetica"];
+  Node5 [label="{CollisionBox\n||+ CollisionBox()\l+ collides()\l+ position()\l+ width()\l+ height()\l+ render()\l+ updatePosition()\l+ updatePosition()\l}",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_collision_box.html"];
+}

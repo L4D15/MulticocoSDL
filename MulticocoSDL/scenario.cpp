@@ -3,6 +3,12 @@
 #include <ctime>
 #include <cmath>
 
+/**
+ @brief Crea un escenario de forma aleatoria, excepto el cuadro central que sirve como casa para los enemigos.
+ @param hSize   Tamaño horizontal del tablero en número de casillas.
+ @param vSize   Tamaño vertical del tablero en número de casillas.
+ @param position    Posicion en la pantalla del punto central del laberinto.
+ **/
 Scenario::Scenario(unsigned int hSize, unsigned int vSize, Vector2D position):
 _position(position),
 _collisionBoxesPos(hSize * vSize)
@@ -16,20 +22,24 @@ _collisionBoxesPos(hSize * vSize)
     this->createEnemyHouse();
     this->repairCorridors();
     
-    printScenarioByConsole();
-    
     this->_enemySpawningCell = Vector2D(hSize/2,vSize/2);
 }
 
+/**
+ @brief Destructor. Libera los recursos.
+ **/
 Scenario::~Scenario()
 {
     for (unsigned int i = 0; i < this->_vSize; i++)
         delete[] _scenario[i];
     delete[] _scenario;
+    
+    delete this->_sprite;
 }
 
 /**
  @brief Numero de casillas en horizontal del escenario.
+ @return Tamaño horizontal en casillas del esceario.
  **/
 unsigned int Scenario::horizontalSize()
 {
@@ -38,6 +48,7 @@ unsigned int Scenario::horizontalSize()
 
 /**
  @brief Numero de casillas en vertical.
+ @return Tamaño vertical en casillas del escenario.
  **/
 unsigned int Scenario::verticalSize()
 {
@@ -46,6 +57,7 @@ unsigned int Scenario::verticalSize()
 
 /**
  @brief Ancho total del escenario en pixeles.
+ @return    Tamaño horizontal en pixels.
  **/
 unsigned int Scenario::width()
 {
@@ -54,12 +66,17 @@ unsigned int Scenario::width()
 
 /**
  @brief Altura total del escenario en pixeles.
+ @return    Tamaño vertical en pixels.
  **/
 unsigned int Scenario::height()
 {
     return this->_vSize * this->_sprite->spriteHeight();
 }
 
+/**
+ @brief Acceso al sprite asociado.
+ @return    Referencia al sprite que usa el escenario para renderizarse.
+ **/
 SpriteSheet& Scenario::spriteSheet()
 {
     return *_sprite;
@@ -292,7 +309,10 @@ void Scenario::setCorridorSprite(unsigned int pos)
 }
 
 /**
- 
+ @brief Indica si la casilla es una pared.
+ @param x   Posicion X de la casilla.
+ @param y   Posicion Y de la casilla.
+ @return    true si la casilla es una pared, false si es un pasillo.
  **/
 bool Scenario::isWall(int x, int y)
 {
@@ -300,7 +320,10 @@ bool Scenario::isWall(int x, int y)
 }
 
 /**
- 
+ @brief Indica si la casilla es un pasillo.
+ @param x   Posicion X de la casilla.
+ @param y   Posicion Y de la casilla.
+ @return    true si la casilla es un pasillo, false si es una pared.
  **/
 bool Scenario::isCorridor(int x, int y)
 {
@@ -327,6 +350,11 @@ Vector2D Scenario::cell(int x, int y)
     return Vector2D(cellX, cellY);
 }
 
+/**
+ @brief Calcula que casilla del escenario corresponde con dichas coordenadas.
+ @param pos Posicion de la casilla.
+ @return    Celda que corresponde a las coordenadas x e y.
+ **/
 Vector2D Scenario::cell(Vector2D pos)
 {
     return this->cell(pos.x(), pos.y());
@@ -337,9 +365,6 @@ Vector2D Scenario::cell(Vector2D pos)
  **/
 Vector2D Scenario::cellPosition(unsigned int x, unsigned int y)
 {
-//    unsigned int posX = x * (float)(this->_position.x() + (float)(this->_sprite->spriteWidth() * this->_vSize)/(float)2)/(float)this->_vSize;
-//    unsigned int posY = y * (float)(this->_position.y() + (float)(this->_sprite->spriteHeight() * this->_hSize)/(float)2)/(float)this->_hSize;
-
     int posX = (this->_position.x() + x * this->_sprite->spriteWidth()) - (this->_hSize * this->_sprite->spriteWidth() / 2);
     int posY = (this->_position.y() + y * this->_sprite->spriteHeight()) - (this->_vSize * this->_sprite->spriteHeight() / 2);
     
@@ -347,7 +372,9 @@ Vector2D Scenario::cellPosition(unsigned int x, unsigned int y)
 }
 
 /**
- 
+ @brief Comprueba si un objeto pasado colisiona con alguna de las paredes.
+ @param object  Objeto con el que comprobar la colisión.
+ @return        true si el objeto colisiona con alguna pared, false si no colisiona con ninguno.
  **/
 bool Scenario::collides(Entity &object)
 {
@@ -360,11 +387,19 @@ bool Scenario::collides(Entity &object)
     return false;
 }
 
+/**
+ @brief Casilla donde aparece el jugador.
+ @return Vector con la posicion en casillas donde aparece el jugador.
+ **/
 Vector2D Scenario::playerSpawningCell()
 {
     return this->_playerSpawningCell;
 }
 
+/**
+ @brief Posicion donde aparece el jugador.
+ @return Vector con la posicion en pixeles donde aparece el jugador.
+ **/
 Vector2D Scenario::playerSpawningPosition()
 {
     unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
@@ -376,6 +411,10 @@ Vector2D Scenario::playerSpawningPosition()
     return Vector2D(posX, posY);
 }
 
+/**
+ @brief Posicion donde aparecen los enemigos.
+ @return Vector con la posicion en pixeles donde aparecen los enemigos.
+ **/
 Vector2D Scenario::enemySpawningPosition()
 {
     unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
@@ -387,6 +426,9 @@ Vector2D Scenario::enemySpawningPosition()
     return Vector2D(posX, posY);
 }
 
+/**
+ @brief Asigna una celda aleatoria donde aparecerá el jugador.
+ **/
 void Scenario::setRandomPlayerSpawningCell()
 {
     int posX, posY;
@@ -410,34 +452,6 @@ void Scenario::createCollisionBoxes()
     unsigned int cellHeight = this->_sprite->spriteHeight();
     unsigned int origX = this->_position.x() - (this->_sprite->spriteWidth() * this->_hSize)/2;
     unsigned int origY = this->_position.y() - (this->_sprite->spriteHeight() * this->_vSize)/2;
-    
-//    unsigned int cellX = 0;
-//    unsigned int boxX = origX;
-//    unsigned int boxY = origY;
-//    unsigned int boxWidth = 0;
-//    unsigned int boxHeight = cellHeight;    // Este no varia
-//
-//    for (int cellY = 0; cellY < this->_vSize; cellY++) {
-//        boxX = origX;
-//        cellX = 0;
-//        boxWidth = 0;
-//        while (cellX < this->_hSize) {
-//            while (cellX < this->_hSize && this->_scenario[cellX][cellY] == WALL) {
-//                boxWidth += cellWidth;
-//                cellX++;
-//            }
-//            pos = new Vector2D(boxX, boxY);
-//            this->_collisionBoxesPos.push_back(*pos);
-//            box = new CollisionBox(this->_collisionBoxesPos.back(),boxWidth, boxHeight);
-//            this->_collisionBoxes.push_back(*box);
-//            
-//            boxWidth = 0;
-//            cellX++;
-//        }
-//        boxY += cellHeight;
-//    }
-    
-    // Modo bruto
     
     for (int i = 0; i < this->_hSize; i++) {
         for (int j = 0; j < this->_vSize; j++) {
@@ -492,7 +506,10 @@ void Scenario::render(SDL_Surface *screen, bool showDebugGraphics)
 }
 
 /**
- 
+ @brief Direcciones en las que se puede ir sin colisionar con una pared.
+ @param posX    Coordenada X en pixels de la posicion.
+ @param posY    Coordenada Y en pixels de la posicion.
+ @return        Vector con las direcciones en las que se puede ir desde la actual sin colisionar con una pared.
  **/
 std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
 {
@@ -501,7 +518,6 @@ std::vector<Vector2D> Scenario::avalibleDirections(int posX, int posY)
     
     int x = currentCell.x();
     int y = currentCell.y();
-    //std::cout<<"current cell: x = "<<x<<" y = "<<y<<std::endl;
     
     // Celda de la derecha
     if (x + 1 < this->_hSize) {
@@ -565,7 +581,8 @@ std::list<Vector2D> Scenario::corridorCells()
 }
 
 /**
- 
+ @brief Posiciones en pixels de todas las casillas que son pasillos.
+ @return    Lista conteniendo las coordenadas de las casillas que son pasillo.
  **/
 std::list<Vector2D> Scenario::corridorPositions()
 {
@@ -585,6 +602,10 @@ std::list<Vector2D> Scenario::corridorPositions()
     return cells;
 }
 
+/**
+ @brief Posiciones en pixels de todas las casillas que son pasillos sin tener en cuenta la casa de los fantasmas.
+ @return    Lista conteniendo las coordenadas de las casillas que son pasillo.
+ **/
 std::list<Vector2D> Scenario::corridorPositionsWithoutGhostHouse()
 {
     std::list<Vector2D> cells;

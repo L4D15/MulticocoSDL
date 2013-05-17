@@ -1,0 +1,102 @@
+\hypertarget{class_entity}{\section{Entity Class Reference}
+\label{class_entity}\index{Entity@{Entity}}
+}
+
+
+{\ttfamily \#include $<$entity.\-h$>$}
+
+Inheritance diagram for Entity\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_entity}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_entity_a93306ecdce9446da37560f5f2b5307c0}{void {\bfseries set\-Position} (float x, float y)}\label{class_entity_a93306ecdce9446da37560f5f2b5307c0}
+
+\item 
+\hypertarget{class_entity_a4a3db66e94bc72170bcda8b12c8459e5}{void {\bfseries set\-Position} (\hyperlink{class_vector2_d}{Vector2\-D} v)}\label{class_entity_a4a3db66e94bc72170bcda8b12c8459e5}
+
+\item 
+\hypertarget{class_entity_a9e3c0cf949f611403d3166554a47031d}{void {\bfseries set\-Direction} (float x, float y)}\label{class_entity_a9e3c0cf949f611403d3166554a47031d}
+
+\item 
+\hypertarget{class_entity_a881f23d8c1d5eed41935540af9a84222}{void {\bfseries set\-Direction} (\hyperlink{class_vector2_d}{Vector2\-D} \&v)}\label{class_entity_a881f23d8c1d5eed41935540af9a84222}
+
+\item 
+\hypertarget{class_entity_a10c4181924679903a918174e7772abf9}{void {\bfseries set\-Visible} (bool v)}\label{class_entity_a10c4181924679903a918174e7772abf9}
+
+\item 
+\hypertarget{class_entity_af0dc11f1a253b5c7c1bb07e76f8bc261}{void {\bfseries set\-Moving} (bool m)}\label{class_entity_af0dc11f1a253b5c7c1bb07e76f8bc261}
+
+\item 
+\hypertarget{class_entity_ae405331a64288b8fb4bfe05c66d58ace}{void {\bfseries set\-Sprite\-Sheet} (const char $\ast$file, int w, int h, int $\ast$animations, int n\-Animations)}\label{class_entity_ae405331a64288b8fb4bfe05c66d58ace}
+
+\item 
+\hypertarget{class_entity_ae83091bf9d06a5257cf3f571470383e5}{\hyperlink{class_sprite_sheet}{Sprite\-Sheet} \& {\bfseries sprite\-Sheet} ()}\label{class_entity_ae83091bf9d06a5257cf3f571470383e5}
+
+\item 
+\hypertarget{class_entity_a9f0c2c230382d8f4f19f6da86beb6384}{\hyperlink{class_collision_box}{Collision\-Box} \& {\bfseries collision\-Box} ()}\label{class_entity_a9f0c2c230382d8f4f19f6da86beb6384}
+
+\item 
+\hypertarget{class_entity_ad1e7b83b2f35e78e84b1705937309fe9}{void {\bfseries set\-Animation} (const char $\ast$name)}\label{class_entity_ad1e7b83b2f35e78e84b1705937309fe9}
+
+\item 
+\hypertarget{class_entity_a098d827982916bd7b3d13f6858c520d7}{bool {\bfseries is\-Visible} ()}\label{class_entity_a098d827982916bd7b3d13f6858c520d7}
+
+\item 
+\hypertarget{class_entity_aa208f77af13f749357d0151fdb5f8b34}{bool {\bfseries is\-Moving} ()}\label{class_entity_aa208f77af13f749357d0151fdb5f8b34}
+
+\item 
+\hypertarget{class_entity_a1183593ad58f48225058ba545880e834}{\hyperlink{class_vector2_d}{Vector2\-D} \& {\bfseries position} ()}\label{class_entity_a1183593ad58f48225058ba545880e834}
+
+\item 
+\hypertarget{class_entity_a4d0d62c67cdf86694c45333608922eb0}{\hyperlink{class_vector2_d}{Vector2\-D} \& {\bfseries direction} ()}\label{class_entity_a4d0d62c67cdf86694c45333608922eb0}
+
+\item 
+\hypertarget{class_entity_aed73e98b980b85833428c935cc1c69f8}{virtual void {\bfseries update} ()}\label{class_entity_aed73e98b980b85833428c935cc1c69f8}
+
+\item 
+\hypertarget{class_entity_ac1f12a5f7922624ee7ced15be3b884de}{void {\bfseries move} ()}\label{class_entity_ac1f12a5f7922624ee7ced15be3b884de}
+
+\item 
+\hypertarget{class_entity_a2fc98106ec767b2d2a6fbd9377f8750f}{void {\bfseries move\-To\-Previous\-Position} ()}\label{class_entity_a2fc98106ec767b2d2a6fbd9377f8750f}
+
+\item 
+\hypertarget{class_entity_a7fef3cd0e1983019e27047d2cceb0f1d}{void {\bfseries render} (S\-D\-L\-\_\-\-Surface $\ast$screen, bool show\-Debug\-Graphics=false)}\label{class_entity_a7fef3cd0e1983019e27047d2cceb0f1d}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_entity_a032fc6b59ce0125aaa590ba45a0e160b}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries \-\_\-position}}\label{class_entity_a032fc6b59ce0125aaa590ba45a0e160b}
+
+\item 
+\hypertarget{class_entity_ad4c3e1eec02d5d7417a22e6f759fa249}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries \-\_\-previous\-Position}}\label{class_entity_ad4c3e1eec02d5d7417a22e6f759fa249}
+
+\item 
+\hypertarget{class_entity_a87e3e972e084ed0900466e47fd1c8d99}{\hyperlink{class_vector2_d}{Vector2\-D} {\bfseries \-\_\-direction}}\label{class_entity_a87e3e972e084ed0900466e47fd1c8d99}
+
+\item 
+\hypertarget{class_entity_ae227fafdb344eb23c136552b1c57910c}{bool {\bfseries \-\_\-visible}}\label{class_entity_ae227fafdb344eb23c136552b1c57910c}
+
+\item 
+\hypertarget{class_entity_a2a1cfc1dc1c719eb49a9b7aa3922b981}{bool {\bfseries \-\_\-moving}}\label{class_entity_a2a1cfc1dc1c719eb49a9b7aa3922b981}
+
+\item 
+\hypertarget{class_entity_ac27b197182854d0af144dcbbc54d7151}{\hyperlink{class_sprite_sheet}{Sprite\-Sheet} $\ast$ {\bfseries \-\_\-sprite}}\label{class_entity_ac27b197182854d0af144dcbbc54d7151}
+
+\item 
+\hypertarget{class_entity_ad83773979b654d923fca4b83f805368d}{\hyperlink{class_collision_box}{Collision\-Box} $\ast$ {\bfseries \-\_\-collision\-Box}}\label{class_entity_ad83773979b654d923fca4b83f805368d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa cualquier objeto que se muestra en el juego, desde Pacman a las monedas. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/entity.\-h\end{DoxyCompactItemize}

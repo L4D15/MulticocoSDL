@@ -1,0 +1,171 @@
+\hypertarget{class_sprite_sheet}{\section{Sprite\-Sheet Class Reference}
+\label{class_sprite_sheet}\index{Sprite\-Sheet@{Sprite\-Sheet}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sprite_sheet_a7271cbaa0719a4d5675ee8e94f85aa56}{Sprite\-Sheet} (const char $\ast$img, int w, int h, int $\ast$animations, int n\-Animations)
+\begin{DoxyCompactList}\small\item\em Constructor de la plantilla de sprites. \end{DoxyCompactList}\item 
+\hypertarget{class_sprite_sheet_a54a4dee6f85eb69fa699477764377d70}{unsigned int \hyperlink{class_sprite_sheet_a54a4dee6f85eb69fa699477764377d70}{sprite\-Width} ()}\label{class_sprite_sheet_a54a4dee6f85eb69fa699477764377d70}
+
+\begin{DoxyCompactList}\small\item\em Ancho de cada frame individual del sprite. \end{DoxyCompactList}\item 
+\hypertarget{class_sprite_sheet_add41556b6575aa5ad6a4fedfa9b8e5d6}{unsigned int \hyperlink{class_sprite_sheet_add41556b6575aa5ad6a4fedfa9b8e5d6}{sprite\-Height} ()}\label{class_sprite_sheet_add41556b6575aa5ad6a4fedfa9b8e5d6}
+
+\begin{DoxyCompactList}\small\item\em Alto de cada frame individual del sprite. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_sheet_a807184db56f47aca2d7a603fd82604b5}{bind\-Animation} (unsigned int pos, const char $\ast$name)
+\begin{DoxyCompactList}\small\item\em Vincula un nombre de animacion con una fila de la plantilla de animaciones. De esta forma es mas sencillo trabajar con distintas animaciones sin tener que saber el orden en que se encuentran en la plantilla. Por ejemplo, la animacion de moverse hacia la derecha esta en la primera fila de la plantilla, por lo que podemos vincular la posicion 0 de la plantilla con el nombre de animacion 'R\-I\-G\-H\-T' mediante blin\-Animation(0,\char`\"{}\-R\-I\-G\-H\-T\char`\"{}). De esta forma nos podremos referir a dicha animacion mas adelante mediante el nombre \char`\"{}\-R\-I\-G\-H\-T\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_sheet_aa4279b765a0c354cd748b522755ca540}{set\-Animation} (const std\-::string name)
+\begin{DoxyCompactList}\small\item\em Cambia la animacion actual que se renderiza. \end{DoxyCompactList}\item 
+\hypertarget{class_sprite_sheet_ae3bf1993f8494d18f9921d7428f4609c}{void \hyperlink{class_sprite_sheet_ae3bf1993f8494d18f9921d7428f4609c}{next\-Frame} ()}\label{class_sprite_sheet_ae3bf1993f8494d18f9921d7428f4609c}
+
+\begin{DoxyCompactList}\small\item\em Pasa al siguiente frame de la animacion actual (si el frameskip lo permite). \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_sheet_aef9b39ad26d9558fb74da2fb5b38b468}{set\-Frame\-Skip} (const std\-::string name, unsigned int value)
+\begin{DoxyCompactList}\small\item\em Ajusta el frame skip de una animacion. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_sheet_a875c5f4942c40f42cc8e68a00cce0c07}{set\-Frame\-Skip} (const unsigned int value)
+\begin{DoxyCompactList}\small\item\em Ajusta el frameskip de todas las animaciones. \end{DoxyCompactList}\item 
+void \hyperlink{class_sprite_sheet_ac2f0e4436e15fb7c8d297476f0bfeeb0}{render} (S\-D\-L\-\_\-\-Surface $\ast$screen, \hyperlink{class_vector2_d}{Vector2\-D} \&pos)
+\begin{DoxyCompactList}\small\item\em Dibuja la imagen en la posicion indicada. \end{DoxyCompactList}\item 
+\hypertarget{class_sprite_sheet_a40ed270049d05bde987ad9b863976be6}{void \hyperlink{class_sprite_sheet_a40ed270049d05bde987ad9b863976be6}{pause} ()}\label{class_sprite_sheet_a40ed270049d05bde987ad9b863976be6}
+
+\begin{DoxyCompactList}\small\item\em Pausa la animacion actual. \end{DoxyCompactList}\item 
+\hypertarget{class_sprite_sheet_a3ac97acde1d03b7cff130b0dda49904f}{void \hyperlink{class_sprite_sheet_a3ac97acde1d03b7cff130b0dda49904f}{resume} ()}\label{class_sprite_sheet_a3ac97acde1d03b7cff130b0dda49904f}
+
+\begin{DoxyCompactList}\small\item\em Reanuda la animacion actual. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_sprite_sheet_a7271cbaa0719a4d5675ee8e94f85aa56}{\index{Sprite\-Sheet@{Sprite\-Sheet}!Sprite\-Sheet@{Sprite\-Sheet}}
+\index{Sprite\-Sheet@{Sprite\-Sheet}!SpriteSheet@{Sprite\-Sheet}}
+\subsubsection[{Sprite\-Sheet}]{\setlength{\rightskip}{0pt plus 5cm}Sprite\-Sheet\-::\-Sprite\-Sheet (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{img, }
+\item[{int}]{w, }
+\item[{int}]{h, }
+\item[{int $\ast$}]{animations, }
+\item[{int}]{n\-Animations}
+\end{DoxyParamCaption}
+)}}\label{class_sprite_sheet_a7271cbaa0719a4d5675ee8e94f85aa56}
+
+
+Constructor de la plantilla de sprites. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em img} & Ruta hasta el archivo de plantilla. \\
+\hline
+{\em w} & Ancho individual de cada elemento de la plantilla. \\
+\hline
+{\em h} & Alto individual de cada elemento de la plantilla, que coincide con el alto de cada fila. \\
+\hline
+{\em animations} & Vector con el numero de frames de cada animacion (columnas de cada fila). \\
+\hline
+{\em n\-Animations} & Numero de animaciones distintas que tiene la plantilla (numero de filas). \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_sprite_sheet_a807184db56f47aca2d7a603fd82604b5}{\index{Sprite\-Sheet@{Sprite\-Sheet}!bind\-Animation@{bind\-Animation}}
+\index{bind\-Animation@{bind\-Animation}!SpriteSheet@{Sprite\-Sheet}}
+\subsubsection[{bind\-Animation}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite\-Sheet\-::bind\-Animation (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos, }
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_sprite_sheet_a807184db56f47aca2d7a603fd82604b5}
+
+
+Vincula un nombre de animacion con una fila de la plantilla de animaciones. De esta forma es mas sencillo trabajar con distintas animaciones sin tener que saber el orden en que se encuentran en la plantilla. Por ejemplo, la animacion de moverse hacia la derecha esta en la primera fila de la plantilla, por lo que podemos vincular la posicion 0 de la plantilla con el nombre de animacion 'R\-I\-G\-H\-T' mediante blin\-Animation(0,\char`\"{}\-R\-I\-G\-H\-T\char`\"{}). De esta forma nos podremos referir a dicha animacion mas adelante mediante el nombre \char`\"{}\-R\-I\-G\-H\-T\char`\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Fila de la plantilla a vincular. \\
+\hline
+{\em name} & Nombre de animacion que queremos vincular con la fila. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+Si se vincular una animacion ya vinculada anteriormente, el anterior nombre deja de ser valido. 
+\end{DoxyPostcond}
+\hypertarget{class_sprite_sheet_ac2f0e4436e15fb7c8d297476f0bfeeb0}{\index{Sprite\-Sheet@{Sprite\-Sheet}!render@{render}}
+\index{render@{render}!SpriteSheet@{Sprite\-Sheet}}
+\subsubsection[{render}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite\-Sheet\-::render (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-Surface $\ast$}]{screen, }
+\item[{{\bf Vector2\-D} \&}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_sprite_sheet_ac2f0e4436e15fb7c8d297476f0bfeeb0}
+
+
+Dibuja la imagen en la posicion indicada. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em screen} & Ventana en la que dibujar la imagen. \\
+\hline
+{\em pos} & Posicion en la ventana donde dibujar. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_sprite_sheet_aa4279b765a0c354cd748b522755ca540}{\index{Sprite\-Sheet@{Sprite\-Sheet}!set\-Animation@{set\-Animation}}
+\index{set\-Animation@{set\-Animation}!SpriteSheet@{Sprite\-Sheet}}
+\subsubsection[{set\-Animation}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite\-Sheet\-::set\-Animation (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{name}
+\end{DoxyParamCaption}
+)}}\label{class_sprite_sheet_aa4279b765a0c354cd748b522755ca540}
+
+
+Cambia la animacion actual que se renderiza. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Nombre de la nueva animacion a renderizar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+La animacion debe estar vinculada con una fila de la plantilla mediante bind\-Animation(...). 
+\end{DoxyPrecond}
+\hypertarget{class_sprite_sheet_aef9b39ad26d9558fb74da2fb5b38b468}{\index{Sprite\-Sheet@{Sprite\-Sheet}!set\-Frame\-Skip@{set\-Frame\-Skip}}
+\index{set\-Frame\-Skip@{set\-Frame\-Skip}!SpriteSheet@{Sprite\-Sheet}}
+\subsubsection[{set\-Frame\-Skip}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite\-Sheet\-::set\-Frame\-Skip (
+\begin{DoxyParamCaption}
+\item[{const std\-::string}]{name, }
+\item[{unsigned int}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_sprite_sheet_aef9b39ad26d9558fb74da2fb5b38b468}
+
+
+Ajusta el frame skip de una animacion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Nombre de la animacion. \\
+\hline
+{\em value} & Cantidad de actualizaciones a ignorar antes de pasar al siguiente frame de la animacion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+La animacion debe estar vinculada con una fila de la plantilla mediante bind\-Animation(...). 
+\end{DoxyPrecond}
+\hypertarget{class_sprite_sheet_a875c5f4942c40f42cc8e68a00cce0c07}{\index{Sprite\-Sheet@{Sprite\-Sheet}!set\-Frame\-Skip@{set\-Frame\-Skip}}
+\index{set\-Frame\-Skip@{set\-Frame\-Skip}!SpriteSheet@{Sprite\-Sheet}}
+\subsubsection[{set\-Frame\-Skip}]{\setlength{\rightskip}{0pt plus 5cm}void Sprite\-Sheet\-::set\-Frame\-Skip (
+\begin{DoxyParamCaption}
+\item[{const unsigned int}]{value}
+\end{DoxyParamCaption}
+)}}\label{class_sprite_sheet_a875c5f4942c40f42cc8e68a00cce0c07}
+
+
+Ajusta el frameskip de todas las animaciones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Cantidad de actualzaciones a ignorar antes de pasar al siguiente frame de la animacion. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/spritesheet.\-h\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/spritesheet.\-cpp\end{DoxyCompactItemize}

@@ -1,0 +1,100 @@
+\hypertarget{class_window}{\section{Window Class Reference}
+\label{class_window}\index{Window@{Window}}
+}
+
+
+Muestra y controla el juego.  
+
+
+
+
+{\ttfamily \#include $<$window.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_window_a110bc154af59208fbf5cb0129d05969a}{Window} (int w, int h, string title)
+\begin{DoxyCompactList}\small\item\em Crea un contexto de renderización para el juego e inicializa la lógica de este. \end{DoxyCompactList}\item 
+\hyperlink{class_window_a245d821e6016fa1f6970ccbbedd635f6}{$\sim$\-Window} ()
+\begin{DoxyCompactList}\small\item\em Destructor de la clase. \end{DoxyCompactList}\item 
+void \hyperlink{class_window_a727b4389e46a6403a128a1e4604f45cd}{start\-Main\-Loop} ()
+\begin{DoxyCompactList}\small\item\em Inicia el bucle principal de la aplicación. \end{DoxyCompactList}\item 
+void \hyperlink{class_window_ab4195686ce0df358d615c9f6a7577b33}{set\-Full\-Screen} (bool full)
+\begin{DoxyCompactList}\small\item\em Cambia la visualización a pantalla completa o modo ventana. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Muestra y controla el juego. 
+
+Esta clase está encargada de crear la ventana que renderizará el juego así como de controlar la lógica de este. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_window_a110bc154af59208fbf5cb0129d05969a}{\index{Window@{Window}!Window@{Window}}
+\index{Window@{Window}!Window@{Window}}
+\subsubsection[{Window}]{\setlength{\rightskip}{0pt plus 5cm}Window\-::\-Window (
+\begin{DoxyParamCaption}
+\item[{int}]{w, }
+\item[{int}]{h, }
+\item[{string}]{title}
+\end{DoxyParamCaption}
+)}}\label{class_window_a110bc154af59208fbf5cb0129d05969a}
+
+
+Crea un contexto de renderización para el juego e inicializa la lógica de este. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & Ancho de la resolución de renderización. \\
+\hline
+{\em h} & Alto de la resolución de renderización. \\
+\hline
+{\em title} & Titulo de la ventana que renderiza el juego. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_window_a245d821e6016fa1f6970ccbbedd635f6}{\index{Window@{Window}!$\sim$\-Window@{$\sim$\-Window}}
+\index{$\sim$\-Window@{$\sim$\-Window}!Window@{Window}}
+\subsubsection[{$\sim$\-Window}]{\setlength{\rightskip}{0pt plus 5cm}Window\-::$\sim$\-Window (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_window_a245d821e6016fa1f6970ccbbedd635f6}
+
+
+Destructor de la clase. 
+
+Libera los recursos utilizados por la clase y indica a S\-D\-L y S\-D\-L\-\_\-\-Mixer que cierrer sus respectivos contextos. 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_window_ab4195686ce0df358d615c9f6a7577b33}{\index{Window@{Window}!set\-Full\-Screen@{set\-Full\-Screen}}
+\index{set\-Full\-Screen@{set\-Full\-Screen}!Window@{Window}}
+\subsubsection[{set\-Full\-Screen}]{\setlength{\rightskip}{0pt plus 5cm}void Window\-::set\-Full\-Screen (
+\begin{DoxyParamCaption}
+\item[{bool}]{full}
+\end{DoxyParamCaption}
+)}}\label{class_window_ab4195686ce0df358d615c9f6a7577b33}
+
+
+Cambia la visualización a pantalla completa o modo ventana. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em full} & true = Pantalla completa, false = Modo ventana. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_window_a727b4389e46a6403a128a1e4604f45cd}{\index{Window@{Window}!start\-Main\-Loop@{start\-Main\-Loop}}
+\index{start\-Main\-Loop@{start\-Main\-Loop}!Window@{Window}}
+\subsubsection[{start\-Main\-Loop}]{\setlength{\rightskip}{0pt plus 5cm}void Window\-::start\-Main\-Loop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_window_a727b4389e46a6403a128a1e4604f45cd}
+
+
+Inicia el bucle principal de la aplicación. 
+
+Esta función hace que la aplicación entre en el bucle principal de modo que el juego comienza a funcionar. También inicia la reproducción de la música. 
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/window.\-h\item 
+Multicoco\-S\-D\-L/\-Multicoco\-S\-D\-L/window.\-cpp\end{DoxyCompactItemize}
