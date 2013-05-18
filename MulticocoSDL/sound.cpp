@@ -28,7 +28,7 @@ bool Sound::play()
     } else {
         this->_channel = Mix_PlayChannel(-1, this->_sound, 0);
     }
-    
+
     return true;
 }
 

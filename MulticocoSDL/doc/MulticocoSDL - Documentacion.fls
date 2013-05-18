@@ -1,4 +1,4 @@
-PWD /Users/Ladis/Documents/MulticocoSDL
+PWD /Users/Ladis/Documents/MulticocoSDL/MulticocoSDL/doc
 INPUT /usr/local/texlive/2012/texmf.cnf
 INPUT /usr/local/texlive/2012/texmf/web2c/texmf.cnf
 INPUT /usr/local/texlive/2012/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -129,6 +129,9 @@ OUTPUT MulticocoSDL - Documentacion.toc
 INPUT /usr/local/texlive/2012/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT uml_clases.png
+INPUT ./uml_clases.png
+INPUT ./uml_clases.png
 OUTPUT MulticocoSDL - Documentacion.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
@@ -145,9 +148,9 @@ INPUT MulticocoSDL - Documentacion.out.pyg
 OUTPUT MulticocoSDL - Documentacion.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
-INPUT MulticocoSDL/img/sprite_example.png
-INPUT ./MulticocoSDL/img/sprite_example.png
-INPUT ./MulticocoSDL/img/sprite_example.png
+INPUT sprite_example.png
+INPUT ./sprite_example.png
+INPUT ./sprite_example.png
 OUTPUT MulticocoSDL - Documentacion.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
@@ -160,9 +163,45 @@ INPUT MulticocoSDL - Documentacion.out.pyg
 OUTPUT MulticocoSDL - Documentacion.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
-INPUT MulticocoSDL/img/pacman_example.png
-INPUT ./MulticocoSDL/img/pacman_example.png
-INPUT ./MulticocoSDL/img/pacman_example.png
+INPUT pacman_example.png
+INPUT ./pacman_example.png
+INPUT ./pacman_example.png
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT animation.png
+INPUT ./animation.png
+INPUT ./animation.png
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+OUTPUT MulticocoSDL - Documentacion.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT MulticocoSDL - Documentacion.out.pyg
+INPUT boxes.png
+INPUT ./boxes.png
+INPUT ./boxes.png
 OUTPUT MulticocoSDL - Documentacion.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
 INPUT MulticocoSDL - Documentacion.out.pyg
@@ -170,7 +209,9 @@ INPUT MulticocoSDL - Documentacion.aux
 INPUT ./MulticocoSDL - Documentacion.out
 INPUT ./MulticocoSDL - Documentacion.out
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb
+INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb
+INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb

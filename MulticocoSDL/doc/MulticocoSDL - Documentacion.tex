@@ -101,6 +101,18 @@ Para m\'as información sobre Simple DirecMedia Layer: \\
 
 %---------------------------------------------
 
+%-------------------CLASES--------------------
+\section{Clases}
+De forma resumida presentamos aqu\'i un esquema de c\'omo se relacionan las clases creadas en el proyecto. M\'as adelante presentamos una descripci\'on m\'as detallada de cada clase en relaci\'on a un area multimedia.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=400]{uml_clases.png}
+	\caption{Clases del proyecto}
+\end{figure}
+
+%---------------------------------------------
+
 %-------------------IMAGEN--------------------
 \newpage
 \section{Imagen}
@@ -191,7 +203,7 @@ Window::~Window()
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics{MulticocoSDL/img/sprite_example.png}
+			\includegraphics{sprite_example.png}
 			\caption{Ejemplo de Sprite}
 		\end{figure}
 
@@ -301,7 +313,7 @@ void Sprite::nextFrame()
 
 		\begin{figure}
 			\centering
-			\includegraphics{MulticocoSDL/img/pacman_example.png}
+			\includegraphics{pacman_example.png}
 			\caption{Spritesheet de Pacman}
 		\end{figure}
 
@@ -325,7 +337,6 @@ SpriteSheet::SpriteSheet(const char* img,
         origin.x = 0;
         origin.y = i * h;
         origin.w = w * animations[i];   
-
         // Dibujamos parte del SpriteSheet
         SDL_BlitSurface(spriteSheet, &origin, currentSprite, NULL);
 
@@ -338,22 +349,113 @@ SpriteSheet::SpriteSheet(const char* img,
 
 		De esta forma hemos dividido la imagen en Sprites que corresponden a cada una de las filas (animaciones) del SpriteSheet.
 
-		\subsubection{Vincular animaciones}
-			Tenemos las distintas animaciones del SpriteSheet separadas pero, \textquestiondown C\'omo elegimos qu\'e animaci\'on queremos reproducir? SpriteSheet guarda un \'indice con la posici\'on en la colecci\'on donde se encuentra la posici\'on actual, que ser\'a la que se dibuje si llamamos a SpriteSheet::render(). Dado que este \'indice es un valor num\'erico, debemos conocer la posici\'on dentro de la colecci\'on de la animaci\'on que queremos reproducir. Esto implica que cambiar la animaci\'on actual requerir\'ia saber qu\'e fila corresponde a la animaci\'on en cada SpriteSheet distinto, lo cual puede ser poco intuitivo en cuanto comencemos a trabajar con SpriteSheets distintos.
+		\subsubsection{Vincular animaciones}
+			Tenemos las distintas animaciones del SpriteSheet separadas pero, \textquestiondown C\'omo elegimos qu\'e animaci\'on queremos reproducir? SpriteSheet guarda un \'indice con la posici\'on en la colecci\'on donde se encuentra la animaci\'on actual, que ser\'a la que se dibuje si llamamos a SpriteSheet::render(). Dado que este \'indice es un valor num\'erico, debemos conocer la posici\'on dentro de la colecci\'on de la animaci\'on que queremos reproducir. Esto implica que cambiar la animaci\'on actual requerir\'ia saber qu\'e fila corresponde a la animaci\'on en cada SpriteSheet distinto, lo cual puede ser poco intuitivo en cuanto comencemos a trabajar con SpriteSheets distintos.
 
-			Para resolver este problema la clase SpriteSheet
+			Para resolver este problema la clase SpriteSheet utiliza un mecanismo de vinculaci\'on mediante nombre, de forma que podemos vincular una posici\'on en la colecci\'on con una cadena de caracteres.
+
+			\begin{figure}[h]
+				\centering
+				\includegraphics{animation.png}
+				\caption{Posicion de animaciones}
+			\end{figure}
+
+			De forma rudimentaria, si quisieramos cambiar la animacion actual de sprite deber\'amos hacer lo siguiente:
+
+			\begin{minted}[frame=lines, samepage=true]{cpp}
+sprite.setAnimation(0);	// Animacion hacia arriba
+sprite.setAnimation(3);	// Animacion hacia la izquierda
+			\end{minted}
+
+			Una forma m\'as sencilla de trabajar con las animaciones es utilizando el m\'etodo bindAnimation() de la clase SpriteSheet de la siguiente forma:
+
+			\begin{minted}[frame=lines, samepage=true]{cpp}
+SpriteSheet sprite = new SpriteSheet("pacman.bmp");
+
+sprite.bindAnimation(0,"UP");    // Vincula la animacion 0 con el nombre UP
+sprite.bindAnimation(1,"RIGHT"); // Vincula la animacion 1 con el nombre RIGHT
+sprite.bindAnimation(2,"DOWN");  // Vincula la animacion 2 con el nombre DOWN
+sprite.bindAnimation(3,"LEFT");  // Vincula la animacion 3 con el nombre LEFT
+sprite.bindAnimation(4,"DIE");   // Vincula la animacion 4 con el nombre DIE
+
+sprite.setAnimation("RIGHT");    // Cambia la animacion a la vinculada con RIGHT
+			\end{minted}
+
+			Una vez la vinculaci\'on se ha hecho se puede trabajar con las animaciones mediante su nombre en lugar de su posici\'on.
+
+		\subsubsection{Velocidad de animaci\'on}
+
+			La clase SpriteSheet tambi\'en nos permite ajustar la velocidad a la que se reproducen las animaciones. Por ejemplo, en el SpriteSheet de pacman anterior, la animaci\'on de la muerte se reproduce m\'as r\'apido que el resto. Para ello haremos uso de distintos valores de frame skip de la siguiente manera (supondremos que se han vinculado las animaciones usando el c\'odigo anterior):
+			\begin{minted}[frame=lines, samepage=true]{cpp}
+sprite.setFrameSkip(15);      // Aplica el frame skip a todas
+sprite.setFrameSkip("DIE",5); // Frame skip especifico a DIE
+			\end{minted}
+
+			Como vemos tenemos dos m\'etodos, uno para aplicar un valor global y otro para animaciones espec\'ificas. Destacar que cuanto mayor sea el valor de frame skip m\'as lenta ser\'a la animaci\'on, ya que el valor de frame skip indica cuantos renderizados tarda el sprite en pasar al siguiente frame de la animaci\'on.
 	%-----------------------------------------
 %---------------------------------------------
 
 %-------------------AUDIO---------------------
 \newpage
 \section{Audio}
+	Nuestra aplicaci\'on necesita reproducir sonidos para cuando el Pacman consigue una de las monedas y tambi\'en para reproducir una canci\'on de fondo. Para ello encapsularemos las funcionales de la biblioteca SDL\_Mixer en dos clases distintas, una para sonidos y otra para m\'usica, ya que SDL\_Mixer trabaja de forma distinta los sonidos y la m\'usica.
 	%---------------SOUND---------------------
 	\subsection{Sound}
+		A la hora de reproducir un sonido con SDL\_Mixer este le asigna un canal en el que reproducirse, de forma que a la hora de comprobar si el sonido se est\'a reproduciendo o no lo haremos sobre el canal. Por ello los atributos de la clase ser\'an:
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+Mix_Chunk*    _sound;
+int           _channel;
+		\end{minted}
 
+		Donde en \_sound guardaremos la informaci\'on sobre el archivo de sonido a reproducir y en \_channel el canal donde se reproduce el sonido.
+
+		Para cargar un sonido desde un archivo hacemos uso de la siguiente llamada desde el mismo constructor:
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+this->_sound = Mix_LoadWAV("sonido.wav");
+		\end{minted}
+
+		Una vez cargada la informaci\'on del archivo podemos reproducirlo mediante el m\'etodo play:
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+bool Sound::play()
+{
+    int isPlaying;
+    // Comprobar si se esta reproduciendo algo en el canal
+    isPlaying = Mix_Playing(this->_channel);
+    
+    if (isPlaying != 0) {	// Si no es 0, ya se esta reproduciendo
+        return false;
+    } else {
+        this->_channel = Mix_PlayChannel(-1, this->_sound, 0);
+    }
+    return true;
+}
+		\end{minted}
+
+		Los atributos que se le pasan son -1 para que escojas el canal en el que reproducir autom\'aticamente, la informaci\'on del sonido y por \'ultimo el n\'umero de veces que queremos que se repita el sonido (en este caso no queremos que se repita). Si quisieramos que se reproduciera en un bucle tan solo habr\'ia que pasarle -1.
 	%-----------------------------------------
 	%---------------MUSIC---------------------
 	\subsection{Music}
+		En el caso de la m\'usica funciona de forma similar a los sonidos pero SDL trabaja con ella de forma distinta, adem\'as de poder reproducir solo un canal a la vez, por lo que ya no necesitamos guardar informaci\'on sobre el canal, por lo que los atributos ser\'an tan solo:
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+Mix_Music*    _music;
+		\end{minted}
+
+		Y cargaremos la inforaci\'on desde el constructor como sigue:
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+this->_music = Mix_LoadMUS("musica.ogg");
+		\end{minted}
+
+		Esta vez queremos que la m\'usica se reproduzca en bucle, por lo que usaremos el siguiente m\'etodo:
+		\begin{minted}[frame=lines, samepage=true]{cpp}
+void Music::playLoop()
+{
+    if (Mix_PlayingMusic()) {
+        std::cout << "La musica ya se esta reproduciendo" << std::endl;
+    } else {
+        Mix_PlayMusic(this->_music, -1);
+    }
+}
+		\end{minted}
 
 	%-----------------------------------------
 %---------------------------------------------
@@ -361,37 +463,62 @@ SpriteSheet::SpriteSheet(const char* img,
 %-------------------LÓGICA--------------------
 \newpage
 \section{L\'ogica}
-	%---------------VECTOR2D------------------
-	\subsection{Vector2D}
-
-	%-----------------------------------------
+	Aqu\'i podr\'iamos hablar sobre varias clases como Entity y Enemy, pero se trata solo de modelos que contienen la posici\'on de cada objeto y m\'etodos para trabajar con ellos; moverlos, asignarles un sprite etc. Una clase que s\'i es interesante comentar es CollisionBox, que se usa ampliamente para comprobar colisiones entre objetos del juego.
 	%---------------COLLISIONBOX--------------
 	\subsection{CollisionBox}
+	Para poder hacer que el jugador solo se pueda mover por los pasillos del escenario, sin poder atravesar los muros, o que el jugador recolecte las monedas, necesitamos una forma de saber cuando dos elementos chocan.
 
-	%-----------------------------------------
+	Se pueden implementar varios sistemas, siendo uno de los m\'as sencillos el que usa esferas que envuelven los elementos y que comprueba si dos esferas colisionan mediante la distancia entre las dos esferas. En nuestro caso hemos escogido el uso de rectángulos, ya que es el siguiente sistema más sencillo, se adapta bien a la forma del escenario y es m\'as interesante de comentar.
 
+	Nuestras cajas de colisi\'on estar\'an relacionadas con una posici\'on concreta que se especifica cuando se crean, de forma que la caja siga a esa posici\'on cuando esta cambien. De esta forma no necesitamos actualizar a mano la posici\'on de la caja.
+
+	A la hora de comprobar si una caja colisiona con otra lo que haremos ser\'a buscar los casos en los que sabemos que no est\'an colisionando, de forma que en cuanto se cumpla uno de ellos se deja devuelve false y no hay m\'as que comprobar. De esta forma ahorramos muchos c\'alculos por frame teniendo en cuenta que se realizan muchas comprobaciones de colisiones cada frame.
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=250]{boxes.png}
+		\caption{Cajas de colisi\'on}
+	\end{figure}
+
+	B\'asicamente lo que haremos es, teniendo las dos cajas de la figura, A y B, buscar las situaciones que con una sola comprobaci\'on nos permitan descartar la colisi\'on, esto es:
+
+	\begin{enumerate}
+		\item A\_RIGHT \leq B\_LEFT .
+
+		\item A\_TOP \leq B\_BOTTOM .
+
+		\item A\_BOTTOM \geq B\_TOP .
+
+		\item A\_LEFT \geq B\_RIGHT .
+	\end{enumerate}
+
+	En c\'odigo se traduce como:
+	\begin{minted}[frame=lines, samepage=true]{cpp}
+bool CollisionBox::collides(CollisionBox &other)
+{    
+    if (!((this->_boxPosition.x() + this->_width) >= other._boxPosition.x())) {
+        return false;
+    }
+    
+    if (!(this->_boxPosition.x() <= (other._boxPosition.x() + other._width))) {
+        return false;
+    }
+    
+    if  (!((this->_boxPosition.y() - this->_height) <= other._boxPosition.y())) {
+        return false;
+    }
+    
+    if (!(this->_boxPosition.y() >= (other._boxPosition.y() - other._height))) {
+        return false;
+    }
+    return true;
+}
+
+	\end{minted}
 	%-----------------------------------------
-	%---------------ENTITY--------------------
-	\subsection{Entity}
 
 	%-----------------------------------------
 %---------------------------------------------
-
-%-------------------JUEGO---------------------
-\newpage
-\section{Juego}
-	%---------------INICIALIZACIÓN------------
-	\subsection{Inicializaci\'on}
-
-	%-----------------------------------------
-	%---------------BUCLE PRINCIPAL-----------
-	\subsection{Bucle principal}
-
-	%-----------------------------------------
-	%---------------EVENTOS-------------------
-	\subsection{Eventos}
-
-	%-----------------------------------------
 %---------------------------------------------
 \end{document}
 %---------------------------------------------
